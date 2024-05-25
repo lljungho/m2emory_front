@@ -1,0 +1,206 @@
+@media screen and (max-width: 1440px) {
+
+    /*header*/
+    #header {
+        .explan {
+            display: none;
+        }
+    } 
+
+}
+
+@media screen and (max-width: 1240px) {
+    
+    /*header*/
+    #header {
+        width: 100%;
+
+        .headerTop {
+            padding: 0 var(--side1);
+            top: var(--size);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .headerSideMenuBtn {
+                display: flex;
+            }
+
+            .logo {
+                left: 0;
+                right: 0;
+                margin: auto;
+                z-index: 1;
+            }
+
+            .contTopRightBox {
+                display: flex;
+            }
+        }
+
+        .hd_wrap {
+            left: -100%;
+            padding: 5rem 0 var(--side) 0;
+            box-shadow: 1px 1px 10px var(--baseRGB_b);
+
+            #area_util {
+                padding: var(--size) var(--side1) var(--side);
+
+                .searchBox {
+                    padding: 0 var(--side1);
+
+                    &.on {
+                        height: calc(100vh - (5rem + (40px + (var(--size) + var(--side)))));
+                    }
+                }
+            }
+            
+            .cate2_option_box {
+                display: flex !important;
+            }
+        }
+    } 
+
+    /*contentsWrap*/
+    #contentsWrap {
+        padding:  5rem 0 var(--side) 0;
+        
+        .contentsBox {
+            .cont_Wrapper {
+                .contents {
+                    padding: 0 var(--side1);
+
+                    .contents_table_box {
+                        .section_container {
+                            .section_box {
+                                .contInfo {
+                                    gap: var(--size);
+
+                                    .contentTopBox {
+                                        .contentTopInfo {           
+                                            .storyBox {
+                                                max-width: none;
+                                            }
+                                        }
+    
+                                        .toggleBtn {
+                                            display: flex;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .storyList{
+            .swiper-button-prev, 
+            .swiper-button-next {
+                display: none;
+            }
+        }
+    }
+
+    /*footer*/
+    #footer {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    
+    /*contents*/
+    #contentsWrap {
+        .contentsBox {
+            .cont_Wrapper {
+                .contents {
+                    .contents_table_box {
+                        gap: var(--size);
+                        
+                        .section_container {
+                            width: calc(50% - var(--ssize1));
+                            gap: var(--size);
+
+                            &.sub {
+                              .section_box{
+                                margin-top: var(--size);
+                              }  
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    html, body {
+        font-size: 15px;
+    }
+
+    /*contentsWrap*/
+    #contentsWrap  {
+        .contentsBox  {
+            .cont_Wrapper {
+                .contents {
+                    .contents_table_box {
+                        .section_container {
+                            width: 100%;
+
+                            &.sub {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 475px) {
+    /*root*/
+    :root {
+        /*size*/
+        --side: 1rem;
+        --side1: 1rem;
+    } 
+
+    #header {
+        & .hd_wrap {
+            width: 100%;
+            
+            .hd_box {
+                width: 100%;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 375px) {
+
+    /*login*/
+    .signWrap {
+        .signInnerBox {
+            min-width: 100%;
+        }
+    }
+}
+
+@media screen and (max-width: 320px) {
+
+    html, body {
+        font-size: 14px;
+    }
+
+    /*header*/
+    #header {
+        .hd_wrap {
+            width: 100%;
+        }
+    }
+}

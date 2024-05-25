@@ -1,0 +1,326 @@
+@font-face {
+    font-family: 'Poiret One';
+    src: url(../fonts/PoiretOne-Regular.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url(../fonts/PretendardVariable.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+
+    /*font*/
+    --fontFamily: 'Poiret One';
+    --fontFamily1: 'Pretendard';
+    --fontSize: 0.8em;
+    --fontSize1: 0.95em;
+    --fontSize2: 1.07em;
+    --fontSize3: 0.9em;
+    --fontSize4: 0.75em;
+    --fontSize5: 0.85em;
+    --fontSize6: 1.1em;
+    --fontSize7: 20px;
+    --lineheight: 1;
+    --lineheight1: 1.4;
+    --lineheight2: 2;
+    --lineheight3: 2.5;
+
+    /*size*/
+    --rsize: 1rem;
+    --rsize2: 3rem;
+    --side: 2rem;
+    --side1: 4rem;
+
+    --size: 1em;
+    --size1: 2em;
+    --size2: 1.3em;
+    --size3: 4em;
+    --size4: 1.7em;
+    --size5: 3em;
+    --size6: 5em;
+
+    --ssize: 0.3em;
+    --ssize1: 0.5em;
+    --ssize2: 0.75em;
+
+    --minusSsize1: -0.5em;
+
+    --profileSize: 60px;
+
+    /*color*/
+    --colorBd: #e7e7e7;
+    --colorBd1: #dbdbdb;
+    --color: #fff;
+    --color1: #000;
+    --color2: #518afb;
+    --color3: #e4eefe;
+    --color4: #f9f9f9;
+    --color5: #ff3f3f;
+    --color6: #a0a0a0;
+
+    /*utile*/
+    --trst: .2s; 
+    --bdrs: 2px;
+
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    list-style: none; 
+    box-sizing: border-box; 
+}
+html, body { 
+    min-width: 320px;
+    font-size: 16px; 
+    overflow-wrap: break-word;
+}
+body { 
+    background: var(--baseBg); 
+    color: var(--baseFg);
+    line-height: var(--lineheight1); 
+    font-family: var(--fontFamily1); 
+}
+a { 
+    display: inline-block;
+    text-decoration: none; 
+    font-size: inherit;
+    color: inherit; 
+    outline: none;
+}
+img {
+    vertical-align: top;
+    width: 100%;
+    max-width: 100%;
+    font-size: var(--fontSize4);
+}
+form {
+    width: 100%;
+}
+button { 
+    display: inline-block;
+    border: none;
+    background: none;
+    cursor: pointer; 
+}
+input, textarea, select {
+    width: 100%;
+    color: var(--baseFg);
+    font-family: var(--fontFamily1);
+    font-size: inherit;
+    border: none;
+    background: transparent;
+    outline: none;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+textarea {
+    height: 100%;
+    min-height: 80px;
+    resize: none;
+}
+input {
+    width: 100%;
+    font-size: var(--fontSize1);
+    color: var(--baseFg);
+    padding: var(--ssize1) 0;
+    line-height: var(--lineheight1);
+}
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px var(--baseBg) inset; /* 웹킷 브라우저(Chrome, Safari 등)용 */
+    -webkit-text-fill-color: var(--baseFg);
+}
+input:-moz-placeholder {
+    color: var(--baseBg); /* Firefox 용 */
+    color: var(--baseFg);
+}
+.regexCK {
+    font-size: var(--fontSize);
+    word-break: break-all;
+    color: var(--color5);
+    display: block;
+    width: 100%;
+}
+.screen_out {
+    overflow: hidden;
+    line-height: 0;
+    text-indent: -9999px;
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+.btns {
+    width: 100%;
+    font-size: 0.9em;
+    font-weight: 600;
+    line-height: var(--lineheight1);
+    color: var(--color);
+    padding: var(--ssize2) var(--size);
+    border-radius: var(--bdrs);
+    background-color: var(--color2);
+    border: 1px solid var(--color2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: capitalize;
+    cursor: pointer;
+
+    &.off {
+       opacity: 0.5; 
+       cursor: auto;
+    }
+}
+.small_btns {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--fontSize);
+    border-radius: var(--bdrs);
+    background-color: var(--baseFg1);
+    padding: var(--ssize);
+    cursor: pointer;
+}
+.TxtBtns {
+    font-size: var(--size);
+    color: var(--color2);
+    font-weight: 600;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+.small_TxtBtns {
+    font-size: var(--fontSize3);
+    color: var(--baseFg);
+    font-weight: normal;
+    cursor: pointer;
+}
+.funcBtnsBox {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--ssize1);
+
+    .funcBtn {
+        visibility: hidden;
+        opacity: 0;
+        width: 15px;
+        height: 15px;
+        cursor: pointer;
+        transition: var(--trst);
+
+        &.on {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        svg {
+            border-radius: var(--bdrs);
+        }
+    }
+}
+.toggleBtn {
+    width: 100%;
+    min-height: var(--size4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    svg {
+        width: 15px;
+    }
+}
+.displayNone {
+    display: none;
+}
+.dimmed_box {
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--baseRGB_b);
+    -webkit-backdrop-filter: blur(1px);
+    backdrop-filter: blur(1px);
+    transition: var(--trst);
+    z-index: 1;
+
+    &.on {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+.dimmed_box_all {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--baseRGB_b);
+    -webkit-backdrop-filter: blur(1px);
+    backdrop-filter: blur(1px);
+    transition: var(--trst);
+    z-index: 100;
+}
+.loadingBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--size);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    .loadingIcon {
+        width: 30px;
+        height: 30px;
+        animation: rotate 1s linear infinite;
+    }
+}
+@keyframes rotate {
+    0% {
+        transform: retate(0deg);
+    }
+    100% {
+        transform: rotate(350deg);
+    }
+}
+.copyright {
+    font-size: var(--fontSize4);
+}
+::-webkit-scrollbar {
+    width: 3px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #c9c9c9;
+}
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+/*임시 버튼*/
+.etc_btn {
+    font-size: 0.8em;
+    width: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5em;
+    border-radius: var(--bdrs);
+    background-color: var(--color2);
+    color: var(--color);
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+}
