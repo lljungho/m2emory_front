@@ -156,10 +156,10 @@
     }
 
     .headerTop {
+        max-width: 500px;
         position: absolute;
         top: var(--side);
         left: 0;
-        right: 0;
 
         .logo {
             position: absolute;
