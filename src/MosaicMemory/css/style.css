@@ -138,6 +138,7 @@
     z-index: 99;
 
     .explan {
+        display: none;
         visibility: hidden;
         opacity: 0;
         width: max-content;
@@ -156,72 +157,37 @@
     }
 
     .headerTop {
-        max-width: 500px;
         position: absolute;
         top: var(--side);
         left: 0;
+        z-index: 3;
 
-        .logo {
-            position: absolute;
-            top: 0;
-            left: var(--side1);
-            z-index: 3;
-        }
-
-        .contTopRightBox {
-            height: max-content;
-            display: none;
-            justify-content: flex-end;
-            gap: var(--size2);
-    
-            .contTopBtnsBox {
-                position: relative;
-    
-                .contTopBtns {
-                    display: block;
-                    width: var(--size4);
-                    height: var(--size4);
-                    cursor: pointer;
-                }
-    
-                &:hover .explan {
-                    visibility: visible;
-                    opacity: 1;
-                }
-            }
-        }
-
-        .headerSideMenuBtn {
-            width: var(--size1);
-            height: var(--size1);
-            padding: var(--ssize) 0;
-            display: none;
-            flex-direction: column;
+        .headerTopbox {
+            width: 400px;
+            padding: 0 var(--side1);
+            display: flex;
             justify-content: space-between;
-            z-index: 3;
+            align-items: center;
 
-            .bar {
-                width: 100%;
-                height: 2px;
-                background-color: var(--baseFg);
-                transition: var(--trst);
-            }
-
-            &.on {
-                .bar1 {
-                    width: 92%;
-                    transform-origin: 0 0;
-                    transform: rotate(45deg);
-                }
-
-                .bar2 {
-                    width: 0;
-                }
-
-                .bar3 {
-                    width: 92%;
-                    transform-origin: 0 100%;
-                    transform: rotate(-45deg);
+            .contTopRightBox {    
+                display: flex;
+                justify-content: flex-end;
+                gap: var(--size);
+    
+                .contTopBtnsBox {
+                    position: relative;
+    
+                    .contTopBtns {
+                        display: block;
+                        width: var(--size2);
+                        height: var(--size2);
+                        cursor: pointer;
+                    }
+        
+                    &:hover .explan {
+                        visibility: visible;
+                        opacity: 1;
+                    }
                 }
             }
         }
@@ -550,168 +516,6 @@
             position: absolute;
             bottom: 0;
             left: 0;
-
-            .searchBox {
-                width: 100%;
-                max-height: 0;
-                height: 0;
-                padding: 0 var(--side1);
-                background-color: var(--baseBg);
-                position: absolute;
-                bottom: 100%;
-                left: 0;
-                overflow: hidden;
-                transition-property: max-height, height;
-                transition-duration: var(--trst);
-
-                &.on {
-                    max-height: 100vh;
-                    height: calc(100vh - (7rem + (40px + (var(--size) + var(--side)))));
-                }
-
-                .searchInfoBox {
-                    display: flex;
-                    flex-direction: column;
-                    gap: var(--size2);
-
-                    .searchInputBox {
-                        display: flex;
-                        gap: var(--ssize);
-                        padding: 0 var(--ssize1);
-                        background-color: var(--baseFg1);
-                        border-radius: var(--bdrs);
-                        position: relative;
-
-                        .ico_search {
-                            width: 20px;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                        }
-                    }
-
-                    .searchRecentBox {
-                        display: flex;
-                        flex-direction: column;
-                        gap: var(--size2);
-                        font-size: var(--fontSize1);
-                        color: var(--baseFg);
-
-                        .searchPopular {
-                            display: flex;
-                            flex-direction: column;
-                            gap: var(--ssize2);
-
-                            .popularListbox {
-                                display: flex;
-                                flex-wrap: wrap;
-                                align-items: center;
-                                gap: var(--ssize1);
-
-                                .popularList {
-                                    font-size: var(--fontSize1);
-                                    display: flex;
-                                    justify-content: center;
-                                    align-items: center;
-                                    padding: var(--ssize) var(--ssize1);
-                                    border-radius: var(--bdrs);
-                                    background-color: var(--baseFg1);
-                                }
-                            }
-                        }
-
-                        .searchRecent {
-                            display: flex;
-                            flex-direction: column;
-                            gap: var(--size);
-
-                            .recentInfoListWrap{
-                                padding: var(--ssize1);
-                                max-height: calc(40vh -  90px);
-                                border-radius: var(--bdrs);
-                                background-color: var(--baseFg1);
-                                overflow: auto;
-
-                                .recentInfoBox {
-                                    height: 100%;
-                                    display: flex;
-                                    flex-direction: column;
-                                    gap: var(--size);
-                                    overflow: auto;
-
-                                    .recentHistoryBox {
-                                        display: flex;
-                                        justify-content: space-between;
-                                        align-items: center;
-                                        gap: var(--size);
-                                    
-                                        .recentInfoList {
-                                            width: 100%;
-
-                                            .recentInfo {
-                                                width: 100%;
-                                                display: flex;
-                                                align-items: center;
-                                                gap: var(--ssize);
-
-                                                .icon {
-                                                    width: 15px;
-                                                    display: flex;
-                                                    justify-content: center;
-                                                    align-items: center;
-                                                }
-
-                                                .historyKeyword {
-                                                    width: 100%;
-                                                }
-                                            }
-                                        }
-
-                                        .recentDel{
-                                            width: 20px;
-                                            height: 20px;
-                                            position: relative;
-
-                                            &::before {
-                                                content: '';
-                                                display: block;
-                                                width: 70%;
-                                                height: 1px;
-                                                background-color: var(--baseRGB_b1);
-                                                position: absolute;
-                                                top: 50%;
-                                                left: 50%;
-                                                transform: translate(-50%, -50%) rotate(45deg);
-                                            }
-
-                                            &::after {
-                                                content: '';
-                                                display: block;
-                                                width: 70%;
-                                                height: 1px;
-                                                background-color: var(--baseRGB_b1);
-                                                position: absolute;
-                                                top: 50%;
-                                                left: 50%;
-                                                transform: translate(-50%, -50%) rotate(-45deg);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        .recentTop {
-                            display: flex;
-                            justify-content: space-between;
-                            align-items: center;
-                            font-size: var(--fontSize1);
-                            font-weight: 600;
-                            text-transform: capitalize;
-                        }
-                    }
-                }
-            }
         }
     }
 }
@@ -943,17 +747,6 @@
                                     }
                                 }
                             }
-
-                            &.on {
-                                position: absolute;
-                                top: 0;
-                                left: 50%;
-                                transform: translateX(-50%);
-
-                                .contInfo {
-                                    max-width: 500px;
-                                }
-                            }
                         }
 
                         &.sub {
@@ -967,6 +760,135 @@
 
                                 &:first-child {
                                     margin-top: 0;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .contents_table_box2 {
+                    width: 100%;
+                    max-width: 500px;
+                    height: 100%;
+                    margin: auto;
+                    display: flex;
+                    justify-content: center;
+
+                    .contents_container {
+                        width: 100%;
+
+                        .searchBox {
+                            width: 100%;
+                            background-color: var(--baseBg);
+            
+                            .searchInfoBox {
+                                display: flex;
+                                flex-direction: column;
+                                gap: var(--size2);
+            
+                                .searchInputBox {
+                                    display: flex;
+                                    gap: var(--ssize);
+                                    padding: 0 var(--ssize1);
+                                    background-color: var(--baseFg1);
+                                    border-radius: var(--bdrs);
+                                    position: relative;
+            
+                                    .ico_search {
+                                        width: 20px;
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+                                    }
+                                }
+                            }
+                        }
+
+                        .searchRecentBox {
+                            display: flex;
+                            flex-direction: column;
+                            gap: var(--size2);
+                            font-size: var(--fontSize1);
+                            color: var(--baseFg);
+    
+                            .searchRecent {
+                                display: flex;
+                                flex-direction: column;
+                                gap: var(--size);
+    
+                                .recentInfoListWrap{
+                                    padding: var(--ssize1);
+                                    max-height: calc(40vh -  90px);
+                                    border-radius: var(--bdrs);
+                                    background-color: var(--baseFg1);
+                                    overflow: auto;
+    
+                                    .recentInfoBox {
+                                        height: 100%;
+                                        display: flex;
+                                        flex-direction: column;
+                                        gap: var(--size);
+                                        overflow: auto;
+    
+                                        .recentHistoryBox {
+                                            display: flex;
+                                            justify-content: space-between;
+                                            align-items: center;
+                                            gap: var(--size);
+                                        
+                                            .recentInfoList {
+                                                width: 100%;
+    
+                                                .recentInfo {
+                                                    width: 100%;
+                                                    display: flex;
+                                                    align-items: center;
+                                                    gap: var(--ssize);
+    
+                                                    .icon {
+                                                        width: 15px;
+                                                        display: flex;
+                                                        justify-content: center;
+                                                        align-items: center;
+                                                    }
+    
+                                                    .historyKeyword {
+                                                        width: 100%;
+                                                    }
+                                                }
+                                            }
+    
+                                            .recentDel{
+                                                width: 20px;
+                                                height: 20px;
+                                                position: relative;
+    
+                                                &::before {
+                                                    content: '';
+                                                    display: block;
+                                                    width: 70%;
+                                                    height: 1px;
+                                                    background-color: var(--baseRGB_b1);
+                                                    position: absolute;
+                                                    top: 50%;
+                                                    left: 50%;
+                                                    transform: translate(-50%, -50%) rotate(45deg);
+                                                }
+    
+                                                &::after {
+                                                    content: '';
+                                                    display: block;
+                                                    width: 70%;
+                                                    height: 1px;
+                                                    background-color: var(--baseRGB_b1);
+                                                    position: absolute;
+                                                    top: 50%;
+                                                    left: 50%;
+                                                    transform: translate(-50%, -50%) rotate(-45deg);
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -989,6 +911,7 @@
 /*contents sub page*/
 .content_info_box {
     height: 100%;
+    padding-bottom: var(--size1);
     display: flex;
     flex-direction: column;
     gap: var(--size1);
@@ -1037,6 +960,19 @@
                 bottom: var(--ssize1);
             }
         }
+
+        .recentTop {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: var(--fontSize1);
+            font-weight: 600;
+            text-transform: capitalize;
+
+            .TxtBtns {
+                font-size: var(--fontSize3);
+            }
+        }
     }
 }
 .content_title {
@@ -1044,6 +980,7 @@
     align-items: center;
     gap: var(--ssize);
     font-size: var(--fontSize7);
+    text-transform: uppercase;
 }
 .content_sub_title {
     font-weight: bold;

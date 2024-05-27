@@ -4,11 +4,6 @@
         .explan {
             display: none;
         }
-
-        .headerTop {
-            padding: 0 var(--side1);
-            box-sizing: content-box;
-        }
     } 
 }
 
@@ -18,26 +13,14 @@
         width: 100%;
 
         .headerTop {
-            top: var(--size);
-            right: 0;
-            margin: auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            width: 100%;
+            padding: 0 var(--side1);
 
-            .headerSideMenuBtn {
-                display: flex;
-            }
-
-            .logo {
-                left: 0;
-                right: 0;
+            .headerTopbox {
+                width: 100%;
+                max-width: 500px;
                 margin: auto;
-                z-index: 1;
-            }
-
-            .contTopRightBox {
-                display: flex;
+                padding: 0;
             }
         }
 

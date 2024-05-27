@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import GatherSvg from '../../utils/svg/GatherSvg';
-import SearchBox from '../../utils/search/SearchBox';
 import HeaderNav from './HeaderNav';
 import UtilBtnsBox from '../../utils/UtilBtnsBox';
 import NotifyBtnsBox from './NotifyBtnsBox';
@@ -12,7 +11,6 @@ import Logo from '../logo/Logo';
 
 const Header = () => {
     const { t } = useTranslation();
-    const Tsearch = t('search');
     const Tmessage = t('message');
 
     // redux
@@ -26,29 +24,13 @@ const Header = () => {
         });
     }
 
-    //검색창 토글
-    const [searchBoxOn, setSearchBoxOn] = useState(false);
-
-    const handleSearchBoxToggle = () => {
-        setSearchBoxOn(!searchBoxOn);
-    }
-
-    useEffect(() => {
-        setSearchBoxOn(false);
-    }, [hdSideState]);
-
     return (
         <header id='header'>
             <div className="headerTop">
-                <div className={`headerSideMenuBtn ${hdSideState ? 'on' : ''}`} onClick={handleSideMenuToggle}>
-                    <div className="bar bar1"></div>
-                    <div className="bar bar2"></div>
-                    <div className="bar bar3"></div>
+                <div className="headerTopbox">
+                    <Logo />
+                    <NotifyBtnsBox />
                 </div>
-
-                <Logo />
-
-                <NotifyBtnsBox />
             </div>
 
             <div className={`hd_wrap ${hdSideState ? 'on' : ''}`}>
@@ -67,16 +49,7 @@ const Header = () => {
                 <div id='area_util'>
 
                     <UtilBtnsBox />
-
-                    <button className='util_icon_boxs' onClick={handleSearchBoxToggle}>
-                        <GatherSvg name='search' title={Tsearch} />
-                    </button>
-
-                    <SearchBox 
-                        searchBoxOn={searchBoxOn}
-                        setSearchBoxOn={setSearchBoxOn}
-                    />
-
+                    
                     <button className='util_icon_boxs'>
                         <GatherSvg name='message' title={Tmessage} />
                     </button>

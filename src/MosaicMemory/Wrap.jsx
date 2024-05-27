@@ -11,6 +11,7 @@ import ContentsWarp from './contents/ContentsWarp';
 import DimmedBox from './utils/DimmedBox';
 import ModalWrap from './utils/modal/ModalWrap';
 import Loading from './utils/Loading';
+import DockBar from './include/dock/DockBar';
 
 const Wrap = () => {
     // redux 
@@ -85,6 +86,20 @@ const Wrap = () => {
         getData();
     }, [dispatch]);
 
+    // dockbar
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    useEffect(() => {
+        const handleWindowResize = () => {
+            setWindowWidth(window.innerWidth);
+        }
+
+        window.addEventListener('resize', handleWindowResize);
+
+        return () => {
+            window.removeEventListener('resize', handleWindowResize);
+        }
+    },[]);
+
     // 통신 중일 경우 로딩 표시
     if (loading) {
         return <Loading />;
@@ -92,10 +107,12 @@ const Wrap = () => {
 
     return (
         <div id="wrap">
-            {isLogIned ? <ContentsWarp /> : <SignWrap />}
+            { isLogIned ? <ContentsWarp /> : <SignWrap /> }
 
             { dimmedState && <DimmedBox /> }
             { modalContents && <ModalWrap /> }
+
+            { windowWidth < 1240 && <DockBar /> }
         </div>
     )
 }
