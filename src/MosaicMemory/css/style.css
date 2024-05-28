@@ -902,6 +902,74 @@
     }
 }
 
+/*dockbar*/
+.dockBarWrap {
+    width: 100%;
+    padding: 0 var(--side1);
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background-color: var(--baseBg);
+    border-top: 1px solid var(--baseRGB_b);
+
+    .dockBarBox {
+        width: 100%;
+        max-width: 500px;
+        margin: auto;
+
+        .dockbar {
+            padding: var(--size) 0 var(--size1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .dockBtns {
+                width: var(--size4);
+                height: var(--size4);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+
+                .profileImg {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: var(--bdrs);
+                }
+
+                .moreMenuBox {
+                    width: max-content;
+                    position: absolute;
+                    bottom: 200%;
+                    left: 0;
+
+                    .moreMenuBtns {
+                        width: max-content;
+                        padding: var(--ssize1) var(--size);
+                        border-radius: var(--bdrs);
+                        background-color: var(--baseBg1);
+                        box-shadow: 0 0 15px var(--baseBoxShadow);
+
+                        .moreMenu {
+                            padding: var(--ssize1) 0;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            gap: var(--size);
+
+                            .icon {
+                                width: var(--size);
+                                height: var(--size);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 /*swiper*/
 .swiper-button-prev:after, .swiper-button-next:after {
     display: none;

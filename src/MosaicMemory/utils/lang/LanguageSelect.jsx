@@ -14,6 +14,7 @@ const LanguageSelect = () => {
     const changeLanguage = (lng) => {
         i18n.changeLanguage(lng); 
         setLanguage(lng);
+        sessionStorage.setItem('lng', lng);
     };
 
     //언어 선택 리스트 박스
@@ -36,7 +37,7 @@ const LanguageSelect = () => {
     }, [islangChangeBoxOn]);
 
     const langChangeSelectOn = () => {
-        setIslangChangeBoxOn(prevValue => !prevValue);
+        setIslangChangeBoxOn(!islangChangeBoxOn);
     };
 
     const langClassAdd = islangChangeBoxOn ? 'on' : '';

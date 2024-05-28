@@ -220,7 +220,7 @@ i18n
     .use(initReactI18next) // i18next을 React에 바인딩
     .init({
         resources,
-        lng: "KR", // 기본 언어 설정
+        lng: sessionStorage.getItem('lng') ? sessionStorage.getItem('lng') : 'KR', // 기본 언어 설정
         interpolation: {
             escapeValue: false // React 컴포넌트 내에서 HTML 태그 사용
         }

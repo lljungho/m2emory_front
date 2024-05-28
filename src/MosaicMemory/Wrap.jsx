@@ -27,17 +27,21 @@ const Wrap = () => {
 
     if(colorMode) { //dark
         document.documentElement.style.setProperty('--baseBg', '#000');
+        document.documentElement.style.setProperty('--baseBg1', '#262626');
         document.documentElement.style.setProperty('--baseFg', '#fff');
         document.documentElement.style.setProperty('--baseFg1', 'rgba(255,255,255,0.15)');
         document.documentElement.style.setProperty('--baseRGB_b', 'rgba(255,255,255,0.35)');
         document.documentElement.style.setProperty('--baseRGB_b1', 'rgba(255,255,255,0.85)');
+        document.documentElement.style.setProperty('--baseBoxShadow', '#000');
 
     } else { //light
         document.documentElement.style.setProperty('--baseBg', '#fff');
+        document.documentElement.style.setProperty('--baseBg1', '#fff');
         document.documentElement.style.setProperty('--baseFg', '#000');
         document.documentElement.style.setProperty('--baseFg1', 'rgba(0,0,0,0.04)');
         document.documentElement.style.setProperty('--baseRGB_b', 'rgba(0,0,0,0.15)');
         document.documentElement.style.setProperty('--baseRGB_b1', 'rgba(0,0,0,0.35)');
+        document.documentElement.style.setProperty('--baseBoxShadow', 'rgba(0,0,0,0.15)');
     };
 
     // 유저 정보 요청

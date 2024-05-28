@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import useWindowWidth from '../utils/useWindowWidth'
 import StoryWrap from './story/StoryWrap'
 import FeedWrap from './feed/FeedWrap'
@@ -17,7 +17,6 @@ const MainContainer = () => {
                 <div className="section_box">
                     <div className="contInfo">
                         <StoryWrap />
-                        
                         <FeedWrap />
                     </div>
                 </div>
