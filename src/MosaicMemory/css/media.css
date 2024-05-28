@@ -1,10 +1,5 @@
 @media screen and (max-width: 1440px) {
-    /*header*/
-    #header {
-        .explan {
-            display: none;
-        }
-    } 
+
 }
 
 @media screen and (max-width: 1240px) {
@@ -15,34 +10,13 @@
         .headerTop {
             width: 100%;
             padding: 0 var(--side1);
+            z-index: 0;
 
             .headerTopbox {
                 width: 100%;
                 max-width: 500px;
                 margin: auto;
                 padding: 0;
-            }
-        }
-
-        .hd_wrap {
-            left: -100%;
-            padding: 5rem 0 var(--side) 0;
-            box-shadow: 1px 1px 10px var(--baseRGB_b);
-
-            #area_util {
-                padding: var(--size) var(--side1) var(--side);
-
-                .searchBox {
-                    padding: 0 var(--side1);
-
-                    &.on {
-                        height: calc(100vh - (5rem + (40px + (var(--size) + var(--side)))));
-                    }
-                }
-            }
-            
-            .cate2_option_box {
-                display: flex !important;
             }
         }
     } 
@@ -62,15 +36,10 @@
                         .section_container {
                             width: 100%;
                             max-width: 500px;
-
-                            &.sub {
-                                display: none;
-                            }
+                            padding-bottom: var(--size5);
 
                             .section_box {
                                 .contInfo {
-                                    gap: var(--size);
-
                                     .contentTopBox {
                                         .contentTopInfo {           
                                             .storyBox {
@@ -117,16 +86,6 @@
         --side: 1rem;
         --side1: 1rem;
     } 
-
-    #header {
-        & .hd_wrap {
-            width: 100%;
-            
-            .hd_box {
-                width: 100%;
-            }
-        }
-    }
 }
 
 @media screen and (max-width: 375px) {
@@ -141,12 +100,5 @@
 @media screen and (max-width: 320px) {
     html, body {
         font-size: 14px;
-    }
-
-    /*header*/
-    #header {
-        .hd_wrap {
-            width: 100%;
-        }
     }
 }

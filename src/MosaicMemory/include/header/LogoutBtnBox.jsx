@@ -48,7 +48,7 @@ const LogoutBtnBox = () => {
     };
 
     return (
-        <button className='util_icon_boxs small' onClick={handleLogout}>
+        <button className='util_icon_boxs' onClick={handleLogout}>
             <GatherSvg name='logout' title={tLogout} />
         </button>
     )

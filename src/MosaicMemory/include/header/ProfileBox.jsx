@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
-import LogoutBtnBox from './LogoutBtnBox';
-
 const ProfileBox = () => {
     const { t } = useTranslation();
     const Tfollower = t('follower');
@@ -126,9 +124,8 @@ const ProfileBox = () => {
             }
 
             <div className="profile_btns_box">
-                <Link to='/contents/profile' className="small_btns" onClick={contContainerChange}>{TprofileEdit}</Link>
-                <Link to='/setting' className="small_btns" onClick={contContainerChange}>{Tsetting}</Link>
-                <LogoutBtnBox />
+                <Link to='/contents/profileEdit' className="small_btns" onClick={contContainerChange}>{TprofileEdit}</Link>
+                <Link to='/contents/setting' className="small_btns" onClick={contContainerChange}>{Tsetting}</Link>
             </div>
         </div>
     )

@@ -2,7 +2,11 @@ import React from 'react'
 
 const FeedWrap = () => {
     return (
-        <div>FeedWrap</div>
+        <div>
+            <div style={{height: '2000px', backgroundColor: 'aqua'}}>
+                test
+            </div>
+        </div>
     )
 }
 

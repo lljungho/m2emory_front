@@ -1,8 +1,8 @@
 import React from 'react'
 
-const GatherSvg = ({name, color, title}) => {
-    const colorModeCode = color ? `${ color }` : 'var(--baseFg)';
-    const colorModeCode2 = color ? `${ color }` : 'var(--baseRGB_b)';
+const GatherSvg = ({name, color, fill, title}) => {
+    const colorModeCode = color ? color : 'var(--baseFg)';
+    const colorModeCode2 = color ? color : 'var(--baseRGB_b)';
 
     const svgIcons = [
         {
@@ -75,26 +75,6 @@ const GatherSvg = ({name, color, title}) => {
             svgIcon: () => (
                 <svg aria-label={title} x="0px" y="0px" fill={colorModeCode2} viewBox="0 0 30 30" enableBackground="new 0 0 30 30">
                     <path d="M0,0v30h30V0H0z M23.242,20.768l-2.475,2.475L15,17.474l-5.768,5.768l-2.475-2.475L12.525,15L6.757,9.232l2.475-2.475 L15,12.525l5.768-5.768l2.475,2.475L17.474,15L23.242,20.768z"/>
-                </svg>
-            ),
-        },
-        {
-            name: 'edit',
-            svgIcon: () => (
-                <svg aria-label={title} x="0px" y="0px" viewBox="0 0 30 30" enableBackground="new 0 0 30 30">
-                    <path fill={colorModeCode} d="M23.079,3.921l-3.327-3.327h-1.026L4.919,14.402l0,0l-2.324,2.324l-0.197,0.362l-0.605,2.838l0,0 l-1.199,5.619l0,0l0.86,0.86l0,0l8.457-1.804l0.362-0.197l2.324-2.324l0,0L26.406,8.273V7.247L23.079,3.921z M2.934,21.534 l2.532,2.532l-3.218,0.686l0.617-2.892L2.934,21.534z M9.4,23.227l-2.243,0.479l-3.862-3.863L3.773,17.6L15.296,6.077l5.627,5.627 L9.4,23.227z M19.24,2.133l5.627,5.627l-2.918,2.918l-5.627-5.627L19.24,2.133z"/>
-                </svg>
-            ),
-        },
-        {
-            name: 'delete',
-            svgIcon: () => (
-                <svg aria-label={title} x="0px" y="0px" viewBox="0 0 30 30" enableBackground="new 0 0 30 30" >
-                    <g>
-                        <path fill={colorModeCode} d="M26.702,4.672h-9.206v-3.47l-0.737-0.737h-6.518L9.504,1.202v3.47H0.298v1.474h2.681v19.653l0.737,0.737 h19.568l0.737-0.737V6.146h2.681V4.672z M10.978,1.938h5.044v2.733h-5.044V1.938z M22.547,25.062H4.453V6.146h18.094V25.062z"/>
-                        <rect x="9.478" y="9.616" fill={colorModeCode} width="1.474" height="12.19"/>
-                        <rect x="16.048" y="9.616" fill={colorModeCode} width="1.474" height="12.19"/>
-                    </g>
                 </svg>
             ),
         },
@@ -200,9 +180,62 @@ const GatherSvg = ({name, color, title}) => {
         {
             name: 'arrow',
             svgIcon: () => (
-                <svg x="0px" y="0px" viewBox="0 0 27 27" enableBackground="new 0 0 27 27" >
+                <svg aria-label={title} x="0px" y="0px" viewBox="0 0 27 27" enableBackground="new 0 0 27 27" >
                     <polyline fill="none" stroke={colorModeCode} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" points="
                     1,7.75 13.5,19.25 26,7.75 "/>
+                </svg>
+            )
+        },
+        {
+            name: 'home',
+            svgIcon: () => (
+                <svg aria-label={title} fill='none' stroke={colorModeCode} x="0px" y="0px" viewBox="0 0 27 27" enableBackground="new 0 0 27 27">
+                    <polygon strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" points="
+                    13.5,0.793 0.793,9.763 0.793,26.207 9.795,26.207 9.795,15.655 17.205,15.655 17.205,26.207 26.207,26.207 26.207,9.763 "/>
+                </svg>
+            )
+        },
+        {
+            name: 'menu',
+            svgIcon: () => (
+                <svg aria-label={title} fill="none" stroke={colorModeCode} x="0px" y="0px" viewBox="0 0 27 27" enableBackground="new 0 0 27 27">
+                    <g>
+                        <line strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" x1="25.567" y1="3.917" x2="1.433" y2="3.917"/>
+
+                        <line strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" x1="25.567" y1="13.515" x2="1.433" y2="13.515"/>
+
+                        <line strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" x1="25.567" y1="23.083" x2="1.433" y2="23.083"/>
+                    </g>
+                </svg>
+            )
+        },
+        {
+            name: 'plus',
+            svgIcon: () => (
+                <svg aria-label={title} x="0px" y="0px" viewBox="0 0 27 27" enableBackground="new 0 0 27 27">
+                    <g>
+                        <line fill="none" stroke={colorModeCode} strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" x1="0.793" y1="13.5" x2="26.207" y2="13.5"/>
+
+                        <line fill="none" stroke={colorModeCode} strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" x1="13.5" y1="26.207" x2="13.5" y2="0.793"/>
+                    </g>
+                </svg>
+            )
+        },
+        {
+            name: 'schedule',
+            svgIcon: () => (
+                <svg aria-label={title} fill="none" stroke={colorModeCode} x="0px" y="0px" viewBox="0 0 27 27" enableBackground="new 0 0 27 27">
+                   <g>
+                        <rect x="1.433" y="4.176" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" width="24.134" height="21.94"/>
+
+                        <line strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" x1="1.433" y1="10.758" x2="25.567" y2="10.758"/>
+
+                        <line strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" x1="8.015" y1="0.885" x2="8.015" y2="6.37"/>
+
+                        <line strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" x1="18.985" y1="0.885" x2="18.985" y2="6.37"/>
+
+                        <polyline strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" points="18.66,15.538 13.175,21.023 9.762,17.976"/>
+                    </g>
                 </svg>
             )
         },

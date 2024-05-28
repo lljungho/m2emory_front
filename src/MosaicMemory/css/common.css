@@ -236,6 +236,44 @@ input:-moz-placeholder {
         width: 15px;
     }
 }
+.dockBarWrap {
+    width: 100%;
+    padding: 0 var(--side1);
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background-color: var(--baseBg);
+    border-top: 1px solid var(--baseRGB_b);
+
+    .dockBarBox {
+        width: 100%;
+        max-width: 500px;
+        margin: auto;
+
+        .dockbar {
+            padding: var(--size) 0 var(--size1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .dockBtns {
+                width: var(--size4);
+                height: var(--size4);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: var(--bdrs);
+                overflow: hidden;
+
+                .profileImg {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+    }
+}
 .displayNone {
     display: none;
 }

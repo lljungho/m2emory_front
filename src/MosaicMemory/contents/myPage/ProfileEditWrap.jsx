@@ -3,7 +3,7 @@ import axios from '../../utils/axios/axiosSet';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
-export const ProfileWrap = () => {
+export const ProfileEditWrap = () => {
     const { t } = useTranslation();
     const Tprofile = t('profile');
     const Ttitle = t('profileEdit');
@@ -212,4 +212,4 @@ export const ProfileWrap = () => {
     )
 }
 
-export default ProfileWrap
+export default ProfileEditWrap

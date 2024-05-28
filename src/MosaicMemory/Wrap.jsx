@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from './utils/axios/axiosSet';
+import useWindowWidth from './utils/useWindowWidth';
 
 import './css/common.css';
 import './css/style.css';
@@ -87,18 +88,7 @@ const Wrap = () => {
     }, [dispatch]);
 
     // dockbar
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    useEffect(() => {
-        const handleWindowResize = () => {
-            setWindowWidth(window.innerWidth);
-        }
-
-        window.addEventListener('resize', handleWindowResize);
-
-        return () => {
-            window.removeEventListener('resize', handleWindowResize);
-        }
-    },[]);
+    const windowWidth = useWindowWidth();
 
     // 통신 중일 경우 로딩 표시
     if (loading) {
@@ -112,7 +102,7 @@ const Wrap = () => {
             { dimmedState && <DimmedBox /> }
             { modalContents && <ModalWrap /> }
 
-            { windowWidth < 1240 && <DockBar /> }
+            { windowWidth < 1240 && isLogIned && <DockBar /> }
         </div>
     )
 }

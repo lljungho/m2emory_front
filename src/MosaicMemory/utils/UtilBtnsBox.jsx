@@ -6,10 +6,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const UtilBtnsBox = () => {
     const { t } = useTranslation();
+    const TlightMode = t('lightMode');
+    const TdarkMode = t('darkMode');
 
     // redux
     const dispatch = useDispatch();
-    const colorMode = useSelector(state => state.colorMode.colorMode);
+    const colorMode = useSelector(store => store.colorMode.colorMode);
 
     //모드 변경
     const coloModerChangeHandler = () => {
@@ -22,21 +24,12 @@ const UtilBtnsBox = () => {
         <>
             <LanguageSelect />
 
-            {
-                colorMode 
-                ?
-                    <>
-                        <button className='util_icon_boxs' onClick={coloModerChangeHandler} >
-                            <GatherSvg name='light' title={t('lightMode')} />
-                        </button>
-                    </>
-                :
-                    <>
-                        <button className='util_icon_boxs' onClick={coloModerChangeHandler} >
-                            <GatherSvg name='dark' title={t('darkMode')} />
-                        </button>
-                    </>
-            }
+            <button className='util_icon_boxs' onClick={coloModerChangeHandler} >
+                <GatherSvg 
+                    name={ colorMode ? 'light' : 'dark' } 
+                    title={ colorMode ? TlightMode : TdarkMode } 
+                />
+            </button>
         </>
     )
 }
