@@ -1,89 +1,98 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getNowLanguage, getLanguages, getLanguageNames, changeLanguage } from '../../utils/lang/languageUtils';
+import { handleLogout } from '../../utils/axios/axiosUtils';
+import { setColorMode } from '../../utils/handler/handlerUtils';
+
 import GatherSvg from '../../utils/svg/GatherSvg';
-import i18n from '../../utils/lang/i18n';
 
 const DockBar = () => {
     const { t } = useTranslation();
-    const Tpost = t('post');
-    const Tsearch = t('search');
-    const Tmore = t('more');
-    const Thome = t('home');
-    const Tschedule = t('schedule');
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const user = useSelector(store => store.userInfo);
+    const colorMode = useSelector(store => store.colorMode.colorMode);
 
-    // redux
-    const user = useSelector(state => state.userInfo);
+    // 언어
+    const nowLanguage = getNowLanguage(); // 현재 적용되어 있는 언어
+    const languages = getLanguages(); // 적용가능한 언어 리스트
+    const languageNames = getLanguageNames(); // 언어명
+
+    // 컬러 모드 변경
+    const colorModeChanger = () => {
+        setColorMode(dispatch, colorMode);
+    }
+
+    // 로그아웃
+    const logout = () => {
+        handleLogout(t('logoutConfirm'), dispatch, navigate);
+    };
 
     // 메뉴버튼 클릭
-    const [moreMenu, setMoreMenu] = useState(false);
-    const moreMenuBtn = useRef(null);
-
-    const handleMoreBtn = () => {
-        setMoreMenu(!moreMenu);
+    const [menuOpen, setMenuOpen] = useState(false);
+    const menuOpenBtn = useRef(null);
+    const handleMenuToggle = () => {
+        setMenuOpen(!menuOpen);
     };
 
     useEffect(() => {
-        //언어 선택 박스 외 클릭 시
-        const moreBtnOutsideClick = (e) => {
-            if (moreMenu && moreMenuBtn.current && !moreMenuBtn.current.contains(e.target)) {
-                setMoreMenu(false);
+        // 클릭한 요소 외 클릭 시
+        const outsideClick = (e) => {
+            if (menuOpen && menuOpenBtn.current && !menuOpenBtn.current.contains(e.target)) {
+                setMenuOpen(false);
             }
         };
 
-        window.addEventListener('click', moreBtnOutsideClick);
+        window.addEventListener('click', outsideClick);
 
         return () => {
-            window.removeEventListener('click', moreBtnOutsideClick);
+            window.removeEventListener('click', outsideClick);
         }
-    }, [moreMenu]);
-
-    //언어 데이터
-    const [Language, setLanguage]= useState(i18n.language); // 현재 적용되어 있는 언어
-    const languages = Object.keys(i18n.options.resources); // 적용가능한 언어 리스트
-    const languageNames = {
-        KR: '한국어',
-        JP: '日本語',
-        CN: '中文',    
-        EN: 'English' 
-    };
-
-    const changeLanguage = (e) => {
-        const lng = e.target.value;
-        i18n.changeLanguage(lng); 
-        setLanguage(lng);
-        sessionStorage.setItem('lng', lng);
-    };
+    }, [menuOpen]);
 
     return (
         <div className='dockBarWrap'>
             <div className="dockBarBox">
                 <div className="dockbar">
-                    <div className="dockBtns" ref={moreMenuBtn} onClick={handleMoreBtn}>
-                        <GatherSvg name='menu' title={Tmore} />
+                    <div className="dockBtns" ref={menuOpenBtn} onClick={handleMenuToggle}>
+                        <GatherSvg name='menu' title={t('more')} />
 
-                        { moreMenu && 
+                        { menuOpen && 
                             <div className="moreMenuBox" onClick={(e) => e.stopPropagation()}>
                                 <div className="moreMenuBtns">
                                     <div className="moreMenu">
-                                        <select name="lng" id="lng" onChange={changeLanguage}>
+                                        <select 
+                                            name="lng" 
+                                            id="lng" 
+                                            className={`${colorMode ? 'dark' : ''}`} 
+                                            onChange={(e) => changeLanguage(e.target.value)}
+                                            value={nowLanguage}
+                                        >
                                             { languages.map((lng, index) => (
                                                 <option 
                                                     key={index} 
                                                     value={lng} 
-                                                    selected={Language === lng ? true : undefined}
                                                 >
                                                     { languageNames[lng] || lng }
                                                 </option>
                                             ))}
                                         </select>
                                     </div>
-                                    <div className="moreMenu">컬러모드</div>
-                                    <div className="moreMenu">
-                                        로그아웃
+                                    <div className="moreMenu" onClick={colorModeChanger}> 
+                                        { colorMode ? t('lightMode') : t('darkMode') }
                                         <div className="icon">
-                                            <GatherSvg name='logout' />
+                                            <GatherSvg 
+                                                name={ colorMode ? 'light' : 'dark' } 
+                                                title={ colorMode ? t('lightMode') : t('darkMode') }
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="moreMenu" onClick={logout}>
+                                        {t('logout')}
+                                        <div className="icon">
+                                            <GatherSvg name='logout' title={t('logout')} />
                                         </div>
                                     </div>
                                 </div>
@@ -92,19 +101,19 @@ const DockBar = () => {
                     </div>
 
                     <Link to='/' className="dockBtns">
-                        <GatherSvg name='home' title={Thome} />
+                        <GatherSvg name='home' title={t('home')} />
                     </Link>
 
                     <Link to='/contents/search' className="dockBtns">
-                        <GatherSvg name='search' title={Tsearch} />
+                        <GatherSvg name='search' title={t('search')} />
                     </Link>
 
-                    <Link to='/' className="dockBtns">
-                        <GatherSvg name='plus' title={Tpost} />
+                    <Link to='/contents/posting' className="dockBtns">
+                        <GatherSvg name='plus' title={t('post')} />
                     </Link>
 
-                    <Link to='/' className="dockBtns">
-                        <GatherSvg name='schedule' title={Tschedule} />
+                    <Link to='/contents/schedule' className="dockBtns">
+                        <GatherSvg name='schedule' title={t('schedule')} />
                     </Link>
 
                     <Link to='/contents/myPage' className="dockBtns">
@@ -116,4 +125,4 @@ const DockBar = () => {
     )
 }
 
-export default DockBar
+export default DockBar;

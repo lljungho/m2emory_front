@@ -1,14 +1,26 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 import useWindowWidth from '../../utils/useWindowWidth';
+import LanguageSelect from '../../utils/lang/LanguageSelect';
+import { setColorMode } from '../../utils/handler/handlerUtils';
+import GatherSvg from '../../utils/svg/GatherSvg';
 
 import HeaderNav from './HeaderNav';
-import UtilBtnsBox from '../../utils/UtilBtnsBox';
 import NotifyBtnsBox from './NotifyBtnsBox';
 import Logo from '../logo/Logo';
 import LogoutBtnBox from './LogoutBtnBox';
 
 const Header = () => {
+    const { t } = useTranslation();
     const windowWidth = useWindowWidth();
+    const dispatch = useDispatch();
+    const colorMode = useSelector(store => store.colorMode.colorMode);
+
+    // 컬러 모드 변경
+    const colorModeChanger = () => {
+        setColorMode(dispatch, colorMode);
+    }
 
     return (
         <header id='header'>
@@ -31,7 +43,15 @@ const Header = () => {
                     </div>
 
                     <div id='area_util'>
-                        <UtilBtnsBox />
+                        <LanguageSelect />
+
+                        <button className='util_icon_boxs' onClick={colorModeChanger} >
+                            <GatherSvg 
+                                name={ colorMode ? 'light' : 'dark' } 
+                                title={ colorMode ? t('lightMode') : t('darkMode') } 
+                            />
+                        </button>
+
                         <LogoutBtnBox />
                     </div>
                 </div>
@@ -40,4 +60,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default Header;

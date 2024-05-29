@@ -3,9 +3,6 @@ import useWindowWidth from '../utils/useWindowWidth'
 import StoryWrap from './story/StoryWrap'
 import FeedWrap from './feed/FeedWrap'
 import ScheduleWrap from './schedule/ScheduleWrap'
-import GuestBookWrap from './guest/GuestBookWrap'
-import AlbumWrap from './album/AlbumWrap'
-import DiaryWrap from './diary/DiaryWrap'
 import PostingWrap from './posting/PostingWrap'
 
 const MainContainer = () => {
@@ -31,22 +28,7 @@ const MainContainer = () => {
                     </div>
                     <div className="section_box">
                         <div className="contInfo">
-                            <DiaryWrap />
-                        </div>
-                    </div>
-                    <div className="section_box">
-                        <div className="contInfo">
-                            <AlbumWrap />
-                        </div>
-                    </div>
-                    <div className="section_box">
-                        <div className="contInfo">
                             <PostingWrap />
-                        </div>
-                    </div>
-                    <div className="section_box">
-                        <div className="contInfo">
-                            <GuestBookWrap />
                         </div>
                     </div>
                 </div>

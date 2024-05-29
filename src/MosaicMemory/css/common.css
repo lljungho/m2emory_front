@@ -114,7 +114,7 @@ input, textarea, select {
     font-family: var(--fontFamily1);
     font-size: inherit;
     border: none;
-    background: transparent;
+    background-color: transparent;
     outline: none;
     appearance: none;
     -moz-appearance: none;
@@ -123,6 +123,16 @@ input, textarea, select {
 select {
     background: url('../../../public/images/icon/arrow_down.png') 100% center no-repeat;
     background-size: contain;
+
+    &.dark {
+        background: url('../../../public/images/icon/arrow_down-w.png') 100% center no-repeat;
+        background-size: contain;
+    }
+}
+select option {
+    color: var(--baseFg);
+    font-family: var(--fontFamily1);
+    background-color: var(--baseBg1);
 }
 textarea {
     height: 100%;

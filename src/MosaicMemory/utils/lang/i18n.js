@@ -4,18 +4,17 @@ import { initReactI18next } from "react-i18next";
 const resources = {
     KR: {
         translation: {
-            language: "언어",
             home: "홈",
             schedule: "스케줄",
-            post: "포스트",
+            post: "포스팅",
             message: "메세지",
             alarm: "알람",
             search: "검색",
             recent: "최근 검색",
             del: '삭제',
             delAll: "전체삭제",
-            lightMode: '라이트 모드 버튼',
-            darkMode: '다크 모드 버튼',
+            lightMode: '라이트 모드',
+            darkMode: '다크 모드',
             id: "아이디",
             pw: "비밀번호",
             email: '이메일',
@@ -57,7 +56,6 @@ const resources = {
     },
     EN: {
         translation: {
-            language: "language",
             home: "home",
             schedule: "schedule",
             post: "post",
@@ -67,8 +65,8 @@ const resources = {
             recent: "recent",
             del: 'Delete',
             delAll: "del all",
-            lightMode: 'Light Mode Button',
-            darkMode: 'Dark Mode Button',
+            lightMode: 'Light Mode',
+            darkMode: 'Dark Mode',
             id: "id",
             pw: "password",
             email: 'e-mail',
@@ -110,7 +108,6 @@ const resources = {
     },
     JP: {
         translation: {
-            language: "言語",
             home: "ホーム",
             schedule: "スケジュール",
             post: "投稿",
@@ -120,8 +117,8 @@ const resources = {
             recent: "最近の検索",
             del: '削除する',
             delAll: "全削除",
-            lightMode: 'ライトモードボタン',
-            darkMode: 'ダークモードボタン',
+            lightMode: 'ライトモード',
+            darkMode: 'ダークモード',
             id: "ユーザー",
             pw: "パスワード",
             email: 'メール',
@@ -163,7 +160,6 @@ const resources = {
     },
     CN: {
         translation: {
-            language: "语言",
             home: "主页",
             schedule: "日程安排",
             post: " 帖子",
@@ -173,8 +169,8 @@ const resources = {
             recent: "最近搜索",
             del: '删除',
             delAll: "全部删除",
-            lightMode: '亮度模式按钮',
-            darkMode: '暗模式按钮',
+            lightMode: '灯光模式',
+            darkMode: '深色模式',
             id: "用户名",
             pw: "密码",
             email: '电子邮件',

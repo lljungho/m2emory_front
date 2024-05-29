@@ -2,28 +2,24 @@ import React from 'react'
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import useWindowWidth from '../../utils/useWindowWidth';
-
 import GatherSvg from '../../utils/svg/GatherSvg'
 
 const NotifyBtnsBox = () => {
     const { t } = useTranslation();
-    const Talarm = t('alarm');
-    const Tmessage = t('message');
-
     const windowWidth = useWindowWidth();
 
     return (
         <div className="contTopRightBox">
             <div className="contTopBtnsBox">
                 <div className='contTopBtns'>
-                    <GatherSvg name='alarm' title={Talarm} />
+                    <GatherSvg name='alarm' title={t('alarm')} />
                 </div>
             </div>
 
             { windowWidth < 1240 && 
                 <div className="contTopBtnsBox">
                     <Link to='/contents/message' className='contTopBtns'>
-                        <GatherSvg name='message' title={Tmessage} />
+                        <GatherSvg name='message' title={t('message')} />
                     </Link>
                 </div>
             }
@@ -31,4 +27,4 @@ const NotifyBtnsBox = () => {
     )
 }
 
-export default NotifyBtnsBox
+export default NotifyBtnsBox;

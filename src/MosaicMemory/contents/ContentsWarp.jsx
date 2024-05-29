@@ -29,4 +29,4 @@ const ContentsWarp = () => {
     )
 }
 
-export default ContentsWarp
+export default ContentsWarp;

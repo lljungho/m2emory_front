@@ -735,6 +735,8 @@
                         font-size: var(--fontSize3);
                     }
                 }
+
+
             }
         }
 
@@ -867,6 +869,49 @@
     text-transform: capitalize;
 }
 
+/*myPage*/
+.my_profile_wrap {
+    .my_profile_box {
+        display: flex;
+        gap: var(--size4);
+
+        .profileImgBox {
+            width: 20%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+
+            &::after {
+                content: '';
+                display: block;
+                padding-bottom: 100%;
+            }
+
+            .profileThumb {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                border-radius: var(--bdrs);
+                overflow: hidden;
+
+                .thumb {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+
+        .profileInfoBox {
+            width: calc(80% - var(--size4));
+        }
+    }
+}
+
 /*modal*/
 .modal_wrap {
     width: 100%;
@@ -953,6 +998,7 @@
 
                         .moreMenu {
                             padding: var(--ssize1) 0;
+                            text-transform: capitalize;
                             display: flex;
                             justify-content: space-between;
                             align-items: center;

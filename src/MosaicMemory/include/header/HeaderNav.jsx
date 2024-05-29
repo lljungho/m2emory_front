@@ -6,14 +6,6 @@ import GatherSvg from '../../utils/svg/GatherSvg';
 
 const HeaderNav = () => {
     const { t } = useTranslation();
-    const Thome = t('home');
-    const Tschedule = t('schedule');
-    const Tsearch = t('search');
-    const Tmessage = t('message');
-    const Tprofile = t('profile');
-    const Tpost = t('post');
-
-    // redux
     const user = useSelector(store => store.userInfo);
 
     return (
@@ -21,50 +13,50 @@ const HeaderNav = () => {
             <div className='gnb_btns'>
                 <Link to='/contents/myPage' className='gnb_cate1'>
                     <div className="gnb_cate1_iconBox gnb_cate1_profile">
-                        <img src={user.u_pf_img} alt={Tprofile} className='gnb_cate1_icon' />
+                        <img src={user.u_pf_img} alt={t('profile')} className='gnb_cate1_icon' />
                     </div>
-                    {Tprofile}
+                    {t('profile')}
                 </Link>
             </div>
             <div className='gnb_btns'>
                 <Link to='/' className='gnb_cate1'>
                     <div className="gnb_cate1_iconBox">
-                        <GatherSvg name='home' title={Thome} />
+                        <GatherSvg name='home' title={t('home')} />
                     </div>
-                    {Thome}
+                    {t('home')}
                 </Link>
             </div>
             <div className='gnb_btns'>
                 <Link to='/contents/search' className='gnb_cate1'>
                     <div className="gnb_cate1_iconBox">
-                        <GatherSvg name='search' title={Tsearch} />
+                        <GatherSvg name='search' title={t('search')} />
                     </div>
-                    {Tsearch}
+                    {t('search')}
                 </Link>
             </div>
 
             <div className='gnb_btns'>
                 <Link to='/contents/message' className='gnb_cate1'>
                     <div className="gnb_cate1_iconBox">
-                        <GatherSvg name='message' title={Tmessage} />
+                        <GatherSvg name='message' title={t('message')} />
                     </div>
-                    {Tmessage}
+                    {t('message')}
                 </Link>
             </div>
             <div className='gnb_btns'>
                 <Link to='/contents/schedule' className='gnb_cate1'>
                     <div className="gnb_cate1_iconBox">
-                        <GatherSvg name='schedule' title={Tschedule} />
+                        <GatherSvg name='schedule' title={t('schedule')} />
                     </div>
-                    {Tschedule}
+                    {t('schedule')}
                 </Link>
             </div>
             <div className='gnb_btns'>
                 <Link to='/contents/schedule' className='gnb_cate1'>
                     <div className="gnb_cate1_iconBox">
-                        <GatherSvg name='plus' title={Tpost} />
+                        <GatherSvg name='plus' title={t('post')} />
                     </div>
-                    {Tpost}
+                    {t('post')}
                 </Link>
             </div>
         </nav>

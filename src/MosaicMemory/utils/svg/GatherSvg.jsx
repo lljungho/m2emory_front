@@ -1,6 +1,6 @@
 import React from 'react'
 
-const GatherSvg = ({name, color, fill, title}) => {
+const GatherSvg = ({name, color, title}) => {
     const colorModeCode = color ? color : 'var(--baseFg)';
     const colorModeCode2 = color ? color : 'var(--baseRGB_b)';
 
@@ -251,4 +251,4 @@ const GatherSvg = ({name, color, fill, title}) => {
     }
 }
 
-export default GatherSvg
+export default GatherSvg;
