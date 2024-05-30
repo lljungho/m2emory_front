@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import useWindowWidth from '../../utils/useWindowWidth';
+import { useWindowWidth } from '../../utils/hook/customHookUtils';
 import GatherSvg from '../../utils/svg/GatherSvg'
 
 const NotifyBtnsBox = () => {

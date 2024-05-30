@@ -36,7 +36,9 @@ export const ProfileWrap = () => {
     return (
         <>
             <div className='content_info_box'>
-                <h2 className='content_title'>{Ttitle}</h2>
+                <div className="title_box">
+                    <h2 className='content_title'>{Ttitle}</h2>
+                </div>
 
                 <div className="contentInfoBox">
                     <div className='searchBox'>

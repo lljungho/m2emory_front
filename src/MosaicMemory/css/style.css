@@ -223,6 +223,7 @@
 
             .gnb_btns {
                 width: 100%;
+                border-radius: var(--bdrs);
                 position: relative;
 
                 .gnb_cate1 {
@@ -237,143 +238,49 @@
                     cursor: pointer;
 
                     .gnb_cate1_iconBox {
-                        width: var(--size2);
-                        height: var(--size2);
-                        padding: 2px;
+                        width: var(--size4);
+                        height: var(--size4);
+                        padding: var(--ssize);
                         display: flex;
                         align-items: center;
                         justify-content: center;
                         border-radius: var(--bdrs);
                         overflow: hidden;
-
-                        &.gnb_cate1_profile {
-                            padding: 0;
-                        }
+                        transition: transform var(--trst);
 
                         .gnb_cate1_icon {
                             width: 100%;
                             height: 100%;
                             object-fit: cover;
                         }
+
+                        &.gnb_cate1_profile {
+                            padding: 0;
+                            border: 1px solid var(--baseBg);
+                            box-sizing: content-box;
+                        }
                     }
 
                     &:hover {
                         background-color: var(--baseFg1);
-                    }
-                }
-            }
-        }
 
-        #area_profile {
-            display: flex;
-            flex-direction: column;
-            gap: var(--size);
-
-            .profile_box {
-                display: flex;
-                justify-content: space-between;
-                gap: var(--size);
-
-                .profileThumbBox {
-                    min-width: var(--profileSize);
-                    border-radius: var(--bdrs);
-                    overflow: hidden;
-
-                    .profileImgBox {
-                        width: var(--profileSize);
-                        height: var(--profileSize);
-
-                        .profileImg {
-                            height: 100%;
-                            object-fit: cover;
-                        }
-                    }
-                }
-
-                .accountInfoBox {
-                    width: calc(100% - (var(--profileSize) + var(--size)));
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-                    gap: var(--ssize2);
-
-                    .accountBox {
-                        display: flex;
-                        justify-content: flex-end;
-                        align-items: center;
-                        gap: var(--ssize1);
-                        text-transform: none;
-
-                        .accoutName {
-                            font-size: var(--fontSize6);
+                        .gnb_cate1_iconBox {
+                            transform: scale(1.1);
                         }
                     }
 
-                    .followBox {
-                        display: flex;
-                        gap: var(--ssize1);
+                    &.on {
+                        background-color: var(--baseFg1);
 
-                        .followBtnBox {
-                            width: 50%;
-                            display: flex;
-                            justify-content: flex-end;
+                        .gnb_cate1_iconBox {
+                            background-color: var(--color2);
 
-                            .followBtn {
-                                display: flex;
-                                align-items: center;
-                                gap: var(--ssize);
-
-                                .followTxt {
-                                    font-size: var(--fontSize5);
-                                }
-
-                                .followNum {
-                                    font-weight: bold;
-                                }
+                            svg {
+                                stroke: var(--color);
                             }
-                        }
-                    }
-                }
-            }
 
-            .profile_btns_box {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                gap: var(--size);
-            }
-
-            .profile_introduce_box {
-                display: flex;
-                flex-direction: column;
-                gap: var(--ssize1);
-                font-size: var(--fontSize5);
-                line-height: var(--lineheight);
-                text-transform: none;
-                white-space: pre-wrap;
-
-                .profile_text_box {
-                    .profile_name {
-                        font-weight: bold;
-                    }
-    
-                    .profile_introduce {
-                        max-height: 80px;
-                        overflow: hidden;
-                        cursor: pointer;
-                        transition: max-height var(--trst);
-
-                        &.on {
-                            max-height: 100%;
-                        }
-
-                        .moreBtn {
-                            display: inline-block;
-                            width: max-content;
-                            font-size: var(--fontSize3);
-
-                            .moreTxt {
-                                color: var(--color6);
+                            &.gnb_cate1_profile {
+                                border-color: var(--color2);
                             }
                         }
                     }
@@ -490,22 +397,28 @@
                     height: 100%;
                     display: flex;
                     flex-wrap: wrap;
-                    gap: var(--size1);
+                    gap: var(--side1);
                     position: relative;
 
                     .section_container {
-                        width: calc(50% - var(--size));
+                        width: calc(50% - var(--side));
+                        height: 100%;
                         padding-bottom: var(--size1);
 
                         .section_box {
                             width: 100%;
                             height: 100%;
-                            background-color: var(--baseBg);
-                            border-radius: var(--bdrs);
 
                             .contInfo {
-                                width: 100%;
-                                overflow: auto;
+                                height: 100%;
+                                display: flex;
+                                flex-direction: column;
+                                
+                                .contents_inner_box {
+                                    width: 100%;
+                                    height: 100%;
+                                    overflow: auto;
+                                }
                             }
 
                             .contentTopBox {
@@ -603,45 +516,14 @@
                                         }
                                     }
                                 }
-
-                                .toggleBtn {
-                                    display: none;
-
-                                    svg {
-                                        transition: transform var(--trst);
-                                        transform: rotateX(180deg);
-                                    }
-                                }
-
-                                &.close {
-                                    gap: 0;
-
-                                    .contentTopInfo {
-                                        height: 0;
-                                    }
-                                    
-                                    .toggleBtn {
-                                        svg {
-                                            transform: rotateX(0deg);
-                                        }
-                                    }
-                                }
                             }
                         }
 
                         &.sub {
                             height: 100%;
-                            display: block;
-                            overflow: auto;
-
-                            .section_box {
-                                height: 500px;
-                                margin-top: var(--size1);
-
-                                &:first-child {
-                                    margin-top: 0;
-                                }
-                            }
+                            display: flex;
+                            flex-direction: column;
+                            gap: var(--side1);
                         }
                     }
                 }
@@ -662,7 +544,6 @@
 /*contents sub page*/
 .contents_table_box2 {
     width: 100%;
-    max-width: 500px;
     height: 100%;
     margin: auto;
     display: flex;
@@ -670,14 +551,18 @@
 
     .contents_container {
         width: 100%;
+        padding: 0 var(--side1);
+        overflow: auto;
 
         .content_info_box {
-            height: 100%;
-            padding-bottom: var(--size6);
+            width: 100%;
+            max-width: 500px;
+            padding: 0 0 var(--size6);
+            margin: auto;
             display: flex;
             flex-direction: column;
             gap: var(--size1);
-            overflow: auto;
+            box-sizing: content-box;
         
             .contentInfoBox {
                 display: flex;
@@ -857,26 +742,60 @@
         }
     }
 }
-.content_title {
+.title_box {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: var(--ssize);
-    font-size: var(--fontSize7);
-    text-transform: uppercase;
+    gap: var(--size);
+
+    .content_title {
+        font-size: var(--fontSize7);
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: var(--ssize1);
+
+        .back_btn {
+            width: var(--ssize2);
+            height: var(--ssize2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: rotate(90deg);
+        }
+    }
+
+    .title_btn {
+        width: var(--size4);
+        height: var(--size4);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 .content_sub_title {
     font-weight: bold;
     text-transform: capitalize;
 }
 
+/*feed*/
+.content_feed_wrap {
+    width: 100%;
+}
+
 /*myPage*/
 .my_profile_wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size);
+
     .my_profile_box {
         display: flex;
         gap: var(--size4);
 
         .profileImgBox {
-            width: 20%;
+            width: 15%;
+            min-width: 60px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -906,8 +825,66 @@
             }
         }
 
-        .profileInfoBox {
-            width: calc(80% - var(--size4));
+        .profileFollowBox {
+            width: calc(85% - var(--size4));
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .profileFollow {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .profileFollowBtns {
+                    display: flex;
+                    align-items: center;
+                    gap: var(--ssize);
+
+                    .num {
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+    }
+
+    .my_profile_info_box {
+        .profile_introduce_box {
+            display: flex;
+            flex-direction: column;
+            gap: var(--ssize1);
+            font-size: var(--fontSize3);
+            line-height: var(--lineheight);
+            text-transform: none;
+            white-space: pre-wrap;
+    
+            .profile_text_box {
+                .profile_name {
+                    font-weight: bold;
+                }
+    
+                .profile_introduce {
+                    line-height: var(--lineheight1);
+                    overflow: hidden;
+                    cursor: pointer;
+                    transition: max-height var(--trst);
+    
+                    &.on {
+                        max-height: 100%;
+                    }
+    
+                    .moreBtn {
+                        display: inline-block;
+                        width: max-content;
+                        font-size: var(--fontSize3);
+    
+                        .moreTxt {
+                            color: var(--color6);
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -963,14 +940,16 @@
         margin: auto;
 
         .dockbar {
-            padding: var(--size) 0 var(--size1);
+            padding: var(--size) 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
 
             .dockBtns {
-                width: var(--size4);
-                height: var(--size4);
+                width: var(--size1);
+                height: var(--size1);
+                padding: var(--ssize);
+                border-radius: var(--bdrs);
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -986,7 +965,7 @@
                 .moreMenuBox {
                     width: max-content;
                     position: absolute;
-                    bottom: 200%;
+                    bottom: 170%;
                     left: 0;
 
                     .moreMenuBtns {
@@ -1009,6 +988,23 @@
                                 height: var(--size);
                             }
                         }
+                    }
+                }
+
+                &.on {
+                    background-color: var(--color2);
+
+                    svg {
+                        stroke: var(--color);
+                    }
+                }
+
+                &.dockProfile {
+                    padding: 0;
+                    border: 2px solid transparent;
+
+                    .profileImg {
+                        border-radius: var(--bdrs);
                     }
                 }
             }
@@ -1078,6 +1074,7 @@
             .ft_util_box {
                 display: flex;
                 justify-content: center;
+                align-items: center;
                 gap: var(--ssize1);
             }
         }

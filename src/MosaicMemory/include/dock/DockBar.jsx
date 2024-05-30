@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { getNowLanguage, getLanguages, getLanguageNames, changeLanguage } from '../../utils/lang/languageUtils';
@@ -12,6 +12,7 @@ const DockBar = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const location = useLocation();
     const user = useSelector(store => store.userInfo);
     const colorMode = useSelector(store => store.colorMode.colorMode);
 
@@ -24,6 +25,11 @@ const DockBar = () => {
     const colorModeChanger = () => {
         setColorMode(dispatch, colorMode);
     }
+
+    // 현재 경로에 맞는 버튼 활성화
+    const getNavClass = (path) => {
+        return location.pathname === path ? 'dockBtns on' : 'dockBtns';
+    };
 
     // 로그아웃
     const logout = () => {
@@ -100,23 +106,23 @@ const DockBar = () => {
                         }
                     </div>
 
-                    <Link to='/' className="dockBtns">
+                    <Link to='/' className={getNavClass('/')}>
                         <GatherSvg name='home' title={t('home')} />
                     </Link>
 
-                    <Link to='/contents/search' className="dockBtns">
+                    <Link to='/contents/search' className={getNavClass('/contents/search')}>
                         <GatherSvg name='search' title={t('search')} />
                     </Link>
 
-                    <Link to='/contents/posting' className="dockBtns">
+                    <Link to='/contents/posting' className={getNavClass('/contents/posting')}>
                         <GatherSvg name='plus' title={t('post')} />
                     </Link>
 
-                    <Link to='/contents/schedule' className="dockBtns">
+                    <Link to='/contents/schedule' className={getNavClass('/contents/schedule')}>
                         <GatherSvg name='schedule' title={t('schedule')} />
                     </Link>
 
-                    <Link to='/contents/myPage' className="dockBtns">
+                    <Link to='/contents/myPage' className={`${getNavClass('/contents/myPage')} dockProfile`}>
                         <img src={user.u_pf_img} alt="" className='profileImg' />
                     </Link>
                 </div>

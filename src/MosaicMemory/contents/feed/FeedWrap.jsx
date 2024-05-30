@@ -2,9 +2,10 @@ import React from 'react'
 
 const FeedWrap = () => {
     return (
-        <div>
-            <div style={{height: '2000px', backgroundColor: 'aqua'}}>
-                test
+        <div className='contents_inner_box'>
+            FeedWrap
+            <div className="content_feed_wrap">
+                
             </div>
         </div>
     )

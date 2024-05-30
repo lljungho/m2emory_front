@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { setTruncate, truncateText } from '../../utils/handler/handlerUtils';
+import GatherSvg from '../../utils/svg/GatherSvg';
 
 const MyPageWrap = () => {
     const { t } = useTranslation();
@@ -21,8 +23,6 @@ const MyPageWrap = () => {
 
     return (
         <div className='content_info_box'>
-            <h2 className='content_title'>{user.u_id}</h2>
-
             <div className="contentInfoBox">
                 <div className="my_profile_wrap">
                     <div className="my_profile_box">
@@ -33,12 +33,19 @@ const MyPageWrap = () => {
                         </div>
 
                         <div className="profileFollowBox">
+                            <div className="title_box">
+                                <h2 className='content_title'>{user.u_id}</h2>
+                                <Link to='/contents/profileEdit' className="title_btn">
+                                    <GatherSvg name='setting' />
+                                </Link>
+                            </div>
+
                             <div className="profileFollow">
-                                <div className="profileFollowBtns">
+                                <div className="profileFollowBtns cursorPointer">
                                     <span className="text">{t('follower')}</span>
                                     <span className="num">123</span>
                                 </div>
-                                <div className="profileFollowBtns">
+                                <div className="profileFollowBtns cursorPointer">
                                     <span className="text">{t('following')}</span>
                                     <span className="num">123</span>
                                 </div>
@@ -51,8 +58,8 @@ const MyPageWrap = () => {
                     </div>
 
                     { (user.u_pf_name || user.u_pf_introduction) &&
-                    <div className="profileInfoBox">
-                        <div className="profileBotBox">
+                    <div className="my_profile_info_box">
+                        <div className="profile_introduce_box">
                             { user.u_pf_name && 
                             <div className="profile_text_box">
                                 <p className="profile_name">{user.u_pf_name}</p>

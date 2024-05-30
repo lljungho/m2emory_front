@@ -10,6 +10,7 @@
         .headerTop {
             width: 100%;
             padding: 0 var(--side1);
+            top: var(--size);
             z-index: 0;
 
             .headerTopbox {
@@ -23,34 +24,48 @@
 
     /*contentsWrap*/
     #contentsWrap {
-        padding:  5rem 0 var(--side) 0;
+        padding:  5rem 0 var(--size3);
         
         .contentsBox {
             .cont_Wrapper {
                 .contents {
-                    padding: 0 var(--side1);
+                    padding: 0;
 
                     .contents_table_box {
+                        padding: 0 var(--side1);
                         justify-content: center;
+                        overflow: auto;
 
                         .section_container {
                             width: 100%;
                             max-width: 500px;
-                            padding-bottom: var(--size5);
+                            padding-bottom: 0;
 
                             .section_box {
                                 .contInfo {
+                                    .contents_inner_box {
+                                        height: auto;
+                                        padding-bottom: var(--size3);
+                                        overflow: visible;
+                                    }
+
                                     .contentTopBox {
                                         .contentTopInfo {           
                                             .storyBox {
                                                 max-width: none;
                                             }
                                         }
-    
-                                        .toggleBtn {
-                                            display: flex;
-                                        }
                                     }
+                                }
+                            }
+                        }
+                    }
+
+                    .contents_table_box2 {
+                        .contents_container {
+                            .content_info_box {
+                                .contentInfoBox {
+                                    padding: 0;
                                 }
                             }
                         }

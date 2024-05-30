@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import useWindowWidth from '../../utils/useWindowWidth';
+import { useWindowWidth } from '../../utils/hook/customHookUtils';
 import LanguageSelect from '../../utils/lang/LanguageSelect';
 import { setColorMode } from '../../utils/handler/handlerUtils';
 import GatherSvg from '../../utils/svg/GatherSvg';

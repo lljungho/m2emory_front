@@ -1,20 +1,10 @@
-import React, { useState } from 'react'
-import { useTranslation } from 'react-i18next';
+import React from 'react'
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from 'swiper/modules';
 import "swiper/css";
 import "swiper/css/navigation";
-import GatherSvg from '../../utils/svg/GatherSvg';
 
 const StoryWrap = () => {
-    const { t } = useTranslation();
-    const tClose = t('close');
-
-    // 스토리 토글버튼
-    const [storyToggle, setStoryToggle ] = useState(false);
-    const handleStoryToggle = () => {
-        setStoryToggle(!storyToggle);
-    }
 
     const slideContents = [
         {
@@ -89,7 +79,7 @@ const StoryWrap = () => {
 
     return (
         <>
-            <div className={`contentTopBox ${storyToggle ? 'close' : ''}`}>
+            <div className='contentTopBox'>
                 <div className="contentTopInfo">
                     <div className="storyBox">
                         <Swiper 
@@ -139,8 +129,6 @@ const StoryWrap = () => {
                         </Swiper>
                     </div>
                 </div>
-
-                <div className="toggleBtn" onClick={handleStoryToggle}><GatherSvg name='arrow' title={tClose}/></div>
             </div>
         </>
     )

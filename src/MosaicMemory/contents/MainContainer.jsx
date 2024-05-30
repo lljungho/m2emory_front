@@ -1,9 +1,7 @@
 import React from 'react'
-import useWindowWidth from '../utils/useWindowWidth'
+import { useWindowWidth } from '../utils/hook/customHookUtils'
 import StoryWrap from './story/StoryWrap'
 import FeedWrap from './feed/FeedWrap'
-import ScheduleWrap from './schedule/ScheduleWrap'
-import PostingWrap from './posting/PostingWrap'
 
 const MainContainer = () => {
     const windowWidth = useWindowWidth();
@@ -23,12 +21,16 @@ const MainContainer = () => {
                 <div className="section_container sub">
                     <div className="section_box">
                         <div className="contInfo">
-                            <ScheduleWrap />
+                            <div className="contents_inner_box">
+                                내 포스팅
+                            </div>
                         </div>
                     </div>
                     <div className="section_box">
                         <div className="contInfo">
-                            <PostingWrap />
+                            <div className="contents_inner_box">
+                                내 스케줄
+                            </div>
                         </div>
                     </div>
                 </div>

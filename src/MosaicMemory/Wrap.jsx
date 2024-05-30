@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserData } from './utils/axios/axiosUtils';
 import { setColor } from './utils/handler/handlerUtils';
-import useWindowWidth from './utils/useWindowWidth';
+import { useWindowWidth } from './utils/hook/customHookUtils';
 
 import './css/common.css';
 import './css/style.css';
@@ -17,7 +17,7 @@ import DockBar from './include/dock/DockBar';
 
 const Wrap = () => {
     const windowWidth = useWindowWidth();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch(); 
     const isLogIned = useSelector(store => store.sessionCheck.sessionID);
     const colorMode = useSelector(store => store.colorMode.colorMode); // false=light
     const dimmedState = useSelector(store => store.contStatus.dimmedState);

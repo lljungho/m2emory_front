@@ -1,27 +1,20 @@
 import React, { useRef } from 'react'
 import { useTranslation } from 'react-i18next';
-import axios from '../../axios/axiosSet';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { deleteProfileImg, putModifyProfileImgData } from '../../axios/axiosUtils';
 
 const FormProfileImg = () => {
     const { t } = useTranslation();
-    const TprofileImgEdit = t('profileImgEdit');
-    const Tdel = t('del');
-    const Tclose = t('close');
-    const Tchange = t('change');
-    const TchangeConfirm = t('changeConfirm');
-    const TprofileImgUploadErr = t('profileImgUploadErr');
-    const TprogileImgDelete = t('progileImgDelete');
-
-    // redux
     const dispatch = useDispatch();
-    const dimmedState = useSelector(store => store.contStatus.dimmedState);
+
+    // 프로필 이미지 파일 input
+    const profileImg = useRef(null);
 
     // 팝업 닫기
     const dimmedClose = () => {
         dispatch({
             type: 'SET_DIMMED_STATE',
-            dimmedState: !dimmedState,
+            dimmedState: false,
         });
         dispatch({
             type: 'SET_MODAL_CONTENTS',
@@ -29,13 +22,8 @@ const FormProfileImg = () => {
         });
     }
 
-    // 프로필 이미지 파일 input
-    const profileImg = useRef(null);
-
     // 프로필 이미지 업로드
-    const putData = async () => {
-        console.log("[Axios] putData()");
-
+    const putData = () => {
         const maxFilesize = 1024 * 1024 * 5; // 파일 크기 제한
         const file = profileImg.current.files[0];
 
@@ -43,100 +31,30 @@ const FormProfileImg = () => {
         if (!file) {
             return;
         }
-
+        
         // 이미지 파일이 아니거나 파일 크기 제한을 초과한 경우
         if (!file.type.startsWith('image/') || file.size > maxFilesize) {
-            alert(TprofileImgUploadErr);
+            alert(t('profileImgUploadErr'));
             return;
         }
-
-        let formData = new FormData();
-        formData.append('file', profileImg.current.files[0]);
-
-        const confirmOk = window.confirm(TchangeConfirm);
+        
+        const confirmOk = window.confirm(t('changeConfirm'));
         if (confirmOk) {
-            try {
-                const response = await axios.put('/upload/modifyProfileImg', formData, {
-                    headers: {
-                        'Content-type': 'multipart/form-data'
-                    }
-                });
-                console.log('axios modifyProfileImg succsess');
-
-                // 팝업 닫기 및 리듀서 프로필 이미지 수정
-                dispatch({
-                    type: 'SET_DIMMED_STATE',
-                    dimmedState: !dimmedState,
-                });
-                dispatch({
-                    type: 'SET_MODAL_CONTENTS',
-                    modalContents: '',
-                });
-                dispatch({
-                    type: 'SET_PROFILE_IMG',
-                    u_pf_img: response.data.u_pf_img,
-                });
-
-            } catch (error) {
-                console.log("[Axios] modifyProfileImg() put form data communication error!!");
-                console.log(error.config);
-    
-                if (error.response) {
-                    // 서버에서 받은 에러 메시지
-                    console.log('Server Error:', error.response.data);
-    
-                } else if (error.request) {
-                    // 요청이 전송되었지만 응답을 받지 못한 경우 
-                    console.log('Network Error:', error.request);
-    
-                } else {
-                    // 기타 에러
-                    console.log('Error:', error.message);
-                }
-            };
-        }
+            // 프로필 이미지 업로드 요청
+            putModifyProfileImgData(
+                file,
+                dispatch,
+            );
+        };
     };
 
-    // 프로필 이미지 삭제
-    const deleteData = async () => {
-        console.log("[Axios] deleteData()");
-
-        const confirmOk = window.confirm(TprogileImgDelete);
-        if(confirmOk) {
-            try {
-                await axios.delete('/upload/deleteProfileImg');
-
-                console.log('axios deleteProfileImg succsess');
-
-                // 팝업 닫기 및 리듀서 프로필 이미지 수정
-                dispatch({
-                    type: 'SET_DIMMED_STATE',
-                    dimmedState: !dimmedState,
-                });
-                dispatch({
-                    type: 'SET_MODAL_CONTENTS',
-                    modalContents: '',
-                });
-                dispatch({
-                    type: 'SET_PROFILE_IMG',
-                    u_pf_img: null,
-                });
-
-            } catch(error) {
-                if (error.response) {
-                    // 서버에서 받은 에러 메시지
-                    console.log('Server Error:', error.response.data);
-    
-                } else if (error.request) {
-                    // 요청이 전송되었지만 응답을 받지 못한 경우 
-                    console.log('Network Error:', error.request);
-    
-                } else {
-                    // 기타 에러
-                    console.log('Error:', error.message);
-                }
-            }
-        }
+    // 프로필 이미지 제거
+    const deleteData = () => {
+        const confirmOk = window.confirm(t('progileImgDelete'));
+        if (confirmOk) {
+            // 프로필 이미지 제거 요청
+            deleteProfileImg(dispatch);
+        };
     };
     
     return (
@@ -150,11 +68,11 @@ const FormProfileImg = () => {
                 className='displayNone' 
                 onChange={putData}
             />
-            <p className="content_title">{TprofileImgEdit}</p>
+            <p className="content_title">{t('profileImgEdit')}</p>
             <div className="modal_btns_box">
-                <label htmlFor='file' className="small_btns">{Tchange}</label>
-                <div className="small_btns" onClick={deleteData}>{Tdel}</div>
-                <div className="small_btns" onClick={dimmedClose}>{Tclose}</div>
+                <label htmlFor='file' className="small_btns">{t('change')}</label>
+                <div className="small_btns" onClick={deleteData}>{t('del')}</div>
+                <div className="small_btns" onClick={dimmedClose}>{t('close')}</div>
             </div>
         </div>
     )
