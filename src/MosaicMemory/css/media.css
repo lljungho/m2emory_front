@@ -34,7 +34,7 @@
                     .contents_table_box {
                         padding: 0 var(--side1);
                         justify-content: center;
-                        overflow: auto;
+                        overflow-y: scroll;
 
                         .section_container {
                             width: 100%;
@@ -46,15 +46,7 @@
                                     .contents_inner_box {
                                         height: auto;
                                         padding-bottom: var(--size3);
-                                        overflow: visible;
-                                    }
-
-                                    .contentTopBox {
-                                        .contentTopInfo {           
-                                            .storyBox {
-                                                max-width: none;
-                                            }
-                                        }
+                                        overflow-y: visible;
                                     }
                                 }
                             }
@@ -73,12 +65,13 @@
                 }
             }
         }
+    }
 
-        .storyList{
-            .swiper-button-prev, 
-            .swiper-button-next {
-                display: none;
-            }
+    /*story*/
+    .storyList{
+        .swiper-button-prev, 
+        .swiper-button-next {
+            display: none;
         }
     }
 

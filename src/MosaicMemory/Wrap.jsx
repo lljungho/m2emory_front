@@ -17,11 +17,11 @@ import DockBar from './include/dock/DockBar';
 
 const Wrap = () => {
     const windowWidth = useWindowWidth();
-    const dispatch = useDispatch(); 
     const isLogIned = useSelector(store => store.sessionCheck.sessionID);
     const colorMode = useSelector(store => store.colorMode.colorMode); // false=light
     const dimmedState = useSelector(store => store.contStatus.dimmedState);
     const modalContents = useSelector(store => store.contStatus.modalContents);
+    const dispatch = useDispatch(); 
 
     // 로딩 설정
     const [loading, setLoading] = useState(false);
@@ -38,7 +38,7 @@ const Wrap = () => {
 
     // 통신 중일 경우 로딩 표시
     if (loading) {
-        return <Loading />;
+        return <Loading logo={true} />;
     };  
 
     return (

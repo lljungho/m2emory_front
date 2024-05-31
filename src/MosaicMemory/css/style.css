@@ -191,7 +191,7 @@
             justify-content: space-between;
             gap: var(--size1);
             position: relative;
-            overflow: auto;
+            overflow-y: scroll;
             scrollbar-width: none;
             -ms-overflow-style: none;
 
@@ -247,12 +247,6 @@
                         border-radius: var(--bdrs);
                         overflow: hidden;
                         transition: transform var(--trst);
-
-                        .gnb_cate1_icon {
-                            width: 100%;
-                            height: 100%;
-                            object-fit: cover;
-                        }
 
                         &.gnb_cate1_profile {
                             padding: 0;
@@ -417,104 +411,7 @@
                                 .contents_inner_box {
                                     width: 100%;
                                     height: 100%;
-                                    overflow: auto;
-                                }
-                            }
-
-                            .contentTopBox {
-                                display: flex;
-                                flex-direction: column;
-                                gap: var(--ssize1);
-                                padding-bottom: var(--size1);
-                
-                                .contentTopInfo {
-                                    height: 80px;
-                                    transition: height var(--trst);
-                                    overflow: hidden;
-
-                                    .storyBox {
-                                        width: 100%;
-                                        overflow: hidden;
-                                        position: relative;
-                
-                                        .storyList {
-                                            position: static;
-                
-                                            .listBox {
-                                                width: 60px;
-                                                height: 80px;
-                                                cursor: pointer;
-                
-                                                .listThumbnailBox {
-                                                    box-shadow: 1px 1px 3px var(--baseRGB_b);  
-                                                    border-radius: var(--bdrs);
-                
-                                                    .thumbnail_img {
-                                                        width: 60px;
-                                                        height: 60px;
-                                                        display: flex;
-                                                        justify-content: center;
-                                                        align-items: center;
-                                                        border-radius: var(--bdrs);
-                                                        border: 2px solid #b49dff;
-                                                        overflow: hidden;
-                
-                                                        .thumbnail {
-                                                            width: 100%;
-                                                            height: 100%;
-                                                            object-fit: cover;
-                                                        }
-                                                    }
-                                                }
-                
-                                                .listTitle {
-                                                    width: 100%;
-                                                    font-size: 0.75em;
-                                                    padding-top: 0.3em;
-                                                    overflow: hidden;
-                                                    text-overflow: ellipsis;
-                                                    white-space: nowrap;
-                                                }
-                
-                                                &.onfirmed {
-                                                    .thumbnail_img {
-                                                        border: 2px solid var(--baseFg1);
-                                                    }
-                
-                                                    .listTitle {
-                                                        color: #9d9d9d;
-                                                    }
-                                                }
-                                            }
-                
-                                            .swiper-button-prev, .swiper-button-next {
-                                                top: 50%;
-                                                transform: translateY(calc(-50% - 10px));
-                                                margin-top: 0;
-                                                width: 30px;
-                                                height: 30px;
-                                                border-radius: var(--bdrs);
-                                                border: 1px solid var(--baseRGB_b);
-                                                box-shadow: 1px 1px 2px rgba(0,0,0,0.35);
-                                                transition: var(--trst);
-                                            }
-                
-                                            .swiper-button-next {
-                                                background: #fff url(/public/images/icon/arrow_right.png) center no-repeat;
-                                                background-size: 70%;
-                                            }
-                
-                                            .swiper-button-prev {
-                                                background: #fff url(/public/images/icon/arrow_left.png) center no-repeat;
-                                                background-size: 70%;
-                                            }
-                
-                                            .swiper-button-prev.swiper-button-disabled, .swiper-button-next.swiper-button-disabled {
-                                                opacity: 0;
-                                                visibility: hidden;
-                                            }
-                                        }
-                                    }
+                                    overflow-y: scroll;
                                 }
                             }
                         }
@@ -552,7 +449,7 @@
     .contents_container {
         width: 100%;
         padding: 0 var(--side1);
-        overflow: auto;
+        overflow-y: scroll;
 
         .content_info_box {
             width: 100%;
@@ -574,14 +471,7 @@
                         .profile_img_box {
                             width: var(--profileSize);
                             height: var(--profileSize);
-                            border-radius: var(--bdrs);
-                            overflow: hidden;
                             cursor: pointer;
-                            
-                            .profileImg {
-                                height: 100%;
-                                object-fit: cover;
-                            }
                         }
                     }
                 }
@@ -668,7 +558,7 @@
                     max-height: calc(40vh -  90px);
                     border-radius: var(--bdrs);
                     background-color: var(--baseFg1);
-                    overflow: auto;
+                    overflow-y: scroll;
 
                     .recentInfoBox {
                         height: 100%;
@@ -676,7 +566,7 @@
                         display: flex;
                         flex-direction: column;
                         gap: var(--size);
-                        overflow: auto;
+                        overflow-y: scroll;
 
                         .recentHistoryBox {
                             display: flex;
@@ -778,9 +668,171 @@
     text-transform: capitalize;
 }
 
+/*story*/
+.contentTopBox {
+    padding-bottom: var(--size);
+
+    .contentTopInfo {
+        height: 80px;
+
+        .storyBox {
+            .storyList {
+                .listBox {
+                    width: 60px;
+                    height: 80px;
+
+                    .listThumbnailBox {
+                        width: 100%;
+                        border: 2px solid var(--color2);
+                        border-radius: var(--bdrs);
+                        position: relative;
+
+                        &::after {
+                            content: '';
+                            display: block;
+                            padding-bottom: 100%;
+                        }
+
+                        .thumbnail_img {
+                            width: 100%;
+                            height: 100%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            border: 2px solid transparent;
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(var(--translateCenter));
+                        }
+                    }
+
+                    .listTitle {
+                        width: 100%;
+                        font-size: 0.75em;
+                        padding-top: 0.3em;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        text-align: center;
+
+                        &.me {
+                            color: var(--baseFg) !important;
+                        }
+                    }
+
+                    &.onfirmed {
+                        .listThumbnailBox {
+                            border: 1px solid var(--baseRGB_b);
+                        }
+
+                        .listTitle {
+                            color: var(--color7);
+                        }
+                    }
+                }
+
+                .swiper-button-prev, .swiper-button-next {
+                    top: 50%;
+                    transform: translateY(calc(-50% - 10px));
+                    margin-top: 0;
+                    width: 30px;
+                    height: 30px;
+                    border-radius: var(--bdrs);
+                    border: 1px solid var(--baseRGB_b);
+                    box-shadow: 1px 1px 2px rgba(0,0,0,0.35);
+                    transition: opacity, visibility var(--trst);
+                }
+
+                .swiper-button-next {
+                    background: #fff url(/public/images/icon/arrow_right.png) center no-repeat;
+                    background-size: 70%;
+                }
+
+                .swiper-button-prev {
+                    background: #fff url(/public/images/icon/arrow_left.png) center no-repeat;
+                    background-size: 70%;
+                }
+
+                .swiper-button-prev.swiper-button-disabled, .swiper-button-next.swiper-button-disabled {
+                    opacity: 0;
+                    visibility: hidden;
+                }
+            }
+        }
+    }
+}
+
 /*feed*/
 .content_feed_wrap {
     width: 100%;
+
+    .content_list_box {
+        display: flex;
+        flex-direction: column;
+
+        .content_list {
+            margin-bottom: var(--size);
+            padding-bottom: var(--size);
+            border-bottom: 1px solid var(--baseRGB_b);
+
+            .content_info_box {
+                display: flex;
+                flex-direction: column;
+
+                .content_top_info {
+                    display: flex;
+                    justify-content: space-between;
+
+                    .cont_top_box {
+                        display: flex;
+                        align-items: center;
+                        gap: var(--ssize);
+
+                        .cont_top_info_profile_thumb {
+                            .story_check_line{
+                                border-radius: var(--bdrs);
+                                border: 2px solid transparent;
+
+                                &.on {
+                                    border: 2px solid var(--color2);
+                                }
+
+                                .profile_thumb_box {
+                                    border: 2px solid transparent;
+
+                                    .thumbnail_img {
+                                        width: var(--size1);
+                                        height: var(--size1);
+                                        border-radius: var(--bdrs);
+                                    }
+                                }
+                            }
+                        }
+
+                        .cont_top_info_profile {
+                            .profile_introduction {
+                                line-height: 1;
+                                display: flex;
+                                align-items: center;
+                                gap: var(--ssize1);
+
+                                .userId {
+                                    font-size: var(--fontSize3);
+                                    font-weight: bold;
+                                }
+
+                                .date {
+                                    font-size: var(--fontSize);
+                                    color: var(--color7);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 /*myPage*/
@@ -814,14 +866,6 @@
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                border-radius: var(--bdrs);
-                overflow: hidden;
-
-                .thumb {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
             }
         }
 
@@ -954,13 +998,6 @@
                 justify-content: center;
                 align-items: center;
                 position: relative;
-
-                .profileImg {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    border-radius: var(--bdrs);
-                }
 
                 .moreMenuBox {
                     width: max-content;

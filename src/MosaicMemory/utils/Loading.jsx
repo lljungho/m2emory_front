@@ -1,15 +1,15 @@
 import React from 'react'
-// import GatherSvg from './svg/GatherSvg'
+import GatherSvg from './svg/GatherSvg'
 import Logo from '../include/logo/Logo'
 
-const Loading = () => {
+const Loading = ({ logo }) => {
     return (
         <div className="loadingBox">
-            <Logo />
+            { logo && <Logo /> }
             
-            {/* <div className="loadingIcon">
+            <div className="loadingIcon">
                 <GatherSvg name='loading' />
-            </div> */}
+            </div>
         </div>
     )
 }

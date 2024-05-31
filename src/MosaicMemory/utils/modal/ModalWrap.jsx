@@ -30,4 +30,4 @@ const ModalWrap = () => {
     )
 }
 
-export default ModalWrap
+export default ModalWrap;

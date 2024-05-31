@@ -3,8 +3,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from 'swiper/modules';
 import "swiper/css";
 import "swiper/css/navigation";
+import { useSelector } from 'react-redux';
 
 const StoryWrap = () => {
+    const user = useSelector(store => store.userInfo);
 
     const slideContents = [
         {
@@ -111,9 +113,20 @@ const StoryWrap = () => {
                             modules={[Navigation]}
                             className="storyList"
                         >
+                            <SwiperSlide>
+                                <div className="listBox onfirmed cursorPointer">
+                                    <div className="listThumbnailBox">
+                                        <div className="thumbnail_img">
+                                            <img src={user.u_pf_img} alt={`${user.u_id} 프로필 이미지`} className='thumbnail' />
+                                        </div>
+                                    </div>
+                                    <p className="listTitle me">My Story</p>
+                                </div>
+                            </SwiperSlide>
+
                             {slideContents.map((slide, index) => (
                                 <SwiperSlide key={index}>
-                                    <div className="listBox">
+                                    <div className="listBox cursorPointer">
                                         <div className="listThumbnailBox">
                                             <div className="thumbnail_img">
                                                 <img src={slide.imageURL} alt={`${slide.title} 프로필 이미지`} className='thumbnail' />

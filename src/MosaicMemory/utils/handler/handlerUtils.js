@@ -65,3 +65,15 @@ export const setTruncate = (text, setTextTruncated) => {
         }
     }
 };
+
+// 딤드 닫기
+export const handleDimmedClose = (dispatch) => {
+    dispatch({
+        type: 'SET_DIMMED_STATE',
+        dimmedState: false,
+    });
+    dispatch({
+        type: 'SET_MODAL_CONTENTS',
+        modalContents: '',
+    });
+}

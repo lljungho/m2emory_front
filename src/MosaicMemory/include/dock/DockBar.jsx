@@ -123,7 +123,7 @@ const DockBar = () => {
                     </Link>
 
                     <Link to='/contents/myPage' className={`${getNavClass('/contents/myPage')} dockProfile`}>
-                        <img src={user.u_pf_img} alt="" className='profileImg' />
+                        <img src={user.u_pf_img} alt="" className='thumbnail' />
                     </Link>
                 </div>
             </div>

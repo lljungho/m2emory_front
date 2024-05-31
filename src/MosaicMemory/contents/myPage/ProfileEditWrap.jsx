@@ -120,7 +120,7 @@ export const ProfileEditWrap = () => {
                     <div className="profile_edit">
                         <div className="profile_thumb">
                             <div className="profile_img_box" onClick={profileEditPop}>
-                                <img src={ user.u_pf_img } alt={t('profile')} className="profileImg" />
+                                <img src={ user.u_pf_img } alt={t('profile')} className="thumbnail" />
                             </div>
                         </div>
                     </div>

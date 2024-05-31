@@ -6,10 +6,6 @@ import GatherSvg from '../../utils/svg/GatherSvg';
 
 export const ProfileWrap = () => {
     const { t } = useTranslation();
-    const Ttitle = t('search');
-    const Tsearch = t('search');
-    const Tdel = t('del');
-    const Trecent = t('recent');
 
     const searchInput = useRef(null);
     const searchDelBtn = useRef(null);
@@ -37,7 +33,7 @@ export const ProfileWrap = () => {
         <>
             <div className='content_info_box'>
                 <div className="title_box">
-                    <h2 className='content_title'>{Ttitle}</h2>
+                    <h2 className='content_title'>{t('search')}</h2>
                 </div>
 
                 <div className="contentInfoBox">
@@ -45,14 +41,14 @@ export const ProfileWrap = () => {
                         <div className="searchInfoBox">
                             <div className="searchInputBox">
                                 <div className="ico_search">
-                                    <GatherSvg name='search' color='var(--baseRGB_b)' title={Tsearch} />
+                                    <GatherSvg name='search' color='var(--baseRGB_b)' title={t('search')} />
                                 </div>
 
-                                <input type="text" name="searchStr" id="searchStr" ref={searchInput} placeholder={Tsearch} onChange={getData} autoComplete="off" />
+                                <input type="text" name="searchStr" id="searchStr" ref={searchInput} placeholder={t('search')} onChange={getData} autoComplete="off" />
 
                                 <div className="funcBtnsBox">
                                     <div className="funcBtn" ref={searchDelBtn} onClick={inputValueDel}>
-                                        <GatherSvg name='delBtn' title={Tdel} />
+                                        <GatherSvg name='delBtn' title={t('del')} />
                                     </div>
                                 </div>
                             </div>
@@ -62,7 +58,7 @@ export const ProfileWrap = () => {
 
                 <div className="contentInfoBox">
                     <div className="recentTop">
-                        <p className="content_sub_title">{Trecent}</p>
+                        <p className="content_sub_title">{t('recent')}</p>
                         <span className='TxtBtns'>{t('delAll')}</span>
                     </div>
 

@@ -2,6 +2,7 @@ import React, { useRef } from 'react'
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux'
 import { deleteProfileImg, putModifyProfileImgData } from '../../axios/axiosUtils';
+import { handleDimmedClose } from '../../handler/handlerUtils';
 
 const FormProfileImg = () => {
     const { t } = useTranslation();
@@ -12,14 +13,7 @@ const FormProfileImg = () => {
 
     // 팝업 닫기
     const dimmedClose = () => {
-        dispatch({
-            type: 'SET_DIMMED_STATE',
-            dimmedState: false,
-        });
-        dispatch({
-            type: 'SET_MODAL_CONTENTS',
-            modalContents: '',
-        });
+        handleDimmedClose(dispatch);
     }
 
     // 프로필 이미지 업로드

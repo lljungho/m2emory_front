@@ -1,20 +1,13 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { handleDimmedClose } from './handler/handlerUtils';
 
 const DimmedBox = () => {
     // redux
     const dispatch = useDispatch();
-    const dimmedState = useSelector(store => store.contStatus.dimmedState);
 
     const dimmedClose = () => {
-        dispatch({
-            type: 'SET_DIMMED_STATE',
-            dimmedState: !dimmedState,
-        });
-        dispatch({
-            type: 'SET_MODAL_CONTENTS',
-            modalContents: '',
-        });
+        handleDimmedClose(dispatch);
     }
 
     return (
@@ -22,4 +15,4 @@ const DimmedBox = () => {
     )
 }
 
-export default DimmedBox
+export default DimmedBox;

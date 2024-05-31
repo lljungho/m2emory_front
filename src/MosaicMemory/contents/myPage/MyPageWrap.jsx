@@ -28,7 +28,7 @@ const MyPageWrap = () => {
                     <div className="my_profile_box">
                         <div className="profileImgBox">
                             <div className="profileThumb">
-                                <img src={ user.u_pf_img } alt={t('profile')} className="thumb" />
+                                <img src={ user.u_pf_img } alt={t('profile')} className="thumbnail" />
                             </div>
                         </div>
 
