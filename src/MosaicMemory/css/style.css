@@ -812,19 +812,29 @@
 
                         .cont_top_info_profile {
                             .profile_introduction {
+                                width: 100%;
+                                max-width: 230px;
                                 line-height: 1;
                                 display: flex;
-                                align-items: center;
-                                gap: var(--ssize1);
+                                flex-direction: column;
+                                gap: var(--ssize);
 
                                 .userId {
                                     font-size: var(--fontSize3);
                                     font-weight: bold;
+                                    display: flex;
+                                    align-items: center;
+                                    gap: var(--ssize1);
+
+                                    .date {
+                                        font-size: var(--fontSize);
+                                        font-weight: normal;
+                                        color: var(--color7);
+                                    }
                                 }
 
-                                .date {
+                                .userName {
                                     font-size: var(--fontSize);
-                                    color: var(--color7);
                                 }
                             }
                         }

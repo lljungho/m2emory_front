@@ -26,8 +26,11 @@ const FeedWrap = () => {
 
                                     <div className="cont_top_info_profile">
                                         <div className="profile_introduction">
-                                            <span className="userId">{user.u_id}</span>
-                                            <span className="date">1분</span>
+                                            <p className="userId">
+                                                {user.u_id}
+                                                <span className="date">1분</span>
+                                            </p>
+                                            <p className="userName">{user.u_pf_name}</p>
                                         </div>
                                     </div>
                                 </div>
