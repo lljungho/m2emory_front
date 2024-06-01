@@ -9,8 +9,8 @@ const GatherSvg = ({name, color, title}) => {
             name: 'message',
             svgIcon: () => (
                 <svg aria-label={title} fill='none' stroke={colorModeCode} x="0px" y="0px" viewBox="0 0 27 27" enableBackground="new 0 0 27 27">
-                    <rect x="0.794" y="3.88" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="25.413" height="19.24"/>
-                    <path stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M0.793,3.88l11.771,9.986c0.539,0.458,1.331,0.458,1.871,0L26.207,3.88"/>
+                    <rect x="0.794" y="3.88" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" width="25.413" height="19.24"/>
+                    <path strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" d="M0.793,3.88l11.771,9.986c0.539,0.458,1.331,0.458,1.871,0L26.207,3.88"/>
                 </svg>
             ),
         },
@@ -63,8 +63,8 @@ const GatherSvg = ({name, color, title}) => {
             name: 'search',
             svgIcon: () => (
                 <svg aria-label={title} fill="none" stroke={colorModeCode} x="0px" y="0px" viewBox="0 0 27 27" enableBackground="new 0 0 27 27">
-                    <circle stroke-width="1.35" stroke-miterlimit="10" cx="12.133" cy="12.133" r="11.339"/>
-		            <line stroke-width="1.35" stroke-miterlimit="10" x1="20.15" y1="20.15" x2="26.206" y2="26.206"/>
+                    <circle strokeWidth="1.35" strokeMiterlimit="10" cx="12.133" cy="12.133" r="11.339"/>
+		            <line strokeWidth="1.35" strokeMiterlimit="10" x1="20.15" y1="20.15" x2="26.206" y2="26.206"/>
                 </svg>
             ),
         },
@@ -211,8 +211,8 @@ const GatherSvg = ({name, color, title}) => {
             name: 'plus',
             svgIcon: () => (
                 <svg aria-label={title} fill='none' stroke={colorModeCode} x="0px" y="0px" viewBox="0 0 27 27" enableBackground="new 0 0 27 27">
-                    <line stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="0.793" y1="13.5" x2="26.207" y2="13.5"/>
-                    <line stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="13.5" y1="26.207" x2="13.5" y2="0.793"/>
+                    <line strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" x1="0.793" y1="13.5" x2="26.207" y2="13.5"/>
+                    <line strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" x1="13.5" y1="26.207" x2="13.5" y2="0.793"/>
                 </svg>
             )
         },
@@ -220,11 +220,11 @@ const GatherSvg = ({name, color, title}) => {
             name: 'schedule',
             svgIcon: () => (
                 <svg aria-label={title} fill='none' stroke={colorModeCode} x="0px" y="0px" viewBox="0 0 27 27" enableBackground="new 0 0 27 27">
-                    <rect x="0.793" y="3.032" fill="none" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="25.414" height="23.165"/>
-                    <line fill="none" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="0.793" y1="11.131" x2="26.207" y2="11.131"/>
-                    <line fill="none" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="7.724" y1="0.809" x2="7.724" y2="5.685"/>
-                    <line fill="none" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="19.276" y1="0.809" x2="19.276" y2="5.685"/>
-                    <polyline fill="none" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+                    <rect x="0.793" y="3.032" fill="none" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" width="25.414" height="23.165"/>
+                    <line fill="none" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" x1="0.793" y1="11.131" x2="26.207" y2="11.131"/>
+                    <line fill="none" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" x1="7.724" y1="0.809" x2="7.724" y2="5.685"/>
+                    <line fill="none" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" x1="19.276" y1="0.809" x2="19.276" y2="5.685"/>
+                    <polyline fill="none" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" points="
                         18.934,15.169 13.158,20.945 9.564,17.736 "/>
                 </svg>
             )

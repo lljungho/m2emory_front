@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { getNowLanguage, getLanguages, getLanguageNames, changeLanguage } from './languageUtils';
+import { useWindowWidth } from '../hook/customHookUtils';
 
 const LanguageSelect = () => {
+    const windowWidth = useWindowWidth();
+
     // 언어
     const nowLanguage = getNowLanguage(); // 현재 적용되어 있는 언어
     const languages = getLanguages(); // 적용가능한 언어 리스트
@@ -32,7 +35,7 @@ const LanguageSelect = () => {
 
     return (
         <div 
-            className={`util_icon_boxs ${menuOpen ? 'on' : ''}`} 
+            className={`util_icon_boxs ${menuOpen ? 'on' : ''} ${windowWidth < 1240 ? 'mo' : ''}`} 
             ref={menuOpenBtn} 
             onClick={handleMenuToggle}
         >
