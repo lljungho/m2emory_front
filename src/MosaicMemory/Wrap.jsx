@@ -8,7 +8,7 @@ import './css/common.css';
 import './css/style.css';
 import './css/media.css';
 
-import SignWrap from './contents/member/SignWrap';
+import SignWrap from './contents/sign/SignWrap';
 import ContentsWarp from './contents/ContentsWarp';
 import DimmedBox from './utils/DimmedBox';
 import ModalWrap from './utils/modal/ModalWrap';

@@ -1,8 +1,9 @@
 import React from 'react'
 
-const GatherSvg = ({name, color, title}) => {
+const GatherSvg = ({name, color, fill, title}) => {
     const colorModeCode = color ? color : 'var(--baseFg)';
     const colorModeCode2 = color ? color : 'var(--baseRGB_b)';
+    const colorFillCode = fill ? fill : 'none';
     
     const svgIcons = [
         {
@@ -226,6 +227,32 @@ const GatherSvg = ({name, color, title}) => {
                     <line fill="none" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" x1="19.276" y1="0.809" x2="19.276" y2="5.685"/>
                     <polyline fill="none" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" points="
                         18.934,15.169 13.158,20.945 9.564,17.736 "/>
+                </svg>
+            )
+        },
+        {
+            name: 'more',
+            svgIcon: () => (
+                <svg aria-label={title} fill={colorModeCode} stroke='none' x="0px" y="0px" viewBox="0 0 27 27" enableBackground="new 0 0 27 27">
+                    <circle cx="5" cy="12" r="1.5"></circle>
+                    <circle cx="13" cy="12" r="1.5"></circle>
+                    <circle cx="21" cy="12" r="1.5"></circle>
+                </svg>
+            )
+        },
+        {
+            name: 'heart',
+            svgIcon: () => (
+                <svg aria-label={title} fill={colorFillCode} stroke={colorModeCode} x="0px" y="0px" viewBox="0 0 27 27" enableBackground="new 0 0 27 27">
+                    <path strokeWidth="1.35" strokeiterlimit="10" d="M23.489,15.933L13.5,23.83l-9.989-7.897 c-3-2.37-3.654-6.969-1.353-10.118C3.273,4.29,4.972,3.238,7.062,3.173C7.138,3.171,7.215,3.17,7.292,3.17 c2.537,0,4.789,1.308,6.208,3.334c1.418-2.026,3.671-3.334,6.208-3.334c0.077,0,0.153,0.001,0.228,0.003 c2.09,0.065,3.789,1.117,4.905,2.642C27.143,8.964,26.488,13.563,23.489,15.933z"/>
+                </svg>
+            )
+        },
+        {
+            name: 'reply',
+            svgIcon: () => (
+                <svg aria-label={title} fill='none' stroke={colorModeCode} x="0px" y="0px" viewBox="0 0 27 27" enableBackground="new 0 0 27 27">
+                    <path strokeWidth="1.35" strokeMiterlimit="10" d="M22.707,2.998H4.293 c-1.509,0-2.732,1.223-2.732,2.732v11.279c0,1.509,1.223,2.732,2.732,2.732h1.145v4.261l5.08-4.261h12.19 c1.509,0,2.732-1.223,2.732-2.732V5.73C25.44,4.221,24.216,2.998,22.707,2.998z"/>
                 </svg>
             )
         },

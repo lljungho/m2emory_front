@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import GatherSvg from '../../../utils/svg/GatherSvg';
-import axios from '../../../utils/axios/axiosSet';
+import GatherSvg from '../../utils/svg/GatherSvg';
+import axios from '../../utils/axios/axiosSet';
 import { useDispatch } from 'react-redux';
 
 const SignInForm = ({ setSignType }) => {

@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux'
 import { deleteProfileImg, putModifyProfileImgData } from '../../axios/axiosUtils';
-import { handleDimmedClose } from '../../handler/handlerUtils';
+import { setDimmedClose } from '../../handler/handlerUtils';
 
 const FormProfileImg = () => {
     const { t } = useTranslation();
@@ -13,7 +13,7 @@ const FormProfileImg = () => {
 
     // 팝업 닫기
     const dimmedClose = () => {
-        handleDimmedClose(dispatch);
+        setDimmedClose(dispatch);
     }
 
     // 프로필 이미지 업로드
@@ -35,8 +35,11 @@ const FormProfileImg = () => {
         const confirmOk = window.confirm(t('changeConfirm'));
         if (confirmOk) {
             // 프로필 이미지 업로드 요청
+            let formData = new FormData();
+            formData.append('file', file);
+            
             putModifyProfileImgData(
-                file,
+                formData,
                 dispatch,
             );
         };

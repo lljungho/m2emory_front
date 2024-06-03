@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import SignUpForm from './sign/SignUpForm';
-import SignInForm from './sign/SignInForm';
+import SignUpForm from './SignUpForm';
+import SignInForm from './SignInForm';
 import Footer2 from '../../include/footer/Footer2';
 
 const SignWrap = () => {

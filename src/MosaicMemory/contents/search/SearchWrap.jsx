@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next';
 
-import RecentSearchBox from './recent/RecentSearchBox';
+import RecentSearchBox from './RecentSearchBox';
 import GatherSvg from '../../utils/svg/GatherSvg';
 
 export const ProfileWrap = () => {

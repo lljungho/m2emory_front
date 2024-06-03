@@ -1,14 +1,13 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
 import { putModifyProfileData } from '../../utils/axios/axiosUtils';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import GatherSvg from '../../utils/svg/GatherSvg';
+
+import ContTitleBox from '../title/ContTitleBox';
 
 export const ProfileEditWrap = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const dimmedState = useSelector(store => store.contStatus.dimmedState);
     const user = useSelector(store => store.userInfo);
 
@@ -29,9 +28,12 @@ export const ProfileEditWrap = () => {
 
     // 프로필 내용 수정 요청
     const putData = () => {
+        let formData = new FormData();
+        formData.append('name', name.current.value);
+        formData.append('introduction', introduction.current.value);
+
         putModifyProfileData(
-            name.current.value,
-            introduction.current.value,
+            formData,
             t('profileUpdated'),
             setCompareCheck,
             dispatch,
@@ -106,14 +108,10 @@ export const ProfileEditWrap = () => {
     return (
         <>
             <div className='content_info_box'>
-                <div className="title_box">
-                    <h2 className='content_title'>
-                        <div className="back_btn cursorPointer" onClick={() => navigate(-1)}>
-                            <GatherSvg name='arrow' />
-                        </div>
-                        {t('profileEdit')}
-                    </h2>
-                </div>
+                <ContTitleBox
+                    title={t('profileEdit')}
+                    back={true}
+                />
 
                 <div className="contentInfoBox">
                     <p className="content_sub_title">{t('profileImg')}</p>

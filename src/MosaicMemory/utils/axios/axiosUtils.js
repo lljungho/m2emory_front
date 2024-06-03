@@ -16,6 +16,26 @@ export const handleError = (error) => {
     }
 };
 
+// 회원 가입 요청
+export const handlerSignUp = async (e, formData, signState, t) => {
+    e.preventDefault(); // submit으로 기본 이벤트 발생 막기
+    console.log('handlerSignUp()');
+    try {
+        const response = await axios.post('/member/signUp', formData, {
+            headers: {
+                'Content-Type' : 'application/json'
+            }
+        });
+
+        console.log('[Axios] handlerSignUp() success :', response.data, response.status);
+        signState(false);
+        alert(t('joinSuccess'));
+
+    } catch(error) {
+        handleError(error);
+    }
+};
+
 // 로그아웃 요청
 export const handleLogout = (confirmTxt, dispatch, navigate) => {
     const logoutConfirm = window.confirm(confirmTxt);
@@ -37,8 +57,8 @@ export const handleLogout = (confirmTxt, dispatch, navigate) => {
 
 // 유저 정보 요청
 export const getUserData = async (setLoading, dispatch) => {
-    setLoading(true);
     console.log('getUserData()');
+    setLoading(true);
     try {
         const response = await axios.get('/member/userInfo');
         console.log('[Axios] getUserData() success :', response.data, response.status);
@@ -64,12 +84,8 @@ export const getUserData = async (setLoading, dispatch) => {
 };
 
 // 프로필 내용 수정 요청
-export const putModifyProfileData = async (nameValue, introductionValue, alertTxt, setCompareCheck, dispatch, onError) => {
+export const putModifyProfileData = async (formData, alertTxt, setCompareCheck, dispatch, onError) => {
     console.log('putDataModifyProfile()');
-    let formData = new FormData();
-    formData.append('name', nameValue);
-    formData.append('introduction', introductionValue);
-
     console.log('FormData Entries:');
     for (const [key, value] of formData.entries()) {
         console.log(`${key}: ${value}`);
@@ -102,11 +118,8 @@ export const putModifyProfileData = async (nameValue, introductionValue, alertTx
 };
 
 // 프로필 이미지 업로드 요청
-export const putModifyProfileImgData = async (profileImgFile, dispatch) => {
+export const putModifyProfileImgData = async (formData, dispatch) => {
     console.log("putModifyProfileImgData()");
-    let formData = new FormData();
-    formData.append('file', profileImgFile);
-
     try {
         const response = await axios.put('/upload/modifyProfileImg', formData, {
             headers: {

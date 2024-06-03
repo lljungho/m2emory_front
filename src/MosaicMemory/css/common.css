@@ -63,10 +63,11 @@
     --color5: #ff3f3f;
     --color6: #a0a0a0;
     --color7: #9d9d9d;
+    --color8: #f0262f;
 
     /*utile*/
     --trst: .2s; 
-    --bdrs: 2px;
+    --bdrs: 0.3em;
     --translateCenter: -50%, -50%;
 
 }
@@ -173,7 +174,7 @@ input:-moz-placeholder {
 }
 .btns {
     width: 100%;
-    font-size: 0.9em;
+    font-size: var(--fontSize3);
     font-weight: 600;
     line-height: var(--lineheight1);
     color: var(--color);
@@ -192,6 +193,16 @@ input:-moz-placeholder {
        cursor: auto;
     }
 }
+.bdBtns {
+    width: max-content;
+    font-size: var(--fontSize4);
+    font-weight: bold;
+    line-height: var(--lineheight2);
+    color: var(--baseRGB_b1);
+    padding: 0 var(--ssize2);
+    border-radius: var(--bdrs);
+    border: 1px solid var(--baseRGB_b1);
+}
 .small_btns {
     width: 100%;
     display: flex;
@@ -204,6 +215,8 @@ input:-moz-placeholder {
     cursor: pointer;
 }
 .TxtBtns {
+    display: block;
+    width: max-content;
     font-size: var(--size);
     color: var(--color2);
     font-weight: 600;
@@ -240,20 +253,7 @@ input:-moz-placeholder {
         }
     }
 }
-/*토글버튼 사용안함 삭제 예정*/
-.toggleBtn {
-    width: 100%;
-    min-height: var(--size4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-
-    svg {
-        width: 15px;
-    }
-}
-.cursorPointer {
+.cursorP {
     cursor: pointer;
 }
 .displayNone {

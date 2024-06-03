@@ -114,7 +114,7 @@ const StoryWrap = () => {
                             className="storyList"
                         >
                             <SwiperSlide>
-                                <div className="listBox onfirmed cursorPointer">
+                                <div className="listBox onfirmed">
                                     <div className="listThumbnailBox">
                                         <div className="thumbnail_img">
                                             <img src={user.u_pf_img} alt={`${user.u_id} 프로필 이미지`} className='thumbnail' />
@@ -126,7 +126,7 @@ const StoryWrap = () => {
 
                             {slideContents.map((slide, index) => (
                                 <SwiperSlide key={index}>
-                                    <div className="listBox cursorPointer">
+                                    <div className="listBox">
                                         <div className="listThumbnailBox">
                                             <div className="thumbnail_img">
                                                 <img src={slide.imageURL} alt={`${slide.title} 프로필 이미지`} className='thumbnail' />

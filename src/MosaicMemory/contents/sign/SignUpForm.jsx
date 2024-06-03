@@ -1,22 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import GatherSvg from '../../../utils/svg/GatherSvg';
-import axios from '../../../utils/axios/axiosSet';
+import GatherSvg from '../../utils/svg/GatherSvg';
+import axios from '../../utils/axios/axiosSet';
 
 const SignUpForm = ({ setSignType }) => {
     const { t } = useTranslation();
-    const Tid = t('id');
-    const Tpw = t('pw');
-    const Temail = t('email');
-    const TsignUp = t('signUp');
-    const Tlogin = t('login');
-    const TalreadyID = t('alreadyID');
-    const TformIdRegEx = t('formIdRegEx');
-    const TformPwRegEx = t('formPwRegEx');
-    const TformEmailRegEx = t('formEmailRegEx');
-    const TjoinSuccess = t('joinSuccess');
-    const TpwView = t('pwView');
-    const Taccount = t('account');
 
     // sign Type
     const signTypeToggle = () => {
@@ -100,7 +88,7 @@ const SignUpForm = ({ setSignType }) => {
             console.log(response.data);
             console.log(response.status);
 
-            alert(TjoinSuccess);
+            alert(t('joinSuccess'));
             setSignType(false);
 
         } catch(error) {
@@ -108,7 +96,7 @@ const SignUpForm = ({ setSignType }) => {
             console.log(error.config);
 
             if (error.response.data.code === 'ER_DUP_ENTRY') { // 중복 ID 오류 코드
-                alert(TalreadyID);
+                alert(t('alreadyID'));
                 id.current.value = '';
                 pw.current.value = '';
                 email.current.value = '';
@@ -141,39 +129,39 @@ const SignUpForm = ({ setSignType }) => {
                     <div className="loginBox">
                         <div className="loginInputBox">
                             <label htmlFor="id" className={`loginInput ${!idErr ? '' : 'regexCK_box'}`}>
-                                <GatherSvg name='profile' color={!idErr ? null : '#ff3f3f'} title={Tid} />
+                                <GatherSvg name='profile' color={!idErr ? null : '#ff3f3f'} title={t('id')} />
                                 <input type="text" name="id" id="id" ref={id} maxLength="16" autoComplete="id" className="login_input" onInput={isValidId} 
-                                placeholder={Tid} />
+                                placeholder={t('id')} />
                             </label>
-                            {idErr && <div className='regexCK'>{TformIdRegEx}</div>}
+                            {idErr && <div className='regexCK'>{t('formIdRegEx')}</div>}
                         </div>
                         <div className="loginInputBox">
                             <label htmlFor="pw" className={`loginInput ${!pwErr ? '' : 'regexCK_box'}`}>
-                                <GatherSvg name='rock' color={!pwErr ? null : '#ff3f3f'} title={Tpw} />
-                                <input type={pwTyle ? "text" : "password"} name="pw" id="pw" ref={pw} maxLength="16" autoComplete='new-password' className="login_input" onInput={isValidPw} placeholder={Tpw} />
+                                <GatherSvg name='rock' color={!pwErr ? null : '#ff3f3f'} title={t('pw')} />
+                                <input type={pwTyle ? "text" : "password"} name="pw" id="pw" ref={pw} maxLength="16" autoComplete='new-password' className="login_input" onInput={isValidPw} placeholder={t('pw')} />
                                 <div className="funcBtnsBox">
                                     <div className="funcBtn on" onClick={pwViewToggle}>
-                                        <GatherSvg name={pwTyle ? 'openEye' : 'closeEye'} color="var(--color6)" title={TpwView} />
+                                        <GatherSvg name={pwTyle ? 'openEye' : 'closeEye'} color="var(--color6)" title={t('pwView')} />
                                     </div>
                                 </div>
                             </label>
-                            {pwErr && <div className='regexCK'>{TformPwRegEx}</div>}
+                            {pwErr && <div className='regexCK'>{t('formPwRegEx')}</div>}
                         </div>
                         <div className="loginInputBox">
                             <label htmlFor="email" className={`loginInput ${!emailErr ? '' : 'regexCK_box'}`}>
-                                <GatherSvg name='message' color={!emailErr ? 'var(--baseRGB_b)' : '#ff3f3f'} title={Temail} />
-                                <input type="text" name="email" id="email" ref={email} className="login_input" onInput={isValidEmail} placeholder={Temail} />
+                                <GatherSvg name='message' color={!emailErr ? 'var(--baseRGB_b)' : '#ff3f3f'} title={t('email')} />
+                                <input type="text" name="email" id="email" ref={email} className="login_input" onInput={isValidEmail} placeholder={t('email')} />
                             </label>
-                            {emailErr && <div className='regexCK'>{TformEmailRegEx}</div>}
+                            {emailErr && <div className='regexCK'>{t('formEmailRegEx')}</div>}
                         </div>
                     </div>
 
                     <div className="loginBox">
                         <div className="btns_box">
                             { errorsCheck ?
-                                <button type="submit" className='btns'>{TsignUp}</button>
+                                <button type="submit" className='btns'>{t('signUp')}</button>
                             :
-                                <button type='button' className='btns off'>{TsignUp}</button>
+                                <button type='button' className='btns off'>{t('signUp')}</button>
                             }
                         </div>
                     </div>
@@ -182,8 +170,8 @@ const SignUpForm = ({ setSignType }) => {
 
             <div className="joinBox">
                 <div className="joinInfo">
-                    <p className="joinTxt">{Taccount}</p>
-                    <span className='TxtBtns' onClick={signTypeToggle}>{Tlogin}</span>
+                    <p className="joinTxt">{t('account')}</p>
+                    <span className='TxtBtns' onClick={signTypeToggle}>{t('signUp')}</span>
                 </div>
             </div>
         </div>

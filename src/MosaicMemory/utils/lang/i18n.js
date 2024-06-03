@@ -5,6 +5,7 @@ const resources = {
     KR: {
         translation: {
             home: "홈",
+            back: '뒤로가기',
             schedule: "스케줄",
             post: "포스팅",
             message: "메세지",
@@ -34,6 +35,7 @@ const resources = {
             joinSuccess: '회원가입이 완료되었습니다.\n로그인 해주세요.',
             joinError: '아이디 또는 비밀번호를 잘못 입력했습니다.',
             welcome: '님 환영합니다!',
+            follow: '팔로우',
             follower: '팔로워',
             following: '팔로잉',
             setting: '설정',
@@ -52,11 +54,13 @@ const resources = {
             changeConfirm: '변경하시겠습니까?',
             profileImgUploadErr: '5MB 이하의 이미지 파일만 업로드 가능합니다.',
             progileImgDelete: '프로필 이미지를 삭제하시겠습니까?',
+            like: '좋아요',
         }
     },
     EN: {
         translation: {
             home: "home",
+            back: 'Back',
             schedule: "schedule",
             post: "post",
             message: "message",
@@ -86,6 +90,7 @@ const resources = {
             joinSuccess: 'Your registration is complete. Please log in.',
             joinError: 'Invalid ID or PASSWORD.',
             welcome: 'welcome!',
+            follow: 'Follow',
             follower: 'follower',
             following: 'following',
             setting: 'settings',
@@ -104,11 +109,13 @@ const resources = {
             changeConfirm: 'Would you like to make changes?',
             profileImgUploadErr: 'Only image files under 5MB can be uploaded.',
             progileImgDelete: 'Are you sure you want to delete the profile image?',
+            like: 'Like',
         }
     },
     JP: {
         translation: {
             home: "ホーム",
+            back: '戻る',
             schedule: "スケジュール",
             post: "投稿",
             message: "メッセージ",
@@ -138,6 +145,7 @@ const resources = {
             joinSuccess: '会員登録が完了しました。ログインしてください。',
             joinError: 'ユーザー名またはパスワードが無効です。',
             welcome: 'さん、ようこそ！',
+            follow: 'フォロー',
             follower: 'フォロー',
             following: 'フォロー中',
             setting: '設定',
@@ -156,11 +164,13 @@ const resources = {
             changeConfirm: '変更しますか？',
             profileImgUploadErr: '5MB未満の画像ファイルのみアップロード可能です。',
             progileImgDelete: 'プロフィール画像を削除しますか？',
+            like: 'いいね',
         }
     },
     CN: {
         translation: {
             home: "主页",
+            back: '返回',
             schedule: "日程安排",
             post: " 帖子",
             message: "消息",
@@ -190,6 +200,7 @@ const resources = {
             joinSuccess: '注册已完成。请登录。',
             joinError: '用户名或密码无效。',
             welcome: '欢迎您！',
+            follow: '关注',
             follower: '粉丝',
             following: '关注',
             setting: '设置',
@@ -208,6 +219,7 @@ const resources = {
             changeConfirm: '您想要进行更改吗？',
             profileImgUploadErr: '只能上传大小不超过5MB的图像文件。',
             progileImgDelete: '确定要删除配置文件图像吗？',
+            like: '赞',
         }
     },
 }

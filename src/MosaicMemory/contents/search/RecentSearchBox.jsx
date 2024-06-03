@@ -1,7 +1,7 @@
 import React from 'react'
 // import { useTranslation } from 'react-i18next';
 
-import GatherSvg from '../../../utils/svg/GatherSvg';
+import GatherSvg from '../../utils/svg/GatherSvg';
 
 const RecentSearchBox = () => {
     // const { t } = useTranslation();

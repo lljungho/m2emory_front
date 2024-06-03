@@ -27,47 +27,49 @@ export const setColor = (colorMode) => {
 };
 
 // 프로필 소개 텍스트 줄임
-export const truncateText = (text, originalText, btnTxt) => {
+export const setTruncateText = (text, originalTextCheck, maxLine, t) => {
     if (text) {
-        const maxHeight = 100; // 최대 높이
-        const lineHeight = 16; // line-height 값
-        const maxLines = Math.floor(maxHeight / lineHeight); // 최대 표시할 줄 수
+        const maxLines = Math.floor(maxLine); // 최대 표시할 줄 수
         const lines = text.split('\n'); // 줄 단위로 나눔
 
-        if (lines.length > maxLines && !originalText) {
+        if (lines.length > maxLines && !originalTextCheck) {
             // 최대 줄 수를 초과하는 경우 텍스트 자르기
-            const truncatedLines = lines.slice(0, maxLines - 1); // 마지막 줄은 줄임표로 대체하기 때문에 -1
-            const truncatedText = truncatedLines.join('\n'); // 줄임표 추가
+            const truncatedLines = lines.slice(0, maxLines);
+            const truncatedText = truncatedLines.join('\n') + '... '; // 줄임표 추가
             return (
                 <>
                     {truncatedText} 
-                    <span className='moreBtn'>...<span className='moreTxt'> {btnTxt}</span></span>
+                    <span className='moreBtn'>{t('more')}</span>
                 </>
             )
         }
 
-        return text; // 최대 줄 수를 초과하지 않는 경우 원본 텍스트 반환
+        return (
+            // 최대 줄 수를 초과하지 않거나 원본 보기 시 원본 텍스트 반환
+            <>
+                {text + ' '}
+                {originalTextCheck && <span className='moreBtn'>{t('less')}</span>}
+            </>
+        )
     }
 };
 
 // 프로필 소개 줄임 상태 확인하여 세팅
-export const setTruncate = (text, setTextTruncated) => {
+export const setTruncate = (text, setState, maxLine) => {
     if (text) {
-        const maxHeight = 100; // 최대 높이
-        const lineHeight = 16; // line-height 값
-        const maxLines = Math.floor(maxHeight / lineHeight); // 최대 표시할 줄 수
+        const maxLines = Math.floor(maxLine); // 최대 표시할 줄 수
         const lines = text.split('\n'); // 줄 단위로 나눔
 
         if (lines.length > maxLines) {
-            setTextTruncated(true);
+            setState(true);
         } else {
-            setTextTruncated(false);
+            setState(false);
         }
     }
 };
 
 // 딤드 닫기
-export const handleDimmedClose = (dispatch) => {
+export const setDimmedClose = (dispatch) => {
     dispatch({
         type: 'SET_DIMMED_STATE',
         dimmedState: false,
