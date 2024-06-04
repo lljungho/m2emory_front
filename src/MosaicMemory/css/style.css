@@ -43,7 +43,7 @@
             gap: var(--size1);
             padding: var(--size1);
             border-radius: var(--bdrs);
-            border: 1px solid var(--colorBd1);
+            border: 1px solid var(--colorBd);
 
             .signInfoBox {
                 width: 100%;
@@ -72,7 +72,7 @@
                                 display: flex;
                                 align-items: center;
                                 gap: var(--ssize2);
-                                border-bottom: 1px solid var(--colorBd1);
+                                border-bottom: 1px solid var(--colorBd);
                                 position: relative;
 
                                 &.regexCK_box {
@@ -113,7 +113,7 @@
         
                     .joinInfo {
                         padding-top: var(--size1);
-                        border-top: 1px solid var(--colorBd1);
+                        border-top: 1px solid var(--colorBd);
                         display: flex;
                         justify-content: center;
                         gap: var(--ssize2);
@@ -250,7 +250,7 @@
 
                         &.gnb_cate1_profile {
                             padding: 0;
-                            border: 1px solid var(--baseBg);
+                            border: 1px solid transparent;
                             box-sizing: content-box;
                         }
                     }
@@ -271,10 +271,6 @@
 
                             svg {
                                 stroke: var(--color);
-                            }
-
-                            &.gnb_cate1_profile {
-                                border-color: var(--color2);
                             }
                         }
                     }
@@ -475,15 +471,9 @@
                 display: flex;
                 flex-direction: column;
                 gap: var(--ssize2);
-        
-                .profile_edit {
-                    .profile_thumb {
-                        .profile_img_box {
-                            width: var(--profileSize);
-                            height: var(--profileSize);
-                            cursor: pointer;
-                        }
-                    }
+
+                .editProfileImg {
+                    display: flex;
                 }
         
                 .editInputBox {
@@ -496,6 +486,10 @@
             
                         &:focus {
                             border-color: var(--baseFg);
+                        }
+
+                        &[name="introduction"] {
+                            min-height: 80px;
                         }
                     }
         
@@ -668,11 +662,12 @@
     }
 
     .title_btn {
-        width: var(--size4);
-        height: var(--size4);
+        width: var(--size2);
+        height: var(--size2);
         display: flex;
         justify-content: center;
         align-items: center;
+        cursor: pointer;
     }
 }
 .content_sub_title {
@@ -878,7 +873,7 @@
                     .content_info_inner_box {
                         width: 100%;
                         height: 100%;
-                        background-color: var(--baseFg);
+                        background-color: var(--color1);
                         border: 1px solid var(--baseRGB_b);
                         border-radius: var(--bdrs);
                         position: absolute;
@@ -951,17 +946,24 @@
 
                         .content_bot_comment_box {
                             .comment_box {
-                                .comment_write_box {
+                                .textareaBox {
                                     padding: 0 var(--ssize1);
-                                    border: 1px solid var(--baseRGB_b);
+                                    background-color: var(--baseFg1);
                                     border-radius: var(--bdrs);
                                     display: flex;
                                     justify-content: space-between;
-                                    align-items: center;
-                                    gap: var(--size1);
+                                    align-items: flex-end;
+                                    gap: var(--size4);
 
                                     .comment_write {
+                                        width: auto;
+                                        height: 40px;
                                         flex-grow: 1;
+                                    }
+
+                                    .regBtn {
+                                        display: none;
+                                        padding: var(--ssize) 0;
                                     }
                                 }
                             }
@@ -973,39 +975,29 @@
     }
 }
 
+/*profileImg*/
+.profileImgBox{
+    width: var(--profileSize);
+    height: var(--profileSize);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.small {
+        width: 100%;
+        height: 100%;
+    }
+}
+
 /*myPage*/
 .my_profile_wrap {
     display: flex;
     flex-direction: column;
-    gap: var(--size);
+    gap: var(--size1);
 
     .my_profile_box {
         display: flex;
         gap: var(--size4);
-
-        .profileImgBox {
-            width: 15%;
-            min-width: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-
-            &::after {
-                content: '';
-                display: block;
-                padding-bottom: 100%;
-            }
-
-            .profileThumb {
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-        }
 
         .profileFollowBox {
             width: calc(85% - var(--size4));
@@ -1089,7 +1081,7 @@
         display: flex;
         flex-direction: column;
         gap: var(--size2);
-        font-size: var(--fontSize7);
+        font-size: var(--size2);
 
         .modal_btns_box {
             display: flex;
@@ -1121,7 +1113,7 @@
             justify-content: space-between;
             align-items: center;
 
-            .dockBtns {
+            .gnb_cate1 {
                 width: var(--size1);
                 height: var(--size1);
                 padding: var(--ssize);
@@ -1171,10 +1163,6 @@
                 &.dockProfile {
                     padding: 0;
                     border: 2px solid transparent;
-
-                    .profileImg {
-                        border-radius: var(--bdrs);
-                    }
                 }
             }
         }

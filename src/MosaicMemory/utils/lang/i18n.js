@@ -7,7 +7,7 @@ const resources = {
             home: "홈",
             back: '뒤로가기',
             schedule: "스케줄",
-            post: "포스팅",
+            post: "게시물",
             message: "메세지",
             alarm: "알람",
             search: "검색",
@@ -44,7 +44,7 @@ const resources = {
             profileEdit: '프로필 편집',
             profileImgEdit: '프로필 사진 편집',
             close: '닫기',
-            submit: '제출',
+            submit: '등록',
             name: '이름',
             introduction: '소개',
             profileUpdated: '프로필이 수정되었습니다.',
@@ -55,6 +55,7 @@ const resources = {
             profileImgUploadErr: '5MB 이하의 이미지 파일만 업로드 가능합니다.',
             progileImgDelete: '프로필 이미지를 삭제하시겠습니까?',
             like: '좋아요',
+            enterComment: '댓글 입력',
         }
     },
     EN: {
@@ -110,6 +111,7 @@ const resources = {
             profileImgUploadErr: 'Only image files under 5MB can be uploaded.',
             progileImgDelete: 'Are you sure you want to delete the profile image?',
             like: 'Like',
+            enterComment: 'Enter Comment',
         }
     },
     JP: {
@@ -154,7 +156,7 @@ const resources = {
             profileEdit: '編集',
             profileImgEdit: 'プロフィール画像編集',
             close: '閉める',
-            submit: '提出する',
+            submit: '送信',
             name: '名前',
             introduction: '紹介',
             profileUpdated: 'プロフィールが更新されました。',
@@ -165,6 +167,7 @@ const resources = {
             profileImgUploadErr: '5MB未満の画像ファイルのみアップロード可能です。',
             progileImgDelete: 'プロフィール画像を削除しますか？',
             like: 'いいね',
+            enterComment: 'コメント',
         }
     },
     CN: {
@@ -220,6 +223,7 @@ const resources = {
             profileImgUploadErr: '只能上传大小不超过5MB的图像文件。',
             progileImgDelete: '确定要删除配置文件图像吗？',
             like: '赞',
+            enterComment: '输入评论',
         }
     },
 }

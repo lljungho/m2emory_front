@@ -2,25 +2,12 @@ import React, { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import GatherSvg from '../../utils/svg/GatherSvg';
-import axios from '../../utils/axios/axiosSet';
 import { useDispatch } from 'react-redux';
+import { handleLogin } from '../../utils/axios/axiosUtils';
 
 const SignInForm = ({ setSignType }) => {
     const { t } = useTranslation();
-    const Tid = t('id');
-    const Tpw = t('pw');
-    const Tlogin = t('login');
-    const TsignUp = t('signUp');
-    const TfindId = t('findId');
-    const TforgotPw = t('forgotPw');
-    const TunAccount = t('unAccount');
-    const TpwView = t('pwView');
-    const Twelcome = t('welcome');
-    const TjoinError = t('joinError');
-
     const navigate  = useNavigate();
-
-    // redux
     const dispatch = useDispatch();
 
     // sign Type
@@ -70,68 +57,24 @@ const SignInForm = ({ setSignType }) => {
     }, [userIdErr, userPasswordErr]);
 
     // signin post form
-    const postData = async (e) => {
+    const postData = (e) => {
         e.preventDefault(); // submit으로 기본 이벤트 발생 막기
-        console.log("[Axios] postFormData()");
 
         let formData = new FormData();
         formData.append('userId', userId.current.value);
         formData.append('userPassword', userPassword.current.value);
-        
-        console.log('FormData Entries:');
-        for (const [key, value] of formData.entries()) {
-            console.log(`${key} : ${value}`);
-        };
 
-        try {
-            const response = await axios.post('/member/signIn', formData, {
-                headers: {
-                    'Content-Type' : 'application/json',
-                }
-            });
-            
-            console.log("[Axios] post form data communication success!!");
-            console.log(response.data);
-            console.log(response.status);
+        handleLogin(
+            formData, 
+            dispatch, 
+            navigate, 
+            handleErrorCallback, 
+            t,
+        );
+    };
 
-            alert('[ ' + response.data.userInfo.u_id + ' ] ' + Twelcome);
-
-            // 유저 정보 리듀서에 저장
-            dispatch({
-                type: 'SET_USER_INFO',
-                payload: response.data.userInfo,
-            });
-
-            // 토큰 저장
-            sessionStorage.setItem('sessionID', response.data.accessToken);
-            dispatch({
-                type: 'SESSION_CHECK',
-                sessionID: response.data.accessToken,
-            });
-            navigate('/');
-            
-        } catch(error) {
-            console.log("[Axios] post form data communication error!!");
-            console.error(error.config);
-
-            if (error.response.status === 401) { // 회원 정보가 없거나 id, pw가 맞지 않음
-                console.log(error.response.status);
-                return setSignErrorCheck(true);
-            }
-            
-            if (error.response) {
-                // 서버에서 받은 에러 메시지
-                console.log('Server Error:', error.response.data);
-
-            } else if (error.request) {
-                // 요청이 전송되었지만 응답을 받지 못한 경우 
-                console.log('Network Error:', error.request);
-
-            } else {
-                // 기타 에러
-                console.log('Error:', error.message);
-            }
-        }
+    const handleErrorCallback = () => {
+        setSignErrorCheck(true);
     };
 
     return (
@@ -141,36 +84,36 @@ const SignInForm = ({ setSignType }) => {
                     <div className="loginBox">
                         <div className="loginInputBox">
                             <label htmlFor="userId" className='loginInput'>
-                                <GatherSvg name='profile' title={Tid} />
-                                <input type="text" name="userId" id="userId" ref={userId} autoComplete="id" className="login_input" onInput={isValidId} placeholder={Tid} />
+                                <GatherSvg name='profile' title={t('id')} />
+                                <input type="text" name="userId" id="userId" ref={userId} autoComplete="id" className="login_input" onInput={isValidId} placeholder={t('id')} />
                             </label>
                         </div>
                         <div className="loginInputBox">
                             <label htmlFor="userPassword" className='loginInput'>
-                                <GatherSvg name='rock' title={Tpw} />
-                                <input type={userPasswordType ? "text" : "password"} name="userPassword" id="userPassword" ref={userPassword} autoComplete="new-password" onInput={isValidPw} className="login_input" placeholder={Tpw} />
+                                <GatherSvg name='rock' title={t('pw')} />
+                                <input type={userPasswordType ? "text" : "password"} name="userPassword" id="userPassword" ref={userPassword} autoComplete="new-password" onInput={isValidPw} className="login_input" placeholder={t('pw')} />
                                 <div className="funcBtnsBox">
                                     <div className="funcBtn on" onClick={pwViewToggle}>
-                                        <GatherSvg name={userPasswordType ? 'openEye' : 'closeEye'} color="var(--color6)" title={TpwView} />
+                                        <GatherSvg name={userPasswordType ? 'openEye' : 'closeEye'} color="var(--color6)" title={t('pwView')} />
                                     </div>
                                 </div>
                             </label>
                         </div>
                     </div>
 
-                    {signErrorCheck && <div className='regexCK'>{TjoinError}</div>}
+                    {signErrorCheck && <div className='regexCK'>{t('joinError')}</div>}
 
                     <div className="loginBox">
                         <div className="btns_box">
                             { errorsCheck ?
-                                <button type="submit" className='btns'>{Tlogin}</button>
+                                <button type="submit" className='btns'>{t('login')}</button>
                             :
-                                <button type='button' className='btns off'>{Tlogin}</button>
+                                <button type='button' className='btns off'>{t('login')}</button>
                             }
                         </div>
                         <div className="loginBottomBox">
-                            <span className="small_TxtBtns">{TfindId}</span>
-                            <span className="small_TxtBtns">{TforgotPw}</span>
+                            <span className="small_TxtBtns">{t('findId')}</span>
+                            <span className="small_TxtBtns">{t('forgotPw')}</span>
                         </div>
                     </div>
                 </div>
@@ -178,8 +121,8 @@ const SignInForm = ({ setSignType }) => {
             
             <div className="joinBox">
                 <div className="joinInfo">
-                    <p className="joinTxt">{TunAccount}</p>
-                    <span className='TxtBtns' onClick={signTypeToggle}>{TsignUp}</span>
+                    <p className="joinTxt">{t('unAccount')}</p>
+                    <span className='TxtBtns' onClick={signTypeToggle}>{t('signUp')}</span>
                 </div>
             </div>
         </div>

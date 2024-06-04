@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next';
 import GatherSvg from '../../utils/svg/GatherSvg';
 import { useSelector } from 'react-redux';
@@ -7,20 +7,37 @@ import { setTruncate, setTruncateText } from '../../utils/handler/handlerUtils';
 const FeedWrap = () => {
     const { t } = useTranslation();
     const user = useSelector(store => store.userInfo);
+    const textarea = useRef();
+
+    // 댓글 입력 시 textarea 높이 조절
+    const adjustHeight = (e) => {
+        const textareaElem = textarea.current;
+        const textareaBtnElem = textareaElem.closest('.textareaBox').querySelector('.regBtn');
+        textarea.current.style.height = '40px';
+        if (e.target.value !== '') {
+            textareaBtnElem.style.display = 'block';
+            textareaElem.style.height = `${Math.min(textareaElem.scrollHeight, 130)}px`;
+        } else {
+            textareaBtnElem.style.display = 'none';
+        }
+    };
 
     // 텍스트 토글
     const maxLine = 2; // 줄임 표시 시 최대 줄 수
     const [originalTextCheck, setOriginalTextCheck] = useState(false);
     const [textTruncated, setTextTruncated] = useState(false); // 텍스트가 줄여진 상태 여부
+
     const originalTextToggle = () => {
         setOriginalTextCheck(!originalTextCheck);
     };
 
-    console.log(user.u_pf_introduction);
-
     // 초기 상태 체크
     useEffect(() => {
-        setTruncate(user.u_pf_introduction, setTextTruncated, maxLine);
+        setTruncate(
+            user.u_pf_introduction, 
+            setTextTruncated, 
+            maxLine
+        );
     }, [user.u_pf_introduction]);
 
     return (
@@ -110,12 +127,17 @@ const FeedWrap = () => {
 
                                     <div className="content_bot_comment_box">
                                         <div className="comment_box">
-                                            <div className="comment_write_box">
-                                                <div className="comment_write">
-                                                    <input type="text" placeholder='comment' />
-                                                </div>
+                                            <div className="textareaBox">
+                                                <textarea 
+                                                    ref={textarea}
+                                                    className="comment_write" 
+                                                    placeholder={t('enterComment')}
+                                                    onInput={adjustHeight}
+                                                ></textarea>
 
-                                                <div className="TxtBtns">게시</div>
+                                                <div className="regBtn">
+                                                    <div className="small_btns on">{t('submit')}</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

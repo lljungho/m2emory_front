@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { setTruncate, setTruncateText } from '../../utils/handler/handlerUtils';
 import GatherSvg from '../../utils/svg/GatherSvg';
+import ProfileImgBox from '../../include/contents/ProfileImgBox';
 
 const MyPageWrap = () => {
     const { t } = useTranslation();
@@ -27,16 +28,12 @@ const MyPageWrap = () => {
             <div className="contentInfoBox">
                 <div className="my_profile_wrap">
                     <div className="my_profile_box">
-                        <div className="profileImgBox">
-                            <div className="profileThumb">
-                                <img src={ user.u_pf_img } alt={t('profile')} className="thumbnail" />
-                            </div>
-                        </div>
+                        <ProfileImgBox img={user.u_pf_img} />
 
                         <div className="profileFollowBox">
                             <div className="title_box">
                                 <h2 className='content_title'>{user.u_id}</h2>
-                                <Link to='/contents/profileEdit' className="title_btn">
+                                <Link to='/contents/myPage/profileEdit' className="title_btn">
                                     <GatherSvg name='setting' />
                                 </Link>
                             </div>

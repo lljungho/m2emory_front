@@ -11,7 +11,7 @@ const EtcContainer = () => {
             <div className="contents_container">
                 <Routes>
                     <Route path='/myPage' element={<MyPageWrap />}></Route>
-                    <Route path='/profileEdit' element={<ProfileEditWrap />}></Route>
+                    <Route path='/myPage/profileEdit' element={<ProfileEditWrap />}></Route>
                     <Route path='/setting' element={<SettingWrap />}></Route>
                     <Route path='/search' element={<SearchWrap />}></Route>
                 </Routes>

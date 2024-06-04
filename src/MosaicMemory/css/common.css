@@ -54,7 +54,6 @@
 
     /*color*/
     --colorBd: #e7e7e7;
-    --colorBd1: #dbdbdb;
     --color: #fff;
     --color1: #000;
     --color2: #518afb;
@@ -139,7 +138,7 @@ select option {
 }
 textarea {
     height: 100%;
-    min-height: 80px;
+    padding: var(--ssize1) 0;
     resize: none;
 }
 input {
@@ -193,6 +192,24 @@ input:-moz-placeholder {
        cursor: auto;
     }
 }
+.small_btns {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--fontSize3);
+    color: var(--color2);
+    background-color: var(--baseBg);
+    border: 1px solid var(--color2);
+    border-radius: var(--bdrs);
+    padding: var(--ssize) var(--ssize1);
+    cursor: pointer;
+
+    &.on {
+        color: var(--color);
+        background-color: var(--color2);
+    }
+}
 .bdBtns {
     width: max-content;
     font-size: var(--fontSize4);
@@ -202,17 +219,6 @@ input:-moz-placeholder {
     padding: 0 var(--ssize2);
     border-radius: var(--bdrs);
     border: 1px solid var(--baseRGB_b1);
-}
-.small_btns {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: var(--fontSize);
-    border-radius: var(--bdrs);
-    background-color: var(--baseFg1);
-    padding: var(--ssize);
-    cursor: pointer;
 }
 .TxtBtns {
     display: block;

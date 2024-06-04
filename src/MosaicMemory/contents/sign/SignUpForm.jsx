@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import GatherSvg from '../../utils/svg/GatherSvg';
-import axios from '../../utils/axios/axiosSet';
+import { handlerSignUp } from '../../utils/axios/axiosUtils';
 
 const SignUpForm = ({ setSignType }) => {
     const { t } = useTranslation();
@@ -63,63 +63,31 @@ const SignUpForm = ({ setSignType }) => {
     }, [idErr, pwErr, emailErr]);
 
     // signup post form
-    const postData = async (e) => {
-        e.preventDefault(); // submit으로 기본 이벤트 발생 막기
-        console.log("[Axios] postFormData()");
+    const postData = (e) => {
+        e.preventDefault(); // submit 기본 이벤트 발생 막기
 
         let formData = new FormData();
         formData.append('id', id.current.value);
         formData.append('pw', pw.current.value);
         formData.append('email', email.current.value);
 
-        console.log('FormData Entries:');
-        for (const [key, value] of formData.entries()) {
-            console.log(`${key}: ${value}`);
-        };
+        handlerSignUp(
+            formData, 
+            setSignType, 
+            handleErrorCallback,
+            t,
+        );
+    };
 
-        try {
-            const response = await axios.post('/member/signUp', formData, {
-                headers: {
-                    'Content-Type' : 'application/json',
-                }
-            });
-
-            console.log("[Axios] post form data communication success!!");
-            console.log(response.data);
-            console.log(response.status);
-
-            alert(t('joinSuccess'));
-            setSignType(false);
-
-        } catch(error) {
-            console.log("[Axios] post form data communication error!!");
-            console.log(error.config);
-
-            if (error.response.data.code === 'ER_DUP_ENTRY') { // 중복 ID 오류 코드
-                alert(t('alreadyID'));
-                id.current.value = '';
-                pw.current.value = '';
-                email.current.value = '';
-                setIdErr('');
-                setPwErr('');
-                setEmailErr('');
-                id.current.focus();
-                return false;
-            }
-
-            if (error.response) {
-                // 서버에서 받은 에러 메시지
-                console.log('Server Error:', error.response.data);
-
-            } else if (error.request) {
-                // 요청이 전송되었지만 응답을 받지 못한 경우 
-                console.log('Network Error:', error.request);
-
-            } else {
-                // 기타 에러
-                console.log('Error:', error.message);
-            }
-        };
+    // 에러 처리
+    const handleErrorCallback = () => {
+        console.log('[Axios] handlerSignUp() communication error');
+        alert(t('alreadyID'));
+        id.current.value = '';
+        pw.current.value = '';
+        setIdErr('');
+        setPwErr('');
+        id.current.focus();
     };
 
     return (

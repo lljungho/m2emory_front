@@ -1,7 +1,7 @@
 import axios from "./axiosSet";
 
 // 에러 핸들러
-export const handleError = (error) => {
+export const handleError = (error, onError) => {
     if (error.response) {
         // 서버에서 받은 에러 메시지
         console.log('Server Error:', error.response.data);
@@ -14,12 +14,20 @@ export const handleError = (error) => {
         // 기타 에러
         console.log('Error:', error.message);
     }
+
+    if (onError) {
+        onError();
+    }
 };
 
 // 회원 가입 요청
-export const handlerSignUp = async (e, formData, signState, t) => {
-    e.preventDefault(); // submit으로 기본 이벤트 발생 막기
+export const handlerSignUp = async (formData, signState, onError, t) => {
     console.log('handlerSignUp()');
+    console.log('FormData Entries:');
+    for (const [key, value] of formData.entries()) {
+        console.log(`${key}: ${value}`);
+    };
+
     try {
         const response = await axios.post('/member/signUp', formData, {
             headers: {
@@ -32,7 +40,48 @@ export const handlerSignUp = async (e, formData, signState, t) => {
         alert(t('joinSuccess'));
 
     } catch(error) {
-        handleError(error);
+        handleError(error, onError);
+    }
+};
+
+// 로그인 요청
+export const handleLogin = async (formData, dispatch, navigate, onError, t) => {
+    console.log('handleLogin()');
+    console.log('FormData Entries:');
+    for (const [key, value] of formData.entries()) {
+        console.log(`${key}: ${value}`);
+    };
+
+    try {
+        const response = await axios.post('/member/signIn', formData, {
+            headers: {
+                'Content-Type' : 'application/json'
+            }
+        });
+
+        console.log('[Axios] handleLogin() success :', response.data, response.status);
+        alert('[ ' + response.data.userInfo.u_id + ' ] ' + t('welcome'));
+
+        // 유저 정보 리듀서에 저장
+        dispatch({
+            type: 'SET_USER_INFO',
+            payload: response.data.userInfo,
+        });
+
+        // 토큰 저장
+        sessionStorage.setItem('sessionID', response.data.accessToken);
+        dispatch({
+            type: 'SESSION_CHECK',
+            sessionID: response.data.accessToken,
+        });
+        navigate('/');
+
+    } catch(error) {
+        if (error.response.status === 400) {
+            handleError(error, onError);
+        } else {
+            handleError(error);
+        }
     }
 };
 
@@ -84,7 +133,7 @@ export const getUserData = async (setLoading, dispatch) => {
 };
 
 // 프로필 내용 수정 요청
-export const putModifyProfileData = async (formData, alertTxt, setCompareCheck, dispatch, onError) => {
+export const putModifyProfileData = async (formData, setCompareCheck, dispatch, onError, t) => {
     console.log('putDataModifyProfile()');
     console.log('FormData Entries:');
     for (const [key, value] of formData.entries()) {
@@ -100,7 +149,7 @@ export const putModifyProfileData = async (formData, alertTxt, setCompareCheck, 
 
         console.log('[Axios] putDataModifyProfile() success :', response.data, response.status);
         setCompareCheck(false);
-        alert(alertTxt);
+        alert(t('profileUpdated'));
 
         // 유저 정보 리듀서에 저장
         dispatch({
@@ -110,10 +159,7 @@ export const putModifyProfileData = async (formData, alertTxt, setCompareCheck, 
         });
 
     } catch( error) {
-        handleError(error);
-        if (onError) {
-            onError();
-        }
+        handleError(error, onError);
     }
 };
 

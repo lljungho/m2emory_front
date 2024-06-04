@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux'
 import { deleteProfileImg, putModifyProfileImgData } from '../../axios/axiosUtils';
-import { setDimmedClose } from '../../handler/handlerUtils';
+import ContTitleBox from '../../../include/contents/ContTitleBox';
 
 const FormProfileImg = () => {
     const { t } = useTranslation();
@@ -10,11 +10,6 @@ const FormProfileImg = () => {
 
     // 프로필 이미지 파일 input
     const profileImg = useRef(null);
-
-    // 팝업 닫기
-    const dimmedClose = () => {
-        setDimmedClose(dispatch);
-    }
 
     // 프로필 이미지 업로드
     const putData = () => {
@@ -65,11 +60,15 @@ const FormProfileImg = () => {
                 className='displayNone' 
                 onChange={putData}
             />
-            <p className="content_title">{t('profileImgEdit')}</p>
+
+            <ContTitleBox
+                title={t('profileImgEdit')}
+                close={true}
+            />
+
             <div className="modal_btns_box">
                 <label htmlFor='file' className="small_btns">{t('change')}</label>
                 <div className="small_btns" onClick={deleteData}>{t('del')}</div>
-                <div className="small_btns" onClick={dimmedClose}>{t('close')}</div>
             </div>
         </div>
     )

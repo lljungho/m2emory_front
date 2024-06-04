@@ -3,7 +3,8 @@ import { putModifyProfileData } from '../../utils/axios/axiosUtils';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
-import ContTitleBox from '../title/ContTitleBox';
+import ContTitleBox from '../../include/contents/ContTitleBox';
+import ProfileImgBox from '../../include/contents/ProfileImgBox';
 
 export const ProfileEditWrap = () => {
     const { t } = useTranslation();
@@ -34,10 +35,10 @@ export const ProfileEditWrap = () => {
 
         putModifyProfileData(
             formData,
-            t('profileUpdated'),
             setCompareCheck,
             dispatch,
             handleErrorCallback,
+            t,
         );
     };
 
@@ -115,11 +116,9 @@ export const ProfileEditWrap = () => {
 
                 <div className="contentInfoBox">
                     <p className="content_sub_title">{t('profileImg')}</p>
-                    <div className="profile_edit">
-                        <div className="profile_thumb">
-                            <div className="profile_img_box" onClick={profileEditPop}>
-                                <img src={ user.u_pf_img } alt={t('profile')} className="thumbnail" />
-                            </div>
+                    <div className="editProfileImg">
+                        <div className="editProfile cursorP" onClick={profileEditPop}>
+                            <ProfileImgBox img={user.u_pf_img} />
                         </div>
                     </div>
                 </div>

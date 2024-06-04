@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import FormProfileImg from './profile/FormProfileImg'
 
 const ModalWrap = () => {
-    // redux
     const modalContents = useSelector(store => store.contStatus.modalContents);
 
     // 랜더링할 컴포넌트 리스트 
