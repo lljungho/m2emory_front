@@ -1,3 +1,17 @@
+import Resizer from "react-image-file-resizer";
+
+// 딤드 닫기
+export const setDimmedClose = (dispatch) => {
+    dispatch({
+        type: 'SET_DIMMED_STATE',
+        dimmedState: false,
+    });
+    dispatch({
+        type: 'SET_MODAL_CONTENTS',
+        modalContents: '',
+    });
+}
+
 // 컬러 모드 변경
 export const setColorMode = (dispatch, colorMode) => {
     dispatch({ type: 'SET_COLOR_MODE', colorMode: !colorMode });
@@ -8,21 +22,17 @@ export const setColorMode = (dispatch, colorMode) => {
 export const setColor = (colorMode) => {
     if(colorMode) { //dark
         document.documentElement.style.setProperty('--baseBg', '#000');
-        document.documentElement.style.setProperty('--baseBg1', '#262626');
         document.documentElement.style.setProperty('--baseFg', '#fff');
-        document.documentElement.style.setProperty('--baseFg1', 'rgba(255,255,255,0.15)');
+        document.documentElement.style.setProperty('--baseFg1', 'rgba(255,255,255,0.1)');
         document.documentElement.style.setProperty('--baseRGB_b', 'rgba(255,255,255,0.35)');
-        document.documentElement.style.setProperty('--baseRGB_b1', 'rgba(255,255,255,0.85)');
         document.documentElement.style.setProperty('--baseBoxShadow', '#000');
 
     } else { //light
         document.documentElement.style.setProperty('--baseBg', '#fff');
-        document.documentElement.style.setProperty('--baseBg1', '#fff');
         document.documentElement.style.setProperty('--baseFg', '#000');
-        document.documentElement.style.setProperty('--baseFg1', 'rgba(0,0,0,0.04)');
+        document.documentElement.style.setProperty('--baseFg1', 'rgba(0,0,0,0.035)');
         document.documentElement.style.setProperty('--baseRGB_b', 'rgba(0,0,0,0.15)');
-        document.documentElement.style.setProperty('--baseRGB_b1', 'rgba(0,0,0,0.35)');
-        document.documentElement.style.setProperty('--baseBoxShadow', 'rgba(0,0,0,0.15)');
+        document.documentElement.style.setProperty('--baseBoxShadow', 'rgba(0,0,0,0.2)');
     };
 };
 
@@ -68,14 +78,36 @@ export const setTruncate = (text, setState, maxLine) => {
     }
 };
 
-// 딤드 닫기
-export const setDimmedClose = (dispatch) => {
-    dispatch({
-        type: 'SET_DIMMED_STATE',
-        dimmedState: false,
+// 파일 리사이징
+export const handleResizeFile = (file, fileType, fileSize) =>
+    new Promise((resolve) => { // 비동기 작업을 위해서 "Promise"를 통한 비동기 작업 정의
+        Resizer.imageFileResizer( // Resizer의 "imageFileResize"메서드로 리사이징 및 인코딩 옵션 정의
+            file,                                      
+            fileSize, // 이미지 너비
+            "auto", // 이미지 높이
+            fileType, // 파일 형식
+            90, // 이미지 퀄리티 0 ~ 100
+            0, // rotation
+            (uri) => {
+                // resize new image with url
+                resolve({ uri, fileType }); // 파일 형식 추가
+            },
+            "blob" // output Type = base64 | blob | file
+        );
     });
-    dispatch({
-        type: 'SET_MODAL_CONTENTS',
-        modalContents: '',
-    });
-}
+
+// Blob을 File 객체로 변환
+export const handleBlobToFile = (theBlob, fileName) => {
+    // Blob()과 File()은 유사하지만, File()은 이름과 마지막 수정일 속성을 추가로 가짐   
+    return new File([theBlob], fileName, { type: theBlob.type }); // Blob 객체를 File 객체로 변환
+};
+
+// 프로필 이미지 업로드 전 리사이징, 프리뷰
+export const setResizerFile = async (file, ext, fileSize) => {
+    const { uri, fileType } = await handleResizeFile(file, ext, fileSize); // 리사이징 파일 blob 생성
+    const originFileName = file.name; // 원본 파일명
+    const fileNameWithoutExtension = originFileName.substring(0, originFileName.lastIndexOf('.')); // 원본 파일명 확장자 제거
+    const resizedFile = handleBlobToFile(uri, `${fileNameWithoutExtension}.${fileType}`); // blob 객체를 file 객체로 변환
+
+    return { uri, resizedFile };
+};

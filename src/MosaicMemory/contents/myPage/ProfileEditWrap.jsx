@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { putModifyProfileData } from '../../utils/axios/axiosUtils';
+import { modifyProfilePutData } from '../../utils/axios/axiosUtils';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -33,7 +33,7 @@ export const ProfileEditWrap = () => {
         formData.append('name', name.current.value);
         formData.append('introduction', introduction.current.value);
 
-        putModifyProfileData(
+        modifyProfilePutData(
             formData,
             setCompareCheck,
             dispatch,
@@ -44,7 +44,7 @@ export const ProfileEditWrap = () => {
 
     // 에러 처리
     const handleErrorCallback = () => {
-        console.log('[Axios] putModifyProfileData() communication error');
+        console.log('[Axios] modifyProfilePutData() communication error');
         name.current.value = user.u_pf_name;
         introduction.current.value = user.u_pf_introduction;
         name.current.focus();
@@ -114,7 +114,7 @@ export const ProfileEditWrap = () => {
                     back={true}
                 />
 
-                <div className="contentInfoBox">
+                <div className="contentInfoBox wrapElement">
                     <p className="content_sub_title">{t('profileImg')}</p>
                     <div className="editProfileImg">
                         <div className="editProfile cursorP" onClick={profileEditPop}>
@@ -123,7 +123,7 @@ export const ProfileEditWrap = () => {
                     </div>
                 </div>
 
-                <div className="contentInfoBox">
+                <div className="contentInfoBox wrapElement">
                     <p className="content_sub_title">{t('name')}</p>
                     <div className="editInputBox">
                         <input 
@@ -131,7 +131,7 @@ export const ProfileEditWrap = () => {
                             name="name" 
                             ref={name} 
                             maxLength={maxLengthConfig.name} 
-                            className='editInput' 
+                            className='editInput innerElement' 
                             placeholder={t('name')} 
                             defaultValue={user.u_pf_name} 
                             onChange={handleInputValue}
@@ -140,14 +140,14 @@ export const ProfileEditWrap = () => {
                     </div>
                 </div>
 
-                <div className="contentInfoBox">
+                <div className="contentInfoBox wrapElement">
                     <p className="content_sub_title">{t('introduction')}</p>
                     <div className="editInputBox">
                         <textarea 
                             name="introduction" 
                             ref={introduction} 
                             maxLength={maxLengthConfig.introduction} 
-                            className='editInput' 
+                            className='editInput innerElement' 
                             placeholder={t('introduction')} 
                             defaultValue={user.u_pf_introduction} 
                             onChange={handleInputValue}

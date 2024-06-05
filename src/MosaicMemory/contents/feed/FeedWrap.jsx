@@ -136,7 +136,7 @@ const FeedWrap = () => {
                                                 ></textarea>
 
                                                 <div className="regBtn">
-                                                    <div className="small_btns on">{t('submit')}</div>
+                                                    <div className="small_btns3 on">{t('submit')}</div>
                                                 </div>
                                             </div>
                                         </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserData } from './utils/axios/axiosUtils';
+import { userGetData } from './utils/axios/axiosUtils';
 import { setColor } from './utils/handler/handlerUtils';
 import { useWindowWidth } from './utils/hook/customHookUtils';
 
@@ -28,7 +28,7 @@ const Wrap = () => {
     
     // 유저 정보 요청
     useEffect(() => {
-        getUserData(setLoading, dispatch);
+        userGetData(setLoading, dispatch);
     }, [dispatch]);   
     
     // 컬러 세팅

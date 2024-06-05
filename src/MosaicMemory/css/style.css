@@ -218,7 +218,7 @@
                 display: flex;
                 flex-direction: column;
                 align-items: flex-start;
-                gap: var(--ssize1);
+                gap: var(--ssize2);
             }
 
             .gnb_btns {
@@ -232,7 +232,7 @@
                     text-transform: uppercase;
                     gap: var(--ssize2);
                     width: 100%;
-                    padding: var(--ssize2);
+                    padding: var(--ssize1);
                     border-radius: var(--bdrs);
                     transition: background-color var(--trst);
                     cursor: pointer;
@@ -264,7 +264,8 @@
                     }
 
                     &.on {
-                        background-color: var(--baseFg1);
+                        background-color: var(--baseBg);
+                        box-shadow: inset var(--bxsd);
 
                         .gnb_cate1_iconBox {
                             background-color: var(--color2);
@@ -281,14 +282,16 @@
         #area_util {
             width: 100%;
             padding: var(--size) var(--side1) var(--size1);
-            background-color: var(--baseBg);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: var(--size);
             position: absolute;
             bottom: 0;
             left: 0;
+
+            .area_util_box {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: var(--size);
+            }
         }
     }
 }
@@ -333,7 +336,7 @@
     .lng_icon {
         width: 80%;
         border-radius: 50%;
-        box-shadow: 1px 1px 3px var(--baseRGB_b);
+        box-shadow: var(--bxsd) var(--baseBoxShadow);
     }
 
     &.mo {
@@ -481,11 +484,11 @@
                     
                     .editInput {
                         padding: var(--ssize1) var(--size6) var(--ssize1) var(--ssize1);
-                        border: 1px solid var(--baseRGB_b);
+                        border: 1px solid transparent;
                         border-radius: var(--bdrs);
             
                         &:focus {
-                            border-color: var(--baseFg);
+                            border-color: var(--color7);
                         }
 
                         &[name="introduction"] {
@@ -610,7 +613,7 @@
                                     display: block;
                                     width: 70%;
                                     height: 1px;
-                                    background-color: var(--baseRGB_b1);
+                                    background-color: var(--baseRGB_b);
                                     position: absolute;
                                     top: 50%;
                                     left: 50%;
@@ -622,7 +625,7 @@
                                     display: block;
                                     width: 70%;
                                     height: 1px;
-                                    background-color: var(--baseRGB_b1);
+                                    background-color: var(--baseRGB_b);
                                     position: absolute;
                                     top: 50%;
                                     left: 50%;
@@ -978,14 +981,18 @@
 /*profileImg*/
 .profileImgBox{
     width: var(--profileSize);
+    min-width: var(--profileSize);
     height: var(--profileSize);
+    min-height: var(--profileSize);
     display: flex;
     align-items: center;
     justify-content: center;
 
     &.small {
         width: 100%;
+        min-width: 100%;
         height: 100%;
+        min-height: 100%;
     }
 }
 
@@ -993,14 +1000,14 @@
 .my_profile_wrap {
     display: flex;
     flex-direction: column;
-    gap: var(--size1);
+    gap: var(--size);
 
     .my_profile_box {
         display: flex;
-        gap: var(--size4);
+        gap: var(--size1);
 
         .profileFollowBox {
-            width: calc(85% - var(--size4));
+            flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -1059,35 +1066,60 @@
 
 /*modal*/
 .modal_wrap {
-    width: 100%;
-    max-width: 300px;
+    width: max-content;
     height: max-content;
-    padding: var(--size4);
-    margin-top: -20px;
-    background-color: var(--baseBg);
-    border-radius: var(--bdrs);
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    transition:  margin var(--trst);
     z-index: 101;
 
-    &.on {
-        margin-top: 0;
-    }
+    .modal_inner_box {
+        width: 100%;
+        min-width: 320px;
+        max-width: 500px;
+        height: max-content;
+        margin-top: -50px;
+        padding: var(--size1);
+        background-color: var(--baseBg);
+        border-radius: var(--bdrs);
+        box-shadow: var(--bxsd);
+        transition:  margin var(--trst);
 
-    .modal_box {
-        display: flex;
-        flex-direction: column;
-        gap: var(--size2);
-        font-size: var(--size2);
-
-        .modal_btns_box {
+        .modal_box {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: var(--ssize1);
+            gap: var(--size1);
+    
+            .modal_info_box {
+                display: flex;
+                gap: var(--size1);
+    
+                .profile_thumb_box {
+                    display: flex;
+                    flex-direction: column;
+                    gap: var(--ssize1);
+                }
+    
+                .modal_btns_box {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    gap: var(--ssize1);
+    
+                    .modal_btns {
+                        height: 100%;
+                        font-size: var(--size);
+                    }
+                }
+            }
+        }
+    }   
+    
+    &.on {
+        .modal_inner_box {
+            margin-top: 0;
         }
     }
 }
@@ -1128,16 +1160,14 @@
                     position: absolute;
                     bottom: 170%;
                     left: 0;
+                    background-color: var(--baseBg);
+                    border-radius: var(--bdrs);
 
                     .moreMenuBtns {
                         width: max-content;
-                        padding: var(--ssize1) var(--size);
-                        border-radius: var(--bdrs);
-                        background-color: var(--baseBg1);
-                        box-shadow: 0 0 15px var(--baseBoxShadow);
 
                         .moreMenu {
-                            padding: var(--ssize1) 0;
+                            padding: var(--ssize1);
                             text-transform: capitalize;
                             display: flex;
                             justify-content: space-between;

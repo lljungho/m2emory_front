@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import GatherSvg from '../../utils/svg/GatherSvg';
-import { handlerSignUp } from '../../utils/axios/axiosUtils';
+import { signUpPostData } from '../../utils/axios/axiosUtils';
 
 const SignUpForm = ({ setSignType }) => {
     const { t } = useTranslation();
@@ -71,7 +71,7 @@ const SignUpForm = ({ setSignType }) => {
         formData.append('pw', pw.current.value);
         formData.append('email', email.current.value);
 
-        handlerSignUp(
+        signUpPostData(
             formData, 
             setSignType, 
             handleErrorCallback,
@@ -81,7 +81,7 @@ const SignUpForm = ({ setSignType }) => {
 
     // 에러 처리
     const handleErrorCallback = () => {
-        console.log('[Axios] handlerSignUp() communication error');
+        console.log('[Axios] signUpPostData() communication error');
         alert(t('alreadyID'));
         id.current.value = '';
         pw.current.value = '';

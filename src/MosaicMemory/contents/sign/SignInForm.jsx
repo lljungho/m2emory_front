@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import GatherSvg from '../../utils/svg/GatherSvg';
 import { useDispatch } from 'react-redux';
-import { handleLogin } from '../../utils/axios/axiosUtils';
+import { signInPostData } from '../../utils/axios/axiosUtils';
 
 const SignInForm = ({ setSignType }) => {
     const { t } = useTranslation();
@@ -64,7 +64,7 @@ const SignInForm = ({ setSignType }) => {
         formData.append('userId', userId.current.value);
         formData.append('userPassword', userPassword.current.value);
 
-        handleLogin(
+        signInPostData(
             formData, 
             dispatch, 
             navigate, 

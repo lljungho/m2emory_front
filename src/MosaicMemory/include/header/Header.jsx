@@ -34,25 +34,22 @@ const Header = () => {
             { windowWidth > 1240 &&
                 <div className='hd_wrap'>
                     <div className='hd_box'>
-                        <div className='hd_inner_box'>
+                        <div className='hd_inner_box wrapElement'>
                             <HeaderNav />
-                            <div id='area_music' className='hd_inner'>
-                                뮤직 플레이어 박스
-                            </div>
                         </div>
                     </div>
 
                     <div id='area_util'>
-                        <LanguageSelect />
-
-                        <button className='util_icon_boxs' onClick={colorModeChanger} >
-                            <GatherSvg 
-                                name={ colorMode ? 'light' : 'dark' } 
-                                title={ colorMode ? t('lightMode') : t('darkMode') } 
-                            />
-                        </button>
-
-                        <LogoutBtnBox />
+                        <div className="area_util_box wrapElement">
+                            <LanguageSelect />
+                            <button className='util_icon_boxs' onClick={colorModeChanger} >
+                                <GatherSvg
+                                    name={ colorMode ? 'light' : 'dark' }
+                                    title={ colorMode ? t('lightMode') : t('darkMode') }
+                                />
+                            </button>
+                            <LogoutBtnBox />
+                        </div>
                     </div>
                 </div>
             }                       

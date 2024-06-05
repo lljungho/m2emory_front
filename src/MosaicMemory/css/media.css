@@ -52,16 +52,6 @@
                             }
                         }
                     }
-
-                    .contents_table_box2 {
-                        .contents_container {
-                            .content_info_box {
-                                .contentInfoBox {
-                                    padding: 0;
-                                }
-                            }
-                        }
-                    }
                 }
             }
         }
@@ -87,13 +77,29 @@
     }
 }
 
-@media screen and (max-width: 475px) {
+@media screen and (max-width: 520px) {
     /*root*/
     :root {
         /*size*/
         --side: 1rem;
         --side1: 1rem;
     } 
+}
+
+@media screen and (max-width: 425px) {
+    /*modal*/
+    .my_profile_wrap {    
+        .my_profile_box {    
+            .profileFollowBox {    
+                .profileFollow {    
+                    .profileFollowBtns {
+                        flex-direction: column;
+                        gap: 0;
+                    }
+                }
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 375px) {

@@ -21,8 +21,8 @@ export const handleError = (error, onError) => {
 };
 
 // 회원 가입 요청
-export const handlerSignUp = async (formData, signState, onError, t) => {
-    console.log('handlerSignUp()');
+export const signUpPostData = async (formData, signState, onError, t) => {
+    console.log('signUpPostData()');
     console.log('FormData Entries:');
     for (const [key, value] of formData.entries()) {
         console.log(`${key}: ${value}`);
@@ -35,7 +35,7 @@ export const handlerSignUp = async (formData, signState, onError, t) => {
             }
         });
 
-        console.log('[Axios] handlerSignUp() success :', response.data, response.status);
+        console.log('[Axios] signUpPostData() success :', response.data, response.status);
         signState(false);
         alert(t('joinSuccess'));
 
@@ -45,8 +45,8 @@ export const handlerSignUp = async (formData, signState, onError, t) => {
 };
 
 // 로그인 요청
-export const handleLogin = async (formData, dispatch, navigate, onError, t) => {
-    console.log('handleLogin()');
+export const signInPostData = async (formData, dispatch, navigate, onError, t) => {
+    console.log('signInPostData()');
     console.log('FormData Entries:');
     for (const [key, value] of formData.entries()) {
         console.log(`${key}: ${value}`);
@@ -59,7 +59,7 @@ export const handleLogin = async (formData, dispatch, navigate, onError, t) => {
             }
         });
 
-        console.log('[Axios] handleLogin() success :', response.data, response.status);
+        console.log('[Axios] signInPostData() success :', response.data, response.status);
         alert('[ ' + response.data.userInfo.u_id + ' ] ' + t('welcome'));
 
         // 유저 정보 리듀서에 저장
@@ -105,12 +105,12 @@ export const handleLogout = (confirmTxt, dispatch, navigate) => {
 };
 
 // 유저 정보 요청
-export const getUserData = async (setLoading, dispatch) => {
-    console.log('getUserData()');
+export const userGetData = async (setLoading, dispatch) => {
+    console.log('userGetData()');
     setLoading(true);
     try {
         const response = await axios.get('/member/userInfo');
-        console.log('[Axios] getUserData() success :', response.data, response.status);
+        console.log('[Axios] userGetData() success :', response.data, response.status);
 
         // 유저 정보 리듀서에 저장
         dispatch({
@@ -133,8 +133,8 @@ export const getUserData = async (setLoading, dispatch) => {
 };
 
 // 프로필 내용 수정 요청
-export const putModifyProfileData = async (formData, setCompareCheck, dispatch, onError, t) => {
-    console.log('putDataModifyProfile()');
+export const modifyProfilePutData = async (formData, setCompareCheck, dispatch, onError, t) => {
+    console.log('modifyProfilePutData()');
     console.log('FormData Entries:');
     for (const [key, value] of formData.entries()) {
         console.log(`${key}: ${value}`);
@@ -147,7 +147,7 @@ export const putModifyProfileData = async (formData, setCompareCheck, dispatch, 
             }
         });
 
-        console.log('[Axios] putDataModifyProfile() success :', response.data, response.status);
+        console.log('[Axios] modifyProfilePutData() success :', response.data, response.status);
         setCompareCheck(false);
         alert(t('profileUpdated'));
 
@@ -164,8 +164,8 @@ export const putModifyProfileData = async (formData, setCompareCheck, dispatch, 
 };
 
 // 프로필 이미지 업로드 요청
-export const putModifyProfileImgData = async (formData, dispatch) => {
-    console.log("putModifyProfileImgData()");
+export const modifyProfileImgPutData = async (formData, dispatch) => {
+    console.log("modifyProfileImgPutData()");
     try {
         const response = await axios.put('/upload/modifyProfileImg', formData, {
             headers: {
@@ -173,7 +173,7 @@ export const putModifyProfileImgData = async (formData, dispatch) => {
             }
         });
 
-        console.log('[Axios] putModifyProfileImgData() success :', response.data, response.status);
+        console.log('[Axios] modifyProfileImgPutData() success :', response.data, response.status);
 
         // 팝업 닫기 및 리듀서 프로필 이미지 수정
         dispatch({

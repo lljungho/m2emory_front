@@ -26,7 +26,7 @@ const MyPageWrap = () => {
     return (
         <div className='content_info_box'>
             <div className="contentInfoBox">
-                <div className="my_profile_wrap">
+                <div className="my_profile_wrap wrapElement">
                     <div className="my_profile_box">
                         <ProfileImgBox img={user.u_pf_img} />
 
@@ -57,7 +57,7 @@ const MyPageWrap = () => {
 
                     { (user.u_pf_name || user.u_pf_introduction) &&
                     <div className="my_profile_info_box">
-                        <div className="profile_introduce_box">
+                        <div className="profile_introduce_box innerElement">
                             { user.u_pf_name && 
                             <div className="profile_text_box">
                                 <p className="profile_name">{user.u_pf_name}</p>

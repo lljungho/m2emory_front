@@ -63,7 +63,7 @@ const DockBar = () => {
 
                         { menuOpen && 
                             <div className="moreMenuBox" onClick={(e) => e.stopPropagation()}>
-                                <div className="moreMenuBtns">
+                                <div className="moreMenuBtns wrapElement">
                                     <div className="moreMenu">
                                         <select 
                                             name="lng" 

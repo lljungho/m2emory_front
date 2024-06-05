@@ -260,8 +260,8 @@ const GatherSvg = ({name, color, fill, title}) => {
             name: 'close',
             svgIcon: () => (
                 <svg aria-label={title} fill='none' stroke={colorModeCode} x="0px" y="0px" viewBox="0 0 27 27" enableBackground="new 0 0 27 27">
-                    <line strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" stroke-miterlimit="10" x1="5.556" y1="5.556" x2="21.444" y2="21.444"/>
-                    <line strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" stroke-miterlimit="10" x1="5.556" y1="21.444" x2="21.444" y2="5.556"/>
+                    <line strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" x1="5.556" y1="5.556" x2="21.444" y2="21.444"/>
+                    <line strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" x1="5.556" y1="21.444" x2="21.444" y2="5.556"/>
                 </svg>
             )
         },
