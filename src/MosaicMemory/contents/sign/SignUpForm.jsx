@@ -1,14 +1,18 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import GatherSvg from '../../utils/svg/GatherSvg';
 import { signUpPostData } from '../../utils/axios/axiosUtils';
+import { useDispatch } from 'react-redux';
+import GatherSvg from '../../utils/svg/GatherSvg';
+import { setSignFrom } from '../../utils/handler/handlerUtils';
 
-const SignUpForm = ({ setSignType }) => {
+
+const SignUpForm = ({ signState }) => {
     const { t } = useTranslation();
+    const dispatch =useDispatch();
 
-    // sign Type
+    // sign form 변경
     const signTypeToggle = () => {
-        setSignType(signType => !signType);
+        setSignFrom(signState, dispatch);
     }
 
     // signup input
@@ -73,7 +77,7 @@ const SignUpForm = ({ setSignType }) => {
 
         signUpPostData(
             formData, 
-            setSignType, 
+            dispatch, 
             handleErrorCallback,
             t,
         );
@@ -95,16 +99,16 @@ const SignUpForm = ({ setSignType }) => {
             <form onSubmit={postData}>
                 <div className="loginWrap">
                     <div className="loginBox">
-                        <div className="loginInputBox">
-                            <label htmlFor="id" className={`loginInput ${!idErr ? '' : 'regexCK_box'}`}>
+                        <label htmlFor="id" className="loginInputBox innerElement">
+                            <div className={`loginInput ${!idErr ? '' : 'regexCK_box'}`}>
                                 <GatherSvg name='profile' color={!idErr ? null : '#ff3f3f'} title={t('id')} />
                                 <input type="text" name="id" id="id" ref={id} maxLength="16" autoComplete="id" className="login_input" onInput={isValidId} 
                                 placeholder={t('id')} />
-                            </label>
+                            </div>
                             {idErr && <div className='regexCK'>{t('formIdRegEx')}</div>}
-                        </div>
-                        <div className="loginInputBox">
-                            <label htmlFor="pw" className={`loginInput ${!pwErr ? '' : 'regexCK_box'}`}>
+                        </label>
+                        <label htmlFor="pw" className="loginInputBox innerElement">
+                            <div className={`loginInput ${!pwErr ? '' : 'regexCK_box'}`}>
                                 <GatherSvg name='rock' color={!pwErr ? null : '#ff3f3f'} title={t('pw')} />
                                 <input type={pwTyle ? "text" : "password"} name="pw" id="pw" ref={pw} maxLength="16" autoComplete='new-password' className="login_input" onInput={isValidPw} placeholder={t('pw')} />
                                 <div className="funcBtnsBox">
@@ -112,16 +116,16 @@ const SignUpForm = ({ setSignType }) => {
                                         <GatherSvg name={pwTyle ? 'openEye' : 'closeEye'} color="var(--color6)" title={t('pwView')} />
                                     </div>
                                 </div>
-                            </label>
+                            </div>
                             {pwErr && <div className='regexCK'>{t('formPwRegEx')}</div>}
-                        </div>
-                        <div className="loginInputBox">
-                            <label htmlFor="email" className={`loginInput ${!emailErr ? '' : 'regexCK_box'}`}>
+                        </label>
+                        <label htmlFor="email" className="loginInputBox innerElement">
+                            <div className={`loginInput ${!emailErr ? '' : 'regexCK_box'}`}>
                                 <GatherSvg name='message' color={!emailErr ? 'var(--baseRGB_b)' : '#ff3f3f'} title={t('email')} />
                                 <input type="text" name="email" id="email" ref={email} className="login_input" onInput={isValidEmail} placeholder={t('email')} />
-                            </label>
+                            </div>
                             {emailErr && <div className='regexCK'>{t('formEmailRegEx')}</div>}
-                        </div>
+                        </label>
                     </div>
 
                     <div className="loginBox">

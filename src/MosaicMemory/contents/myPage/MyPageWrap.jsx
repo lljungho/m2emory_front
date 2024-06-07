@@ -20,19 +20,19 @@ const MyPageWrap = () => {
 
     // 초기 상태 체크
     useEffect(() => {
-        setTruncate(user.u_pf_introduction, setTextTruncated, maxLine);
-    }, [user.u_pf_introduction]);
+        setTruncate(user.user_pf_introduction, setTextTruncated, maxLine);
+    }, [user.user_pf_introduction]);
 
     return (
         <div className='content_info_box'>
             <div className="contentInfoBox">
                 <div className="my_profile_wrap wrapElement">
                     <div className="my_profile_box">
-                        <ProfileImgBox img={user.u_pf_img} />
+                        <ProfileImgBox img={user.user_pf_img} />
 
                         <div className="profileFollowBox">
                             <div className="title_box">
-                                <h2 className='content_title'>{user.u_id}</h2>
+                                <h2 className='content_title'>{user.user_id}</h2>
                                 <Link to='/contents/myPage/profileEdit' className="title_btn">
                                     <GatherSvg name='setting' />
                                 </Link>
@@ -55,22 +55,22 @@ const MyPageWrap = () => {
                         </div>
                     </div>
 
-                    { (user.u_pf_name || user.u_pf_introduction) &&
+                    { (user.user_pf_name || user.user_pf_introduction) &&
                     <div className="my_profile_info_box">
                         <div className="profile_introduce_box innerElement">
-                            { user.u_pf_name && 
+                            { user.user_pf_name && 
                             <div className="profile_text_box">
-                                <p className="profile_name">{user.u_pf_name}</p>
+                                <p className="profile_name">{user.user_pf_name}</p>
                             </div>
                             }
 
-                            { user.u_pf_introduction &&
+                            { user.user_pf_introduction &&
                             <div 
                                 className={`profile_text_box ${ textTruncated ? 'cursorP' : '' }`}
                                 onClick={ textTruncated ? originalTextToggle : null }
                             >
                                 <p className={`profile_introduce ${originalTextCheck ? 'on' : ''}`}>
-                                    { setTruncateText(user.u_pf_introduction, originalTextCheck, maxLine, t) }
+                                    { setTruncateText(user.user_pf_introduction, originalTextCheck, maxLine, t) }
                                 </p>
                             </div>
                             }

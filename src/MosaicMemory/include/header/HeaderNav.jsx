@@ -55,7 +55,7 @@ const HeaderNav = () => {
             <div className='gnb_btns'>
                 <Link to='/contents/myPage' className={`gnb_cate1 ${useNavLocation('/contents/myPage')}`}>
                     <div className="gnb_cate1_iconBox gnb_cate1_profile">
-                        <ProfileImgBox img={user.u_pf_img} small={true} />
+                        <ProfileImgBox img={user.user_pf_img} small={true} />
                     </div>
                     {t('profile')}
                 </Link>

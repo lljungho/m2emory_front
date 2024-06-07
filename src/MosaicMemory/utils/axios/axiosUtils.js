@@ -1,5 +1,10 @@
 import axios from "./axiosSet";
 
+// 더미 계정 생성
+export const setDummy = async () => {
+    await axios.put('/member/dummy');
+};
+
 // 에러 핸들러
 export const handleError = (error, onError) => {
     if (error.response) {
@@ -21,7 +26,7 @@ export const handleError = (error, onError) => {
 };
 
 // 회원 가입 요청
-export const signUpPostData = async (formData, signState, onError, t) => {
+export const signUpPostData = async (formData, dispatch, onError, t) => {
     console.log('signUpPostData()');
     console.log('FormData Entries:');
     for (const [key, value] of formData.entries()) {
@@ -36,7 +41,11 @@ export const signUpPostData = async (formData, signState, onError, t) => {
         });
 
         console.log('[Axios] signUpPostData() success :', response.data, response.status);
-        signState(false);
+        dispatch({
+            type: 'SET_SIGN_STATE',
+            signState: ''
+        });
+        sessionStorage.removeItem('sign');
         alert(t('joinSuccess'));
 
     } catch(error) {
@@ -60,7 +69,7 @@ export const signInPostData = async (formData, dispatch, navigate, onError, t) =
         });
 
         console.log('[Axios] signInPostData() success :', response.data, response.status);
-        alert('[ ' + response.data.userInfo.u_id + ' ] ' + t('welcome'));
+        alert('[ ' + response.data.userInfo.user_id + ' ] ' + t('welcome'));
 
         // 유저 정보 리듀서에 저장
         dispatch({
@@ -69,10 +78,10 @@ export const signInPostData = async (formData, dispatch, navigate, onError, t) =
         });
 
         // 토큰 저장
-        sessionStorage.setItem('sessionID', response.data.accessToken);
+        sessionStorage.setItem('sessionAuth', true);
         dispatch({
             type: 'SESSION_CHECK',
-            sessionID: response.data.accessToken,
+            sessionAuth: true,
         });
         navigate('/');
 
@@ -92,7 +101,7 @@ export const handleLogout = (confirmTxt, dispatch, navigate) => {
         axios.get('/member/signOut')
         .then(response => {
             console.log(response.data);
-            sessionStorage.removeItem('sessionID');
+            sessionStorage.removeItem('sessionAuth');
             dispatch({
                 type: 'CLEAR_ALL_STATE',
             });
@@ -119,10 +128,10 @@ export const userGetData = async (setLoading, dispatch) => {
         });
 
         // 토큰 저장
-        sessionStorage.setItem('sessionID', response.data.accessToken);
+        sessionStorage.setItem('sessionAuth', true);
         dispatch({
             type: 'SESSION_CHECK',
-            sessionID: response.data.accessToken,
+            sessionAuth: true,
         });
 
     } catch(error) {
@@ -154,8 +163,8 @@ export const modifyProfilePutData = async (formData, setCompareCheck, dispatch, 
         // 유저 정보 리듀서에 저장
         dispatch({
             type: 'SET_PROFILE_INFO',
-            u_pf_name: response.data.name,
-            u_pf_introduction: response.data.introduction,
+            user_pf_name: response.data.name,
+            user_pf_introduction: response.data.introduction,
         });
 
     } catch( error) {
@@ -186,7 +195,7 @@ export const modifyProfileImgPutData = async (formData, dispatch) => {
         });
         dispatch({
             type: 'SET_PROFILE_IMG',
-            u_pf_img: response.data.u_pf_img,
+            user_pf_img: response.data.user_pf_img,
         });
 
     } catch(error) {
@@ -214,7 +223,7 @@ export const deleteProfileImg = async (dispatch) => {
         });
         dispatch({
             type: 'SET_PROFILE_IMG',
-            u_pf_img: null,
+            user_pf_img: null,
         });
 
     } catch(error) {

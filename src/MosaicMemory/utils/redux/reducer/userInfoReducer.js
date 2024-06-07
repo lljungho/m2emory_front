@@ -2,11 +2,11 @@ const serverUrl = process.env.REACT_APP_SERVER_URL;
 const basicProfileImg = process.env.REACT_APP_BASIC_PROFILE_IMG;
 
 const initial_state = {
-    u_id: null,
-    u_email: null,
-    u_pf_img: null,
-    u_pf_name: null,
-    u_pf_introduction: null,
+    user_id: null,
+    user_email: null,
+    user_pf_img: null,
+    user_pf_name: null,
+    user_pf_introduction: null,
 };
     
 export const setUserInfoReducer = (currentState = initial_state, action) => {
@@ -14,18 +14,18 @@ export const setUserInfoReducer = (currentState = initial_state, action) => {
         case 'SET_USER_INFO':
             return { ...currentState,
                 ...action.payload,
-                u_pf_img: action.payload.u_pf_img ? `${serverUrl}/${action.payload.u_id}/${action.payload.u_pf_img}` : basicProfileImg,
+                user_pf_img: action.payload.user_pf_img ? `${serverUrl}/${action.payload.user_id}/${action.payload.user_pf_img}` : basicProfileImg,
             }; 
         
         case 'SET_PROFILE_INFO':
             return { ...currentState,
-                u_pf_name: action.u_pf_name,
-                u_pf_introduction: action.u_pf_introduction,
+                user_pf_name: action.user_pf_name,
+                user_pf_introduction: action.user_pf_introduction,
             };
 
         case 'SET_PROFILE_IMG':
             return { ...currentState,
-                u_pf_img: action.u_pf_img ? `${serverUrl}/${currentState.u_id}/${action.u_pf_img}` : basicProfileImg,
+                user_pf_img: action.user_pf_img ? `${serverUrl}/${currentState.user_id}/${action.user_pf_img}` : basicProfileImg,
             };
 
         case 'CLEAR_ALL_STATE':

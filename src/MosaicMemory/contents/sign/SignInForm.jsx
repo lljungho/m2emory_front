@@ -4,15 +4,16 @@ import { useTranslation } from 'react-i18next';
 import GatherSvg from '../../utils/svg/GatherSvg';
 import { useDispatch } from 'react-redux';
 import { signInPostData } from '../../utils/axios/axiosUtils';
+import { setSignFrom } from '../../utils/handler/handlerUtils';
 
-const SignInForm = ({ setSignType }) => {
+const SignInForm = ({ signState }) => {
     const { t } = useTranslation();
     const navigate  = useNavigate();
     const dispatch = useDispatch();
 
     // sign Type
     const signTypeToggle = () => {
-        setSignType(signType => !signType);
+        setSignFrom(signState, dispatch);
     }
 
     // signin input
@@ -82,14 +83,14 @@ const SignInForm = ({ setSignType }) => {
             <form onSubmit={postData}>
                 <div className="loginWrap">
                     <div className="loginBox">
-                        <div className="loginInputBox">
-                            <label htmlFor="userId" className='loginInput'>
+                        <label htmlFor="userId" className="loginInputBox innerElement">
+                            <div className='loginInput'>
                                 <GatherSvg name='profile' title={t('id')} />
                                 <input type="text" name="userId" id="userId" ref={userId} autoComplete="id" className="login_input" onInput={isValidId} placeholder={t('id')} />
-                            </label>
-                        </div>
-                        <div className="loginInputBox">
-                            <label htmlFor="userPassword" className='loginInput'>
+                            </div>
+                        </label>
+                        <label htmlFor="userPassword" className="loginInputBox innerElement">
+                            <div className='loginInput'>
                                 <GatherSvg name='rock' title={t('pw')} />
                                 <input type={userPasswordType ? "text" : "password"} name="userPassword" id="userPassword" ref={userPassword} autoComplete="new-password" onInput={isValidPw} className="login_input" placeholder={t('pw')} />
                                 <div className="funcBtnsBox">
@@ -97,8 +98,8 @@ const SignInForm = ({ setSignType }) => {
                                         <GatherSvg name={userPasswordType ? 'openEye' : 'closeEye'} color="var(--color6)" title={t('pwView')} />
                                     </div>
                                 </div>
-                            </label>
-                        </div>
+                            </div>
+                        </label>
                     </div>
 
                     {signErrorCheck && <div className='regexCK'>{t('joinError')}</div>}

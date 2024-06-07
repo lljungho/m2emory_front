@@ -70,6 +70,7 @@
     --bdrs: 0.3em;
     --translateCenter: -50%, -50%;
     --bxsd: 1px 2px 3px var(--baseBoxShadow);
+    --insetBxsd: 1px 1px 3px var(--baseBoxShadow);
 
 }
 
@@ -328,7 +329,7 @@ input:-moz-placeholder {
     padding: var(--ssize2);
     border-radius: var(--bdrs);
     background-color: var(--baseBg);
-    box-shadow: inset var(--bxsd);
+    box-shadow: inset var(--insetBxsd);
 }
 .dimmed_box {
     visibility: hidden;

@@ -45,15 +45,15 @@ export const ProfileEditWrap = () => {
     // 에러 처리
     const handleErrorCallback = () => {
         console.log('[Axios] modifyProfilePutData() communication error');
-        name.current.value = user.u_pf_name;
-        introduction.current.value = user.u_pf_introduction;
+        name.current.value = user.user_pf_name;
+        introduction.current.value = user.user_pf_introduction;
         name.current.focus();
     };
 
     // 기존 데이터 비교
     const [compareCheck, setCompareCheck] = useState(false);
     const compareData = () => {
-        const compare = name.current.value !== user.u_pf_name || introduction.current.value !== user.u_pf_introduction;
+        const compare = name.current.value !== user.user_pf_name || introduction.current.value !== user.user_pf_introduction;
         setCompareCheck(compare);
     };
 
@@ -116,10 +116,12 @@ export const ProfileEditWrap = () => {
 
                 <div className="contentInfoBox wrapElement">
                     <p className="content_sub_title">{t('profileImg')}</p>
-                    <div className="editProfileImg">
+                    <div className="editProfileImg innerElement">
                         <div className="editProfile cursorP" onClick={profileEditPop}>
-                            <ProfileImgBox img={user.u_pf_img} />
+                            <ProfileImgBox img={user.user_pf_img} />
                         </div>
+
+                        <div className="small_btns3 on cursorP" onClick={profileEditPop}>{t('change')}</div>
                     </div>
                 </div>
 
@@ -133,7 +135,7 @@ export const ProfileEditWrap = () => {
                             maxLength={maxLengthConfig.name} 
                             className='editInput innerElement' 
                             placeholder={t('name')} 
-                            defaultValue={user.u_pf_name} 
+                            defaultValue={user.user_pf_name} 
                             onChange={handleInputValue}
                         />
                         <span className="limit_byte">{nameLength} / {maxLengthConfig.name}</span>
@@ -149,7 +151,7 @@ export const ProfileEditWrap = () => {
                             maxLength={maxLengthConfig.introduction} 
                             className='editInput innerElement' 
                             placeholder={t('introduction')} 
-                            defaultValue={user.u_pf_introduction} 
+                            defaultValue={user.user_pf_introduction} 
                             onChange={handleInputValue}
                             onKeyDown={handleKeyDown}
                         >

@@ -12,6 +12,15 @@ export const setDimmedClose = (dispatch) => {
     });
 }
 
+// sign form 변경
+export const setSignFrom = (signState, dispatch) => {
+    dispatch({
+        type: 'SET_SIGN_STATE',
+        signState: !signState
+    });
+    sessionStorage.setItem('sign', !signState);
+};
+
 // 컬러 모드 변경
 export const setColorMode = (dispatch, colorMode) => {
     dispatch({ type: 'SET_COLOR_MODE', colorMode: !colorMode });

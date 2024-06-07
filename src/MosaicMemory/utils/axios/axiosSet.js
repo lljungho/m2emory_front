@@ -15,7 +15,7 @@ api.interceptors.response.use(
         // 토큰 인증 오류
         if (error.response && error.response.status === 401 && !error.response.tokenState) {
             console.log('token error');
-            sessionStorage.removeItem('sessionID');
+            sessionStorage.removeItem('sessionAuth');
             sessionStorage.removeItem('containerState');
             store.dispatch({ type: 'CLEAR_ALL_STATE' });
             return Promise.reject(error);

@@ -34,11 +34,11 @@ const FeedWrap = () => {
     // 초기 상태 체크
     useEffect(() => {
         setTruncate(
-            user.u_pf_introduction, 
+            user.user_pf_introduction, 
             setTextTruncated, 
             maxLine
         );
-    }, [user.u_pf_introduction]);
+    }, [user.user_pf_introduction]);
 
     return (
         <div className='contents_inner_box'>
@@ -53,7 +53,7 @@ const FeedWrap = () => {
                                         <div className="story_check_line">
                                             <div className="profile_thumb_box">
                                                 <div className="thumbnail_img">
-                                                    <img src={user.u_pf_img} alt="ProfileImg" className="thumbnail" />
+                                                    <img src={user.user_pf_img} alt="ProfileImg" className="thumbnail" />
                                                 </div>
                                             </div>
                                         </div>
@@ -62,10 +62,10 @@ const FeedWrap = () => {
                                     <div className="cont_top_info_profile">
                                         <div className="profile_introduction">
                                             <p className="userId cursorP">
-                                                {user.u_id}
+                                                {user.user_id}
                                                 <span className="date">1분</span>
                                             </p>
-                                            <p className="userName">{user.u_pf_name}</p>
+                                            <p className="userName">{user.user_pf_name}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -119,7 +119,7 @@ const FeedWrap = () => {
                                         <div className={`caption_box ${ textTruncated ? 'cursorP' : '' }`} onClick={ textTruncated ? originalTextToggle : null }>
                                             <div className='caption'>
                                                 <p className={`captionTxt ${originalTextCheck ? 'on' : ''}`}>
-                                                    { setTruncateText(user.u_pf_introduction, originalTextCheck, maxLine, t) }
+                                                    { setTruncateText(user.user_pf_introduction, originalTextCheck, maxLine, t) }
                                                 </p>
                                             </div>
                                         </div>
@@ -136,7 +136,7 @@ const FeedWrap = () => {
                                                 ></textarea>
 
                                                 <div className="regBtn">
-                                                    <div className="small_btns3 on">{t('submit')}</div>
+                                                    <div className="small_btns3 on cursorP">{t('submit')}</div>
                                                 </div>
                                             </div>
                                         </div>

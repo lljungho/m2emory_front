@@ -119,7 +119,7 @@ const DockBar = () => {
                     </Link>
 
                     <Link to='/contents/myPage' className={`gnb_cate1 dockProfile ${useNavLocation('/contents/myPage')}`}>
-                        <ProfileImgBox img={user.u_pf_img} small={true} />
+                        <ProfileImgBox img={user.user_pf_img} small={true} />
                     </Link>
                 </div>
             </div>

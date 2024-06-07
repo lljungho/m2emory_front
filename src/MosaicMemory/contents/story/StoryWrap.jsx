@@ -117,7 +117,7 @@ const StoryWrap = () => {
                                 <div className="listBox onfirmed">
                                     <div className="listThumbnailBox">
                                         <div className="thumbnail_img">
-                                            <img src={user.u_pf_img} alt={`${user.u_id} 프로필 이미지`} className='thumbnail' />
+                                            <img src={user.user_pf_img} alt={`${user.user_id} 프로필 이미지`} className='thumbnail' />
                                         </div>
                                     </div>
                                     <p className="listTitle me">My Story</p>

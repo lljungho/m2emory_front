@@ -11,7 +11,7 @@ const FormProfileImg = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const user = useSelector(store => store.userInfo);
-    const [profileImg, setProfileImg] = useState(user.u_pf_img);
+    const [profileImg, setProfileImg] = useState(user.user_pf_img);
     const [btnOn, setBtnOn] = useState(false);
     const inputFile = useRef();
 
@@ -25,7 +25,7 @@ const FormProfileImg = () => {
         if (!file) {
             return (
                 setBtnOn(false),
-                setProfileImg(user.u_pf_img)
+                setProfileImg(user.user_pf_img)
             )
         }
 
@@ -34,7 +34,7 @@ const FormProfileImg = () => {
             alert(t('profileImgUploadErr'));
             return (
                 setBtnOn(false),
-                setProfileImg(user.u_pf_img)
+                setProfileImg(user.user_pf_img)
             )
         }
         
@@ -87,7 +87,9 @@ const FormProfileImg = () => {
                 />
                 <div className="modal_info_box">
                     <div className="profile_thumb_box">
-                        <ProfileImgBox img={ profileImg } />
+                        <label htmlFor="file" className='cursorP'>
+                            <ProfileImgBox img={ profileImg } />
+                        </label>
                         <label htmlFor="file" className='small_btns3 on cursorP'>{t('select')}</label>
                     </div>
                     <div className="modal_btns_box">
@@ -96,7 +98,7 @@ const FormProfileImg = () => {
                         :
                             <div className="modal_btns small_btns2">{t('change')}</div>
                         }
-                        { user.u_pf_img === '/images/image/profile.jpg' ?
+                        { user.user_pf_img === '/images/image/profile.jpg' ?
                             <div className="modal_btns small_btns2">{t('del')}</div>
                         :
                             <div className="modal_btns small_btns2 on cursorP" onClick={deleteData}>{t('del')}</div>

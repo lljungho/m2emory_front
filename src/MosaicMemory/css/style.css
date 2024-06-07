@@ -43,7 +43,6 @@
             gap: var(--size1);
             padding: var(--size1);
             border-radius: var(--bdrs);
-            border: 1px solid var(--colorBd);
 
             .signInfoBox {
                 width: 100%;
@@ -63,6 +62,8 @@
                         gap: var(--size);
         
                         .loginInputBox {
+                            padding: var(--ssize) var(--ssize2);
+                            border: 1px solid transparent;
                             display: flex;
                             flex-direction: column;
                             gap: var(--ssize);
@@ -72,7 +73,6 @@
                                 display: flex;
                                 align-items: center;
                                 gap: var(--ssize2);
-                                border-bottom: 1px solid var(--colorBd);
                                 position: relative;
 
                                 &.regexCK_box {
@@ -96,6 +96,10 @@
                                         max-width: none;
                                     }
                                 }
+                            }
+
+                            &:focus-within {
+                                border-color: var(--color7);
                             }
                         }
                     }
@@ -265,7 +269,7 @@
 
                     &.on {
                         background-color: var(--baseBg);
-                        box-shadow: inset var(--bxsd);
+                        box-shadow: inset var(--insetBxsd);
 
                         .gnb_cate1_iconBox {
                             background-color: var(--color2);
@@ -440,6 +444,7 @@
     .btns_box {
         display: flex;
         justify-content: flex-end;
+        margin-top: var(--size);
 
         .btns {
             max-width: 200px;
@@ -467,7 +472,7 @@
             margin: auto;
             display: flex;
             flex-direction: column;
-            gap: var(--size1);
+            gap: var(--size);
             box-sizing: content-box;
         
             .contentInfoBox {
@@ -477,6 +482,8 @@
 
                 .editProfileImg {
                     display: flex;
+                    justify-content: space-between;
+                    align-items: center;
                 }
         
                 .editInputBox {
@@ -953,10 +960,12 @@
                                     padding: 0 var(--ssize1);
                                     background-color: var(--baseFg1);
                                     border-radius: var(--bdrs);
+                                    border: 1px solid transparent;
                                     display: flex;
                                     justify-content: space-between;
                                     align-items: flex-end;
                                     gap: var(--size4);
+                                    box-shadow: inset var(--insetBxsd);
 
                                     .comment_write {
                                         width: auto;
@@ -967,6 +976,10 @@
                                     .regBtn {
                                         display: none;
                                         padding: var(--ssize) 0;
+                                    }
+
+                                    &:focus-within {
+                                        border-color: var(--color7);
                                     }
                                 }
                             }
@@ -984,6 +997,8 @@
     min-width: var(--profileSize);
     height: var(--profileSize);
     min-height: var(--profileSize);
+    border-radius: var(--bdrs);
+    box-shadow: var(--bxsd);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -993,6 +1008,7 @@
         min-width: 100%;
         height: 100%;
         min-height: 100%;
+        box-shadow: none;
     }
 }
 
