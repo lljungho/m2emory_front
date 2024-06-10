@@ -87,6 +87,24 @@ export const setTruncate = (text, setState, maxLine) => {
     }
 };
 
+// textarea 높이 조정
+export const setAdjustHeight = (textarea, btn, minHeight, maxHeight) => {
+    // textarea: 해당요소
+    // btn: 버튼요소
+    // minHeight: 최소높이, null = auto
+    // maxHeight: 필수입력
+
+    const textareaElem = textarea.current;
+    textareaElem.style.height = minHeight ? `${minHeight}px` : 'auto';
+    const hasValue = textareaElem.value !== '';
+    if (hasValue) {
+        textareaElem.style.height = `${Math.min(textareaElem.scrollHeight, maxHeight)}px`;
+    }
+    if (btn) {
+        btn.current.style.display = hasValue ? 'block' : 'none';
+    }
+};
+
 // 파일 리사이징
 export const handleResizeFile = (file, fileType, fileSize) =>
     new Promise((resolve) => { // 비동기 작업을 위해서 "Promise"를 통한 비동기 작업 정의

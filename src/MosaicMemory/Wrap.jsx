@@ -54,7 +54,7 @@ const Wrap = () => {
 
             { windowWidth < 1240 && isLogIned && <DockBar /> }
 
-            <div className="etc_btn" onClick={createDummy}>더미 계정 100</div>
+            <div className="etc_btn off" onClick={createDummy}>더미 계정 100</div>
         </div>
     )
 }

@@ -59,7 +59,7 @@ export const ProfileWrap = () => {
                 <div className="contentInfoBox">
                     <div className="recentTop">
                         <p className="content_sub_title">{t('recent')}</p>
-                        <span className='TxtBtns'>{t('delAll')}</span>
+                        <span className='txtBtns'>{t('delAll')}</span>
                     </div>
 
                     <RecentSearchBox />

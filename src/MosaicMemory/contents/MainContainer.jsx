@@ -12,7 +12,9 @@ const MainContainer = () => {
                 <div className="section_box">
                     <div className="contInfo">
                         <StoryWrap />
-                        <FeedWrap />
+                        <div className='contents_inner_box'>
+                            <FeedWrap />
+                        </div>
                     </div>
                 </div>
             </div>

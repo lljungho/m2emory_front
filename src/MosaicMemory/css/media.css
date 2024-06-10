@@ -45,7 +45,6 @@
                                 .contInfo {
                                     .contents_inner_box {
                                         height: auto;
-                                        padding-bottom: var(--size3);
                                         overflow-y: visible;
                                     }
                                 }

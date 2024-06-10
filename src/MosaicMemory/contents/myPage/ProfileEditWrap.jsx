@@ -107,68 +107,66 @@ export const ProfileEditWrap = () => {
     };
 
     return (
-        <>
-            <div className='content_info_box'>
-                <ContTitleBox
-                    title={t('profileEdit')}
-                    back={true}
-                />
+        <div className='content_info_box'>
+            <ContTitleBox
+                title={t('profileEdit')}
+                back={true}
+            />
 
-                <div className="contentInfoBox wrapElement">
-                    <p className="content_sub_title">{t('profileImg')}</p>
-                    <div className="editProfileImg innerElement">
-                        <div className="editProfile cursorP" onClick={profileEditPop}>
-                            <ProfileImgBox img={user.user_pf_img} />
-                        </div>
-
-                        <div className="small_btns3 on cursorP" onClick={profileEditPop}>{t('change')}</div>
+            <div className="contentInfoBox wrapElement">
+                <p className="content_sub_title">{t('profileImg')}</p>
+                <div className="editProfileImg innerElement">
+                    <div className="editProfile cursorP" onClick={profileEditPop}>
+                        <ProfileImgBox img={user.user_pf_img} />
                     </div>
-                </div>
 
-                <div className="contentInfoBox wrapElement">
-                    <p className="content_sub_title">{t('name')}</p>
-                    <div className="editInputBox">
-                        <input 
-                            type="text" 
-                            name="name" 
-                            ref={name} 
-                            maxLength={maxLengthConfig.name} 
-                            className='editInput innerElement' 
-                            placeholder={t('name')} 
-                            defaultValue={user.user_pf_name} 
-                            onChange={handleInputValue}
-                        />
-                        <span className="limit_byte">{nameLength} / {maxLengthConfig.name}</span>
-                    </div>
-                </div>
-
-                <div className="contentInfoBox wrapElement">
-                    <p className="content_sub_title">{t('introduction')}</p>
-                    <div className="editInputBox">
-                        <textarea 
-                            name="introduction" 
-                            ref={introduction} 
-                            maxLength={maxLengthConfig.introduction} 
-                            className='editInput innerElement' 
-                            placeholder={t('introduction')} 
-                            defaultValue={user.user_pf_introduction} 
-                            onChange={handleInputValue}
-                            onKeyDown={handleKeyDown}
-                        >
-                        </textarea>
-                        <span className="limit_byte">{introductionLength} / {maxLengthConfig.introduction}</span>
-                    </div>
-                </div>
-
-                <div className="btns_box">
-                    { compareCheck ?
-                        <button type="button" className='btns' onClick={putData}>{t('submit')}</button>
-                    :
-                        <button type='button' className='btns off'>{t('submit')}</button>
-                    }
+                    <div className="small_btns3 on cursorP" onClick={profileEditPop}>{t('change')}</div>
                 </div>
             </div>
-        </>
+
+            <div className="contentInfoBox wrapElement">
+                <p className="content_sub_title">{t('name')}</p>
+                <div className="editInputBox">
+                    <input 
+                        type="text" 
+                        name="name" 
+                        ref={name} 
+                        maxLength={maxLengthConfig.name} 
+                        className='editInput innerElement' 
+                        placeholder={t('name')} 
+                        defaultValue={user.user_pf_name} 
+                        onChange={handleInputValue}
+                    />
+                    <span className="limit_byte">{nameLength} / {maxLengthConfig.name}</span>
+                </div>
+            </div>
+
+            <div className="contentInfoBox wrapElement">
+                <p className="content_sub_title">{t('introduction')}</p>
+                <div className="editInputBox">
+                    <textarea 
+                        name="introduction" 
+                        ref={introduction} 
+                        maxLength={maxLengthConfig.introduction} 
+                        className='editInput innerElement' 
+                        placeholder={t('introduction')} 
+                        defaultValue={user.user_pf_introduction} 
+                        onChange={handleInputValue}
+                        onKeyDown={handleKeyDown}
+                    >
+                    </textarea>
+                    <span className="limit_byte">{introductionLength} / {maxLengthConfig.introduction}</span>
+                </div>
+            </div>
+
+            <div className="btns_box">
+                { compareCheck ?
+                    <button type="button" className='btns' onClick={putData}>{t('submit')}</button>
+                :
+                    <button type='button' className='btns off'>{t('submit')}</button>
+                }
+            </div>
+        </div>
     )
 }
 

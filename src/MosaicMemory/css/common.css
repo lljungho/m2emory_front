@@ -48,7 +48,7 @@
     --ssize1: 0.5em;
     --ssize2: 0.75em;
 
-    --minusSsize1: -0.5em;
+    --minusSsize: -0.3em;
 
     --profileSize: 80px;
 
@@ -65,7 +65,7 @@
     --color8: #f0262f;
     --color9: #90aee9;
 
-    /*utile*/
+    /*utils*/
     --trst: .2s; 
     --bdrs: 0.3em;
     --translateCenter: -50%, -50%;
@@ -191,6 +191,12 @@ input:-moz-placeholder {
     cursor: pointer;
     box-shadow: var(--bxsd);
 
+    &.white {
+        background-color: var(--color);
+        color: var(--color1);
+        border-color: var(--colorBd);
+    }
+
     &.off {
        opacity: 0.5; 
        cursor: auto;
@@ -268,7 +274,7 @@ input:-moz-placeholder {
         border-color: var(--color2);
     }
 }
-.TxtBtns {
+.txtBtns {
     display: block;
     width: max-content;
     font-size: var(--size);
@@ -415,4 +421,8 @@ input:-moz-placeholder {
     right: 0;
     bottom: 0;
     cursor: pointer;
+
+    &.off {
+        display: none;
+    }
 }
