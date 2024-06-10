@@ -9,7 +9,7 @@ const FeedWrap = () => {
     const user = useSelector(store => store.userInfo);
     const textarea = useRef();
 
-    // 댓글 입력 시 textarea 높이 조절
+    // 댓글 입력 시 textarea 높이 조정
     const adjustHeight = (e) => {
         const textareaElem = textarea.current;
         const textareaBtnElem = textareaElem.closest('.textareaBox').querySelector('.regBtn');
