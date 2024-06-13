@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { handleFileCheck, setAdjustHeight } from '../../utils/handler/handlerUtils';
 
@@ -9,9 +10,10 @@ const PostingWrap = () => {
     const postInput = useRef(null);
     const mediaFile = useRef(null);
     const description = useRef(null);
+    const params = useParams();
 
     // 포스팅할 콘텐츠 선택
-    const [posting, setPosting] = useState(1);
+    const [posting, setPosting] = useState(Number(params.post));
 
     // 댓글 입력 시 textarea 높이 조정
     const adjustHeight = () => {

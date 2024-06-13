@@ -45,7 +45,7 @@ const HeaderNav = () => {
                 </Link>
             </div>
             <div className='gnb_btns'>
-                <Link to='/contents/posting' className={`gnb_cate1 ${useNavLocation('/contents/posting')}`}>
+                <Link to='/contents/posting/1' className={`gnb_cate1 ${useNavLocation('/contents/posting')}`}>
                     <div className="gnb_cate1_iconBox">
                         <GatherSvg name='plus' title={t('post')} />
                     </div>
