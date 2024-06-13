@@ -16,6 +16,7 @@ const resources = {
             recent: "최근 검색",
             del: '삭제',
             delAll: "전체삭제",
+            modify: '수정',
             lightMode: '라이트 모드',
             darkMode: '다크 모드',
             id: "아이디",
@@ -56,12 +57,13 @@ const resources = {
             mediaSelect: '미디어 선택',
             change: '변경',
             changeConfirm: '변경하시겠습니까?',
-            profileImgUploadErr: '5MB 이하의 이미지 파일만 업로드 가능합니다.',
-            progileImgDelete: '프로필 이미지를 삭제하고 기본 이미지를 사용하시겠습니까??',
+            profileImgUploadErr: '5MB 미만의 이미지 파일만 업로드 가능합니다.',
+            progileImgDelete: '프로필 이미지를 삭제하고 기본 이미지를 사용하시겠습니까?',
             like: '좋아요',
             enterComment: '댓글 입력',
             enterDescription: '문구를 작성하세요',
             fileAcceptMedia: '사진과 동영상을 선택하세요',
+            invalidFileWarning: '5MB 미만의 사진, 100MB 미만의 동영상 파일만 선택해 주세요',
         }
     },
     EN: {
@@ -78,6 +80,7 @@ const resources = {
             recent: "Recent",
             del: 'Delete',
             delAll: "Del All",
+            modify: 'Mod',
             lightMode: 'Light Mode',
             darkMode: 'Dark Mode',
             id: "id",
@@ -124,6 +127,7 @@ const resources = {
             enterComment: 'Enter Comment',
             enterDescription: 'Write an explanation',
             fileAcceptMedia: 'Choose photos and videos',
+            invalidFileWarning: 'Please select photos less than 5MB and video files less than 100MB',
         }
     },
     JP: {
@@ -140,6 +144,7 @@ const resources = {
             recent: "最近の検索",
             del: '削除する',
             delAll: "全削除",
+            modify: '修正',
             lightMode: 'ライトモード',
             darkMode: 'ダークモード',
             id: "ユーザー",
@@ -186,6 +191,7 @@ const resources = {
             enterComment: 'コメント',
             enterDescription: '説明を書く',
             fileAcceptMedia: '写真と動画をお選びください',
+            invalidFileWarning: '5MB未満の写真、100MB未満の動画ファイルのみを選択してください',
         }
     },
     CN: {
@@ -202,6 +208,7 @@ const resources = {
             recent: "最近搜索",
             del: '删除',
             delAll: "全部删除",
+            modify: '联系我们',
             lightMode: '灯光模式',
             darkMode: '深色模式',
             id: "用户名",
@@ -242,12 +249,13 @@ const resources = {
             mediaSelect: '媒体选择',
             change: '变更',
             changeConfirm: '您想要进行更改吗？',
-            profileImgUploadErr: '只能上传大小不超过5MB的图像文件。',
+            profileImgUploadErr: '只能上传5MB以下的图片文件。',
             progileImgDelete: '您要删除个人资料图片并使用默认图片吗？',
             like: '赞',
             enterComment: '输入评论',
             enterDescription: '写一个解释',
             fileAcceptMedia: '请选择照片和视频',
+            invalidFileWarning: '请选择5MB以下的照片、100MB以下的视频文件',
         }
     },
 }

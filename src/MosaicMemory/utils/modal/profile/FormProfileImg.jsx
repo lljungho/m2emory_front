@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteProfileImg, modifyProfileImgPutData } from '../../axios/axiosUtils';
-import { setResizerFile } from '../../handler/handlerUtils';
+import { handleFileCheck, setResizerFile } from '../../handler/handlerUtils';
 
 import ContTitleBox from '../../../include/contents/ContTitleBox';
 import ProfileImgBox from '../../../include/contents/ProfileImgBox';
@@ -17,7 +17,6 @@ const FormProfileImg = () => {
 
     // 파일 인풋 데이터 체크
     const fileCheck = async () => {
-        const maxFilesize = 1024 * 1024 * 5; // 파일 크기 제한
         const file = inputFile.current.files[0];
         console.log("File selected:", file);
 
@@ -29,14 +28,14 @@ const FormProfileImg = () => {
             )
         }
 
-        // 이미지 파일이 아니거나 파일 크기 제한을 초과한 경우
-        if (!file.type.startsWith('image/') || file.size > maxFilesize) {
+        // 파일 유형, 사이즈 검사
+        if (!handleFileCheck(file, ['image/'])) {
             alert(t('profileImgUploadErr'));
             return (
                 setBtnOn(false),
                 setProfileImg(user.user_pf_img)
             )
-        }
+        };
         
         setProfileImg(URL.createObjectURL(file));
         setBtnOn(true);
@@ -90,18 +89,18 @@ const FormProfileImg = () => {
                         <label htmlFor="file" className='cursorP'>
                             <ProfileImgBox img={ profileImg } />
                         </label>
-                        <label htmlFor="file" className='small_btns3 on cursorP'>{t('select')}</label>
+                        <label htmlFor="file" className='small_btns3 on'>{t('select')}</label>
                     </div>
                     <div className="modal_btns_box">
                         { btnOn ?
-                            <div className="modal_btns small_btns2 on cursorP" onClick={putData}>{t('change')}</div>
+                            <div className="modal_btns small_btns2 on" onClick={putData}>{t('change')}</div>
                         :
                             <div className="modal_btns small_btns2">{t('change')}</div>
                         }
                         { user.user_pf_img === '/images/image/profile.jpg' ?
                             <div className="modal_btns small_btns2">{t('del')}</div>
                         :
-                            <div className="modal_btns small_btns2 on cursorP" onClick={deleteData}>{t('del')}</div>
+                            <div className="modal_btns small_btns2 on" onClick={deleteData}>{t('del')}</div>
                         }
                     </div>
                 </div>

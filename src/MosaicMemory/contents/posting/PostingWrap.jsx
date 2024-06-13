@@ -1,13 +1,17 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next';
-import { setAdjustHeight } from '../../utils/handler/handlerUtils';
+import { handleFileCheck, setAdjustHeight } from '../../utils/handler/handlerUtils';
 
 import ContTitleBox from '../../include/contents/ContTitleBox';
 
 const PostingWrap = () => {
     const { t } = useTranslation();
+    const postInput = useRef(null);
     const mediaFile = useRef(null);
     const description = useRef(null);
+
+    // 포스팅할 콘텐츠 선택
+    const [posting, setPosting] = useState(1);
 
     // 댓글 입력 시 textarea 높이 조정
     const adjustHeight = () => {
@@ -15,20 +19,21 @@ const PostingWrap = () => {
     };
 
     // 파일 인풋 데이터 체크
+    const [isFileCheck, setIsFileCheck] = useState(false);
     const fileCheck = () => {
-        const files = Array.from(mediaFile.current.files);
+        const files = Array.from(mediaFile.current.files); // 배열로 만들기
 
-        // 파일 형식 검사 (이미지, 동영상 타입이 아닌 파일이 있을 시 취소)
-        const isValidFileType = (file) => {
-            return file.type.startsWith('image/') || file.type.startsWith('video/');
-        };
-        const invalidFiles = files.filter(file => !isValidFileType(file));
+        // 파일 유형, 사이즈 검사
+        const invalidFiles = files.filter(file => !handleFileCheck(file, ['image/', 'video/']));
 
+        // 유형, 사이즈 부적합 파일이 있을 경우
         if (invalidFiles.length > 0) {
             alert(t('invalidFileWarning'));
             mediaFile.current.value = '';
             return;
         }
+
+        setIsFileCheck(true);
     };
 
     return (
@@ -39,18 +44,30 @@ const PostingWrap = () => {
             />
 
             <div className="contentInfoBox wrapElement">
+                <input 
+                    type="hidden" 
+                    name="post" 
+                    ref={postInput} 
+                    defaultValue={posting} 
+                />
                 <div className="contInfo_tabBtnBox">
-                    <div className="tabBtns btns">
+                    <div 
+                        className={`tabBtns ${posting === 1 ? 'btns on' : 'innerElement off'}`}
+                        onClick={() => setPosting(1)}
+                    >
                         <p className="tab">갤러리</p>
                     </div>
-                    <div className="tabBtns innerElement">
+                    <div 
+                        className={`tabBtns ${posting === 2 ? 'btns on' : 'innerElement off'}`}
+                        onClick={() => setPosting(2)}
+                    >
                         <p className="tab">스토리</p>
                     </div>
                 </div>
             </div>
 
             <div className="contMediaBox wrapElement">
-                <div className="contMedia_viewBox">
+                <div className="contMedia_viewBox border">
                     <input 
                         type="file" 
                         id='mediaFile' 
@@ -60,10 +77,21 @@ const PostingWrap = () => {
                         multiple
                         onChange={fileCheck}
                     />
+
+                    { isFileCheck ?
+                    <div className="mediaBtnsBox">
+                        <div className="funcBtnsBox">
+                            <div className='bdBtns'>{t('del')}</div>
+                            <div className='bdBtns'>{t('modify')}</div>
+                            <div className='bdBtns'>{t('delAll')}</div>
+                        </div>
+                    </div>
+                    :
                     <label htmlFor="mediaFile" className="mediaSelectBtnBox txtBtns">
                         {t('mediaSelect')}
                         <p className="subtxt">{t('fileAcceptMedia')}</p>
                     </label>
+                    }   
                 </div>
             </div>
 
@@ -72,7 +100,7 @@ const PostingWrap = () => {
                     <textarea 
                         name="description" 
                         ref={description} 
-                        className='editInput innerElement' 
+                        className='editInput innerElement border' 
                         placeholder={t('enterDescription')}
                         onInput={adjustHeight}
                     >
@@ -87,4 +115,4 @@ const PostingWrap = () => {
     )
 }
 
-export default PostingWrap
+export default PostingWrap;

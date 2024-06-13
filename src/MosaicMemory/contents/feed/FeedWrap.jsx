@@ -63,7 +63,7 @@ const FeedWrap = () => {
                             </div>
 
                             <div className="cont_top_box">
-                                <div className="bdBtns cursorP">
+                                <div className="bdBtns">
                                     {t('follow')}
                                 </div>
 
@@ -128,7 +128,7 @@ const FeedWrap = () => {
                                             ></textarea>
 
                                             <div className="regBtn" ref={textareaBtn}>
-                                                <div className="small_btns3 on cursorP">{t('submit')}</div>
+                                                <div className="small_btns3 on">{t('submit')}</div>
                                             </div>
                                         </div>
                                     </div>

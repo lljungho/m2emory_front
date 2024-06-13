@@ -131,9 +131,9 @@ const SignUpForm = ({ signState }) => {
                     <div className="loginBox">
                         <div className="btns_box">
                             { errorsCheck ?
-                                <button type="submit" className='btns'>{t('signUp')}</button>
+                                <button type="submit" className='btns on'>{t('signUp')}</button>
                             :
-                                <button type='button' className='btns off'>{t('signUp')}</button>
+                                <button type='button' className='btns'>{t('signUp')}</button>
                             }
                         </div>
                     </div>
@@ -143,7 +143,7 @@ const SignUpForm = ({ signState }) => {
             <div className="joinBox">
                 <div className="joinInfo">
                     <p className="joinTxt">{t('account')}</p>
-                    <span className='TxtBtns' onClick={signTypeToggle}>{t('signUp')}</span>
+                    <span className='txtBtns' onClick={signTypeToggle}>{t('signUp')}</span>
                 </div>
             </div>
         </div>

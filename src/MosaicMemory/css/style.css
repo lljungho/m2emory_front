@@ -536,12 +536,21 @@
 
                     .tabBtns {
                         width: 100%;
+                        padding: var(--ssize2) var(--size);
                         display: flex;
                         align-items: center;
                         justify-content: center;
                         font-size: var(--fontSize3);
                         border: 1px solid transparent;
                         cursor: pointer;
+
+                        &.on {
+                            box-shadow: inset var(--bxsd);
+                        }
+
+                        &.off {
+                            box-shadow: var(--bxsd);
+                        }
                     }
                 }
             }
@@ -563,7 +572,6 @@
                     height: 100%;
                     border-radius: var(--bdrs);
                     background-color: var(--color1);
-                    border: 1px solid var(--baseRGB_b);
                     position: absolute;
                     top: 50%;
                     left: 50%;
@@ -584,6 +592,13 @@
                             font-weight: normal;
                             color: var(--color6);
                         }
+                    }
+
+                    .mediaBtnsBox {
+                        padding: var(--ssize1) var(--ssize2);
+                        position: absolute;
+                        top: 0;
+                        right: 0;
                     }
                 }
             }

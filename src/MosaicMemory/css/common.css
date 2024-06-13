@@ -188,8 +188,8 @@ input:-moz-placeholder {
     justify-content: center;
     align-items: center;
     text-transform: capitalize;
-    cursor: pointer;
     box-shadow: var(--bxsd);
+    opacity: 0.5;
 
     &.white {
         background-color: var(--color);
@@ -197,9 +197,9 @@ input:-moz-placeholder {
         border-color: var(--colorBd);
     }
 
-    &.off {
-       opacity: 0.5; 
-       cursor: auto;
+    &.on {
+       opacity: 1; 
+       cursor: pointer;
     }
 }
 .small_btns {
@@ -237,6 +237,7 @@ input:-moz-placeholder {
         background-color: var(--color2);
         border-color: var(--color2);
         box-shadow: var(--bxsd);
+        cursor: pointer;
     }
 }
 .small_btns3 {
@@ -256,6 +257,7 @@ input:-moz-placeholder {
         background-color: var(--color9);
         border-color: var(--color9);
         box-shadow: var(--bxsd);
+        cursor: pointer;
     }
 }
 .bdBtns {
@@ -267,8 +269,16 @@ input:-moz-placeholder {
     padding: 0 var(--ssize2);
     border-radius: var(--bdrs);
     border: 1px solid var(--color7);
+    transition: var(--trst);
+    cursor: pointer;
     
     &.on {
+        color: var(--color);
+        background-color: var(--color2);
+        border-color: var(--color2);
+    }
+
+    &:hover {
         color: var(--color);
         background-color: var(--color2);
         border-color: var(--color2);
@@ -324,6 +334,9 @@ input:-moz-placeholder {
     height: 100%;
     object-fit: cover;
     border-radius: var(--bdrs);
+}
+.border {
+    border: 1px solid var(--baseRGB_b);
 }
 .wrapElement {
     padding: var(--ssize2);

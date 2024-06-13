@@ -34,7 +34,7 @@ export const setColor = (colorMode) => {
         document.documentElement.style.setProperty('--baseFg', '#fff');
         document.documentElement.style.setProperty('--baseFg1', 'rgba(255,255,255,0.1)');
         document.documentElement.style.setProperty('--baseRGB_b', 'rgba(255,255,255,0.35)');
-        document.documentElement.style.setProperty('--baseBoxShadow', '#000');
+        document.documentElement.style.setProperty('--baseBoxShadow', 'rgba(255,255,255,0.2)');
 
     } else { //light
         document.documentElement.style.setProperty('--baseBg', '#fff');
@@ -103,6 +103,33 @@ export const setAdjustHeight = (textarea, btn, minHeight, maxHeight) => {
     if (btn) {
         btn.current.style.display = hasValue ? 'block' : 'none';
     }
+};
+
+// 파일 체크
+const maxImgsize = 1024 * 1024 * 5;
+const maxVideoSize = 1024 * 1024 * 100;
+
+// 파일 유형 검사
+const isValidFileType = (file, allowedTypes) => {
+    return allowedTypes.some(type => file.type.startsWith(type));
+};
+
+// 파일 사이즈 검사
+const isValidFileSize = (file) => {
+    if (file.type.startsWith('image/')) {
+        return file.size < maxImgsize;
+    } else if (file.type.startsWith('video/')) {
+        return file.size < maxVideoSize;
+    };
+    return false;
+};
+
+// 파일 유형, 사이즈 검사
+export const handleFileCheck = (file, allowedTypes) => {
+    if (isValidFileType(file, allowedTypes) && isValidFileSize(file)) {
+        return true;
+    };
+    return false;
 };
 
 // 파일 리사이징
