@@ -265,6 +265,22 @@ const GatherSvg = ({name, color, fill, title}) => {
                 </svg>
             )
         },
+        {
+            name: 'phone',
+            svgIcon: () => (
+                <svg aria-label={title} x="0px" y="0px" viewBox="0 0 27 27" enableBackground="new 0 0 27 27">
+                    <polygon fill="none" stroke={colorModeCode} strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" points="
+                    -15.258,0.793 -27.965,9.763 -27.965,26.207 -18.963,26.207 -18.963,15.655 -11.553,15.655 -11.553,26.207 -2.551,26.207 -2.551,9.763 "/>
+                    <path fill="none" stroke={colorModeCode} strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" d="M22.069,26.096H4.931 c-0.236,0-0.428-0.193-0.428-0.428V1.332c0-0.236,0.193-0.428,0.428-0.428h17.138c0.236,0,0.428,0.193,0.428,0.428v24.335 C22.497,25.903,22.304,26.096,22.069,26.096z"/>
+                    
+                    <line fill="none" stroke={colorModeCode} strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" x1="4.503" y1="19.667" x2="22.478" y2="19.667"/>
+                
+                    <line fill="none" stroke={colorModeCode} strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" x1="4.503" y1="4.222" x2="22.478" y2="4.222"/>
+
+                    <path fill="none" stroke={colorModeCode} strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" d="M13.666,23.271 c0,0.222-0.18,0.402-0.402,0.402c-0.222,0-0.402-0.18-0.402-0.402c0-0.222,0.18-0.402,0.402-0.402 C13.486,22.869,13.666,23.049,13.666,23.271z"/>
+                </svg>
+            )
+        },
     ]
 
     //name에 해당하는 아이콘 찾기

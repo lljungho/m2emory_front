@@ -1,16 +1,10 @@
 const initial_state = {
-    signState: sessionStorage.getItem('sign') === 'true',
     dimmedState: false,
     modalContents: '',
 };
     
 export const setContStatusesReducer = (currentState = initial_state, action) => {
     switch (action.type) {
-        case 'SET_SIGN_STATE':
-            return { ...currentState,
-                signState: action.signState,
-            };
-
         case 'SET_DIMMED_STATE':
             return { ...currentState,
                 dimmedState: action.dimmedState,

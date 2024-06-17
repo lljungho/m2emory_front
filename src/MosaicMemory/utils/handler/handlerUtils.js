@@ -12,15 +12,6 @@ export const setDimmedClose = (dispatch) => {
     });
 }
 
-// sign form 변경
-export const setSignFrom = (signState, dispatch) => {
-    dispatch({
-        type: 'SET_SIGN_STATE',
-        signState: !signState
-    });
-    sessionStorage.setItem('sign', !signState);
-};
-
 // 컬러 모드 변경
 export const setColorMode = (dispatch, colorMode) => {
     dispatch({ type: 'SET_COLOR_MODE', colorMode: !colorMode });
@@ -43,6 +34,37 @@ export const setColor = (colorMode) => {
         document.documentElement.style.setProperty('--baseRGB_b', 'rgba(0,0,0,0.15)');
         document.documentElement.style.setProperty('--baseBoxShadow', 'rgba(0,0,0,0.2)');
     };
+};
+
+// 회원 정보 입력 정규식 검사
+export const setValidId = (value) => { // ID
+    const regex =  /^[a-z0-9_-]{5,16}$/; // 소문자알파벳, 숫자, 하이픈, 밑줄
+    const isValid = regex.test(value);
+    return isValid;
+};
+
+export const setValidPw = (value) => { // PW
+    const regex = /^(?=.*[a-zA-Z])(?=.*[@$!%*?&])[a-zA-Z\d@$!%*?&]{8,16}$/; // 8자 이상의 영문 대소문자 중 최소 1개, 특수문자 최소 1개, 숫자 선택 입력
+    const isValid = regex.test(value);
+    return isValid;
+};
+
+export const setValidEmail = (value) => { // E-MAIL
+    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z.]{2,5}$/; // 로컬파트와 도메인은 영문, 숫자, 정해진 특수문자/ TLD는 영문, "."를 포함할 수 있고 2~5자
+    const isValid = regex.test(value);
+    return isValid;
+};
+
+export const setValidTel = (ref) => { // TEL
+    let telValue = ref.current.value;
+    telValue = telValue.replace(/[^0-9]/g, "").replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(-{1,2})$/g, "");
+    ref.current.value = telValue;
+
+    if (telValue.length < 13 || !/^01[016789]/.test(telValue)) {
+        return false;
+    } else {
+        return true;
+    }
 };
 
 // 프로필 소개 텍스트 줄임

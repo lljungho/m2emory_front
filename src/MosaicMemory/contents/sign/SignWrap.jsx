@@ -1,23 +1,25 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
 
-import SignUpForm from './SignUpForm';
-import SignInForm from './SignInForm';
 import Footer2 from '../../include/footer/Footer2';
+import Logo from '../../include/logo/Logo';
+import SignInForm from './SignInForm';
+import SignUpForm from './SignUpForm';
+import ForgotIdForm from './ForgotIdForm';
+import ForgotPwFrom from './ForgotPwFrom';
 
 const SignWrap = () => {
-    const signState = useSelector(store => store.contStatus.signState);
-
     return (
         <div className="signWrap">
             <div className="signInnerBox">
-                <a href="/" className="logo"><h1>M<sup>2</sup>emory</h1></a>
+                <Logo />
                 <div className="signBox wrapElement">
-                    { signState ? 
-                        <SignUpForm signState={signState} />
-                    :
-                        <SignInForm signState={signState} />
-                    }
+                    <Routes>
+                        <Route path='/' element={<SignInForm />}></Route>
+                        <Route path='/signUp' element={<SignUpForm />}></Route>
+                        <Route path='/forgotId' element={<ForgotIdForm />}></Route>
+                        <Route path='/forgotPw' element={<ForgotPwFrom />}></Route>
+                    </Routes>
                 </div>
             </div>
 

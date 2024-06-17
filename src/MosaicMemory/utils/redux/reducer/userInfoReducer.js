@@ -14,7 +14,7 @@ export const setUserInfoReducer = (currentState = initial_state, action) => {
         case 'SET_USER_INFO':
             return { ...currentState,
                 ...action.payload,
-                user_pf_img: action.payload.user_pf_img ? `${serverUrl}/${action.payload.user_id}/${action.payload.user_pf_img}` : basicProfileImg,
+                user_pf_img: action.payload.user_pf_img ? `${ serverUrl }/${ action.payload.user_id }/${ action.payload.user_pf_img }` : basicProfileImg,
             }; 
         
         case 'SET_PROFILE_INFO':
@@ -25,7 +25,7 @@ export const setUserInfoReducer = (currentState = initial_state, action) => {
 
         case 'SET_PROFILE_IMG':
             return { ...currentState,
-                user_pf_img: action.user_pf_img ? `${serverUrl}/${currentState.user_id}/${action.user_pf_img}` : basicProfileImg,
+                user_pf_img: action.user_pf_img ? `${ serverUrl }/${ currentState.user_id }/${ action.user_pf_img }` : basicProfileImg,
             };
 
         case 'CLEAR_ALL_STATE':

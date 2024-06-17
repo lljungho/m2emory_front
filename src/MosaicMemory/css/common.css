@@ -111,7 +111,6 @@ button {
     display: inline-block;
     border: none;
     background: none;
-    cursor: pointer; 
 }
 input, textarea, select {
     width: 100%;
@@ -161,6 +160,7 @@ input:-moz-placeholder {
 }
 .regexCK {
     font-size: var(--fontSize);
+    padding: var(--ssize2) 0;
     word-break: break-all;
     color: var(--color5);
     display: block;
