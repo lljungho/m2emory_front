@@ -23,7 +23,7 @@
     --fontSize3: 0.9em;
     --fontSize4: 0.75em;
     --fontSize5: 0.85em;
-    --fontSize6: 1.1em;
+    --fontSize6: 1.25em;
     --fontSize7: 20px;
     --lineheight: 1;
     --lineheight1: 1.4;
@@ -322,6 +322,9 @@ input:-moz-placeholder {
             border-radius: var(--bdrs);
         }
     }
+}
+.bold {
+    font-weight: bold;
 }
 .cursorP {
     cursor: pointer;

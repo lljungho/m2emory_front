@@ -55,16 +55,10 @@ export const setValidEmail = (value) => { // E-MAIL
     return isValid;
 };
 
-export const setValidTel = (ref) => { // TEL
-    let telValue = ref.current.value;
-    telValue = telValue.replace(/[^0-9]/g, "").replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(-{1,2})$/g, "");
-    ref.current.value = telValue;
-
-    if (telValue.length < 13 || !/^01[016789]/.test(telValue)) {
-        return false;
-    } else {
-        return true;
-    }
+export const setValidTel = (value) => { // TEL
+    let telValue = value.replace(/[^0-9]/g, "").replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(-{1,2})$/g, "");
+    const isValid = telValue.length === 13 && /^01[016789]/.test(telValue);
+    return { isValid, telValue };
 };
 
 // 프로필 소개 텍스트 줄임
