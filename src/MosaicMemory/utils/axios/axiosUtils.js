@@ -6,7 +6,7 @@ export const setDummy = async () => {
 };
 
 // 에러 핸들러
-export const handleError = (error, onError) => {
+const handleError = (error, onError) => {
     if (error.response) {
         // 서버에서 받은 에러 메시지
         console.log('Server Error:', error.response.data);
@@ -25,20 +25,30 @@ export const handleError = (error, onError) => {
     }
 };
 
-// 회원 가입 요청
-export const signUpPostData = async (formData, dispatch, onError, t) => {
-    console.log('signUpPostData()');
+// formData check
+const handleFormDataCheck = (formData) => {
     console.log('FormData Entries:');
     for (const [key, value] of formData.entries()) {
         console.log(`${key}: ${value}`);
     };
+};
+
+// headers 설정
+const jsonHeaders = {
+    'Content-Type' : 'application/json',
+};
+const multipartHeaders = {
+    'Content-Type' : 'multipart/form-data',
+};
+
+
+// 회원 가입 요청
+export const signUpPostData = async (formData, dispatch, navigate, onError, t) => {
+    console.log('signUpPostData()');
+    handleFormDataCheck(formData);
 
     try {
-        const response = await axios.post('/member/signUp', formData, {
-            headers: {
-                'Content-Type' : 'application/json'
-            }
-        });
+        const response = await axios.post('/member/signUp', formData, { headers: jsonHeaders });
 
         console.log('[Axios] signUpPostData() success :', response.data, response.status);
         dispatch({
@@ -47,6 +57,7 @@ export const signUpPostData = async (formData, dispatch, onError, t) => {
         });
         sessionStorage.removeItem('sign');
         alert(t('joinSuccess'));
+        navigate('/');
 
     } catch(error) {
         handleError(error, onError);
@@ -56,17 +67,10 @@ export const signUpPostData = async (formData, dispatch, onError, t) => {
 // 로그인 요청
 export const signInPostData = async (formData, dispatch, navigate, onError, t) => {
     console.log('signInPostData()');
-    console.log('FormData Entries:');
-    for (const [key, value] of formData.entries()) {
-        console.log(`${key}: ${value}`);
-    };
+    handleFormDataCheck(formData);
 
     try {
-        const response = await axios.post('/member/signIn', formData, {
-            headers: {
-                'Content-Type' : 'application/json'
-            }
-        });
+        const response = await axios.post('/member/signIn', formData, { headers: jsonHeaders });
 
         console.log('[Axios] signInPostData() success :', response.data, response.status);
         alert('[ ' + response.data.userInfo.user_id + ' ] ' + t('welcome'));
@@ -86,11 +90,7 @@ export const signInPostData = async (formData, dispatch, navigate, onError, t) =
         navigate('/');
 
     } catch(error) {
-        if (error.response.status === 400) {
-            handleError(error, onError);
-        } else {
-            handleError(error);
-        }
+        handleError(error, onError);
     }
 };
 
@@ -110,6 +110,22 @@ export const handleLogout = (confirmTxt, dispatch, navigate) => {
         }).catch(error => {
             handleError(error);
         });
+    }
+};
+
+// 아이디 찾기 요청
+export const forgotIdPostData = async (formData, onError) => {
+    console.log('forgotIdPostData()');
+    handleFormDataCheck(formData);
+
+    try {
+        const response = await axios.post('/member/forgotId', formData, { headers: jsonHeaders });
+
+        console.log('[Axios] forgotIdPostData() success :', response.data, response.status);
+        return response.data.user;
+
+    } catch(error) {
+        handleError(error, onError);
     }
 };
 
@@ -144,17 +160,9 @@ export const userGetData = async (setLoading, dispatch) => {
 // 프로필 내용 수정 요청
 export const modifyProfilePutData = async (formData, setCompareCheck, dispatch, onError, t) => {
     console.log('modifyProfilePutData()');
-    console.log('FormData Entries:');
-    for (const [key, value] of formData.entries()) {
-        console.log(`${key}: ${value}`);
-    };
-
+    handleFormDataCheck(formData);
     try {
-        const response = await axios.put('/member/modifyProfile', formData, {
-            headers: {
-                'Content-Type' : 'application/json'
-            }
-        });
+        const response = await axios.put('/member/modifyProfile', formData, { headers: jsonHeaders });
 
         console.log('[Axios] modifyProfilePutData() success :', response.data, response.status);
         setCompareCheck(false);
@@ -175,12 +183,10 @@ export const modifyProfilePutData = async (formData, setCompareCheck, dispatch, 
 // 프로필 이미지 업로드 요청
 export const modifyProfileImgPutData = async (formData, dispatch) => {
     console.log("modifyProfileImgPutData()");
+    handleFormDataCheck(formData);
+
     try {
-        const response = await axios.put('/upload/modifyProfileImg', formData, {
-            headers: {
-                'Content-Type' : 'multipart/form-data'
-            }
-        });
+        const response = await axios.put('/upload/modifyProfileImg', formData, { headers: multipartHeaders });
 
         console.log('[Axios] modifyProfileImgPutData() success :', response.data, response.status);
 

@@ -1,27 +1,22 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { signUpPostData } from '../../utils/axios/axiosUtils';
 import { useDispatch } from 'react-redux';
-import GatherSvg from '../../utils/svg/GatherSvg';
-import { Link } from 'react-router-dom';
-import { setValidEmail, setValidId, setValidPw, setValidTel } from '../../utils/handler/handlerUtils';
+import { Link, useNavigate } from 'react-router-dom';
+
+import SignInputBox from '../../utils/input/sign/SignInputBox';
+import ContTitleBox from '../../include/contents/ContTitleBox';
 
 const SignUpForm = () => {
     const { t } = useTranslation();
     const dispatch =useDispatch();
+    const navigate  = useNavigate();
 
-    // signup input
-    const id = useRef(null);
-    const pw = useRef(null);
-    const tel = useRef(null);
-    const email = useRef(null);
-
-    // password view
-    const [pwTyle, setPwType] = useState(false);
-
-    const pwViewToggle = () => {
-        setPwType(pwTyle => !pwTyle);
-    };
+    // input
+    const [id, setId] = useState('');
+    const [pw, setPw] = useState('');
+    const [email, setEmail] = useState('');
+    const [tel, setTel] = useState('');
 
     // error regex state
     const [idErr, setIdErr] = useState('');
@@ -30,25 +25,8 @@ const SignUpForm = () => {
     const [emailErr, setEmailErr] = useState('');
     const [errorsCheck, setErrorsCheck] = useState(false);
 
-    // input validation
-    const isValidId = () => {
-        setIdErr(!setValidId(id.current.value));
-    };
-
-    const isValidPw = () => {
-        setPwErr(!setValidPw(pw.current.value));
-    };
-
-    const isValidEmail = () => {
-        setEmailErr(!setValidEmail(email.current.value));
-    };
-
-    const isValidTel = () => {
-        setTelErr(!setValidTel(tel));
-    };
-
+    // 모든 에러 체크
     useEffect(() => {
-        // 모든 에러 체크
         if (idErr !== "" && pwErr !== "" && telErr !== "" && emailErr !== "") {
             const allErrosCheck = !idErr && !pwErr && !telErr && !emailErr;
             setErrorsCheck(allErrosCheck);
@@ -58,19 +36,20 @@ const SignUpForm = () => {
         }
     }, [idErr, pwErr, telErr, emailErr]);
 
-    // signup post form
+    // 회원가입 요청
     const postData = (e) => {
         e.preventDefault(); // submit 기본 이벤트 발생 막기
 
         let formData = new FormData();
-        formData.append('id', id.current.value);
-        formData.append('pw', pw.current.value);
-        formData.append('tel', tel.current.value.replace(/-/g, ''));
-        formData.append('email', email.current.value);
+        formData.append('id', id);
+        formData.append('pw', pw);
+        formData.append('tel', tel);
+        formData.append('email', email);
 
         signUpPostData(
             formData, 
             dispatch, 
+            navigate,
             handleErrorCallback,
             t,
         );
@@ -80,55 +59,60 @@ const SignUpForm = () => {
     const handleErrorCallback = () => {
         console.log('[Axios] signUpPostData() communication error');
         alert(t('alreadyID'));
-        id.current.value = '';
-        pw.current.value = '';
+        setId('');
+        setPw('');
         setIdErr('');
         setPwErr('');
-        id.current.focus();
     };
 
     return (
         <div className="signInfoBox signUpBox">
             <form onSubmit={postData}>
                 <div className="signInputWrap">
+                    <ContTitleBox title={t('signUp')} />
                     <div className="signInputBox">
-                        <label htmlFor="id" className="signInfoInput innerElement">
-                            <div className={`signInputInfoBox ${!idErr ? '' : 'regexCK_box'}`}>
-                                <GatherSvg name='profile' color={!idErr ? null : '#ff3f3f'} title={t('id')} />
-                                <input type="text" name="id" id="id" ref={id} maxLength="16" autoComplete="id" className="signInput" onInput={isValidId} 
-                                placeholder={t('id')} />
-                            </div>
-                            {idErr && <div className='regexCK'>{t('formIdRegEx')}</div>}
-                        </label>
+                        <SignInputBox 
+                            type='text'
+                            id='id'
+                            name='id'
+                            maxLength='16'
+                            err={idErr}
+                            setErr={setIdErr}
+                            setState={setId}
+                            value={id}
+                        />
 
-                        <label htmlFor="pw" className="signInfoInput innerElement">
-                            <div className={`signInputInfoBox ${!pwErr ? '' : 'regexCK_box'}`}>
-                                <GatherSvg name='rock' color={!pwErr ? null : '#ff3f3f'} title={t('pw')} />
-                                <input type={pwTyle ? "text" : "password"} name="pw" id="pw" ref={pw} maxLength="16" autoComplete='new-password' className="signInput" onInput={isValidPw} placeholder={t('pw')} />
-                                <div className="funcBtnsBox">
-                                    <div className="funcBtn on" onClick={pwViewToggle}>
-                                        <GatherSvg name={pwTyle ? 'openEye' : 'closeEye'} color="var(--color6)" title={t('pwView')} />
-                                    </div>
-                                </div>
-                            </div>
-                            {pwErr && <div className='regexCK'>{t('formPwRegEx')}</div>}
-                        </label>                        
+                        <SignInputBox 
+                            type='password'
+                            id='pw'
+                            name='pw'
+                            maxLength='16'
+                            err={pwErr}
+                            setErr={setPwErr}
+                            setState={setPw}
+                            value={pw}
+                        />
 
-                        <label htmlFor="email" className="signInfoInput innerElement">
-                            <div className={`signInputInfoBox ${!emailErr ? '' : 'regexCK_box'}`}>
-                                <GatherSvg name='message' color={!emailErr ? 'var(--baseRGB_b)' : '#ff3f3f'} title={t('email')} />
-                                <input type="text" name="email" id="email" ref={email} className="signInput" onInput={isValidEmail} placeholder={t('email')} />
-                            </div>
-                            {emailErr && <div className='regexCK'>{t('formEmailRegEx')}</div>}
-                        </label>
+                        <SignInputBox 
+                            type='text'
+                            id='email'
+                            name='email'
+                            err={emailErr}
+                            setErr={setEmailErr}
+                            setState={setEmail}
+                            value={email}
+                        />
 
-                        <label htmlFor="tel" className="signInfoInput innerElement">
-                            <div className={`signInputInfoBox ${!telErr ? '' : 'regexCK_box'}`}>
-                                <GatherSvg name='phone' color={!telErr ? 'var(--baseRGB_b)' : '#ff3f3f'} title={t('tel')} />
-                                <input type="text" name="tel" id="tel" ref={tel} maxLength="13" autoComplete="off" className="signInput" onInput={isValidTel} placeholder={t('tel')} />
-                            </div>
-                            {telErr && <div className='regexCK'>{t('formTelRegEx')}</div>}
-                        </label>
+                        <SignInputBox 
+                            type='text'
+                            id='tel'
+                            name='tel'
+                            maxLength="13"
+                            err={telErr}
+                            setErr={setTelErr}
+                            setState={setTel}
+                            value={tel}
+                        />
                     </div>
 
                     <div className="signInputBox">

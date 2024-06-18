@@ -102,12 +102,39 @@
                             }
                         }
                     }
+                    
+                    .resultTxt {
+                        font-size: var(--fontSize5);
+                    }
+
+                    .resultBox {
+                        display: flex;
+                        flex-direction: column;
+                        gap: var(--size);
+
+                        .resultInfoBox {
+                            font-size: var(--fontSize);
+                            padding: 0 var(--size);
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            gap: var(--size);
+
+                            .bold {
+                                font-size: var(--fontSize6);
+                            }
+                        }
+                    }
         
                     .sign_btns_box {
                         width: 100%;
                         display: flex;
                         justify-content: space-around;
                         text-transform: capitalize;
+
+                        &.btnsChange {
+                            gap: var(--size);
+                        }
                     }
                 }
         
