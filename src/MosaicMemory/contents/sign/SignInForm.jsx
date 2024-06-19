@@ -1,47 +1,29 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import GatherSvg from '../../utils/svg/GatherSvg';
 import { useDispatch } from 'react-redux';
 import { signInPostData } from '../../utils/axios/axiosUtils';
+
+import SignInputBox from '../../utils/form/SignInputBox';
+import SubmitBtnsBox from '../../utils/form/SubmitBtnsBox';
 
 const SignInForm = () => {
     const { t } = useTranslation();
     const navigate  = useNavigate();
     const dispatch = useDispatch();
 
-    // signin input
-    const userId = useRef(null);
-    const userPassword = useRef(null);
-
-    // password view
-    const [userPasswordType, setUserPasswordType] = useState(false);
-
-    const pwViewToggle = () => {
-        setUserPasswordType(!userPasswordType);
-    };
+    // input
+    const [userId, setUserId] = useState('');
+    const [userPassword, setUserPassword] = useState('');
 
     // error regex state
     const [userIdErr, setUserIdErr] = useState('');
     const [userPasswordErr, setUserPasswordErr] = useState('');
     const [errorsCheck, setErrorsCheck] = useState(false);
     const [signErrorCheck, setSignErrorCheck] = useState(false);
-
-    // input validation
-    const isValidId = () => {
-        const isValid = userId.current.value.length > 2;
-        setUserIdErr(!isValid);
-        return isValid;
-    };
-
-    const isValidPw = () => {
-        const isValid = userPassword.current.value.length > 4;
-        setUserPasswordErr(!isValid);
-        return isValid;
-    };
-
+    
+    // 모든 에러 체크
     useEffect(() => {
-        // 모든 에러 체크
         if (userIdErr !== "" && userPasswordErr !== "") {
             const allErrosCheck = !userIdErr && !userPasswordErr;
             setErrorsCheck(allErrosCheck);
@@ -51,13 +33,13 @@ const SignInForm = () => {
         }
     }, [userIdErr, userPasswordErr]);
 
-    // signin post form
+    // 로그인 요청
     const postData = (e) => {
         e.preventDefault(); // submit으로 기본 이벤트 발생 막기
 
         let formData = new FormData();
-        formData.append('userId', userId.current.value);
-        formData.append('userPassword', userPassword.current.value);
+        formData.append('userId', userId);
+        formData.append('userPassword', userPassword);
 
         signInPostData(
             formData, 
@@ -77,35 +59,35 @@ const SignInForm = () => {
             <form onSubmit={postData}>
                 <div className="signInputWrap">
                     <div className="signInputBox">
-                        <label htmlFor="userId" className="signInfoInput innerElement">
-                            <div className='signInputInfoBox'>
-                                <GatherSvg name='profile' title={t('id')} />
-                                <input type="text" name="userId" id="userId" ref={userId} autoComplete="id" className="signInput" onInput={isValidId} placeholder={t('id')} />
-                            </div>
-                        </label>
-                        <label htmlFor="userPassword" className="signInfoInput innerElement">
-                            <div className='signInputInfoBox'>
-                                <GatherSvg name='rock' title={t('pw')} />
-                                <input type={userPasswordType ? "text" : "password"} name="userPassword" id="userPassword" ref={userPassword} autoComplete="new-password" onInput={isValidPw} className="signInput" placeholder={t('pw')} />
-                                <div className="funcBtnsBox">
-                                    <div className="funcBtn on" onClick={pwViewToggle}>
-                                        <GatherSvg name={userPasswordType ? 'openEye' : 'closeEye'} color="var(--color6)" title={t('pwView')} />
-                                    </div>
-                                </div>
-                            </div>
-                        </label>
+                        <SignInputBox 
+                            type='text'
+                            id='userId'
+                            name='userId'
+                            placeholder={t('id')}
+                            setErr={setUserIdErr}
+                            setState={setUserId}
+                            value={userId}
+                        />
+
+                        <SignInputBox 
+                            type='password'
+                            id='userPassword'
+                            name='userPassword'
+                            placeholder={t('pw')}
+                            setErr={setUserPasswordErr}
+                            setState={setUserPassword}
+                            value={userPassword}
+                        />
                     </div>
 
                     {signErrorCheck && <div className='regexCK'>{t('joinError')}</div>}
 
                     <div className="signInputBox">
-                        <div className="btns_box">
-                            { errorsCheck ?
-                                <button type="submit" className='btns on'>{t('login')}</button>
-                            :
-                                <button type='button' className='btns'>{t('login')}</button>
-                            }
-                        </div>
+                        <SubmitBtnsBox 
+                            errorsCheck={errorsCheck}
+                            text={t('login')}
+                        />
+                        
                         <div className="sign_btns_box">
                             <Link to='/forgotId' className="small_TxtBtns" >{t('findId')}</Link>
                             <Link to='/forgotPw' className="small_TxtBtns" >{t('forgotPw')}</Link>

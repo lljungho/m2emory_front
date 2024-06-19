@@ -55,7 +55,6 @@ export const signUpPostData = async (formData, dispatch, navigate, onError, t) =
             type: 'SET_SIGN_STATE',
             signState: ''
         });
-        sessionStorage.removeItem('sign');
         alert(t('joinSuccess'));
         navigate('/');
 
@@ -95,8 +94,8 @@ export const signInPostData = async (formData, dispatch, navigate, onError, t) =
 };
 
 // 로그아웃 요청
-export const handleLogout = (confirmTxt, dispatch, navigate) => {
-    const logoutConfirm = window.confirm(confirmTxt);
+export const handleLogout = (dispatch, navigate, t) => {
+    const logoutConfirm = window.confirm(t('logoutConfirm'));
     if (logoutConfirm) {
         axios.get('/member/signOut')
         .then(response => {
@@ -123,6 +122,23 @@ export const forgotIdPostData = async (formData, onError) => {
 
         console.log('[Axios] forgotIdPostData() success :', response.data, response.status);
         return response.data.user;
+
+    } catch(error) {
+        handleError(error, onError);
+    }
+};
+
+// 비밀번호 찾기 요청
+export const forgotPwPostData = async (formData, navigate, onError, t) => {
+    console.log('forgotIdPostData()');
+    handleFormDataCheck(formData);
+
+    try {
+        const response = await axios.post('/member/forgotPw', formData, { headers: jsonHeaders });
+
+        console.log('[Axios] forgotPwPostData() success :', response.data, response.status);
+        alert(t('forgotPwEmailSend'));
+        navigate('/');
 
     } catch(error) {
         handleError(error, onError);
