@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { setValidEmail, setValidId, setValidPw, setValidTel } from '../../handler/handlerUtils';
+import { setValidEmail, setValidId, setValidPw, setValidTel } from '../handler/handlerUtils';
 
-import GatherSvg from '../../svg/GatherSvg'
+import GatherSvg from '../svg/GatherSvg'
 
-const IdInputBox = ({ type, id, name, maxLength, err, setErr, setState, value }) => {
+const IdInputBox = ({ type, id, name, maxLength, placeholder, err, setErr, setState, value }) => {
     const { t } = useTranslation();
 
     // password view
@@ -43,26 +43,60 @@ const IdInputBox = ({ type, id, name, maxLength, err, setErr, setState, value })
     const isValidUserId = (e) => { // 로그인 아이디 유효성 검사
         const isValid = e.target.value.length > 2;
         setErr(!isValid);
-        setState(isValid);
+        setState(e.target.value);
+    };
+
+    const isValidUserPw = (e) => { // 로그인 비밀번호 유효성 검사
+        const isValid = e.target.value.length > 4;
+        setErr(!isValid);
+        setState(e.target.value);
     };
 
     return (
         <label htmlFor={id} className="signInfoInput innerElement">
             <div className={`signInputInfoBox ${!err ? '' : 'regexCK_box'}`}>
                 <GatherSvg 
-                    name={name === 'id' ? 'profile' : name === 'pw' ? 'rock' : name === 'email' ? 'message' : 'phone'} 
+                    name={
+                        name === 'id' || name === 'userId' 
+                        ? 'profile' 
+                        : name === 'pw' || name === 'userPassword' 
+                        ? 'rock' 
+                        : name === 'email' 
+                        ? 'message' 
+                        : 'phone'
+                    } 
                     color={!err ? 'var(--baseRGB_b)' : '#ff3f3f'}
-                    title={t(name)} 
+                    title={name === 'userId' ? placeholder : t(name)} 
                 />
                 <input 
                     type={type === 'password' && pwType ? 'text' : type}
                     name={name}
                     id={id} 
                     maxLength={maxLength}
-                    autoComplete={name === 'id' ? 'id' : name === 'pw' ? 'new-password' : name === 'email' ? 'email' : 'off'} 
+                    autoComplete={
+                        name === 'id' || name === 'userId' 
+                        ? 'id' 
+                        : name === 'pw' || name === 'userPassword'
+                        ? 'new-password' 
+                        : name === 'email' 
+                        ? 'email' 
+                        : 'off'
+                    } 
                     className="signInput" 
-                    onInput={name === 'id' ? isValidId : name === 'pw' ? isValidPw : name === 'email' ? isValidEmail : isValidTel} 
-                    placeholder={t(id)} 
+                    onInput={
+                        name === 'id' 
+                        ? isValidId 
+                        : name === 'userId' 
+                        ? isValidUserId 
+                        : name === 'pw' 
+                        ? isValidPw 
+                        : name === 'userPassword'
+                        ? isValidUserPw
+                        : name === 'email' 
+                        ? isValidEmail 
+                        : isValidTel
+                    } 
+                    placeholder={placeholder} 
                     value={value}
                 />
 

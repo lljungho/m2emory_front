@@ -4,8 +4,9 @@ import { signUpPostData } from '../../utils/axios/axiosUtils';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
-import SignInputBox from '../../utils/input/sign/SignInputBox';
+import SignInputBox from '../../utils/form/SignInputBox';
 import ContTitleBox from '../../include/contents/ContTitleBox';
+import SubmitBtnsBox from '../../utils/form/SubmitBtnsBox';
 
 const SignUpForm = () => {
     const { t } = useTranslation();
@@ -76,6 +77,7 @@ const SignUpForm = () => {
                             id='id'
                             name='id'
                             maxLength='16'
+                            placeholder={t('id')}
                             err={idErr}
                             setErr={setIdErr}
                             setState={setId}
@@ -87,6 +89,7 @@ const SignUpForm = () => {
                             id='pw'
                             name='pw'
                             maxLength='16'
+                            placeholder={t('pw')}
                             err={pwErr}
                             setErr={setPwErr}
                             setState={setPw}
@@ -97,6 +100,7 @@ const SignUpForm = () => {
                             type='text'
                             id='email'
                             name='email'
+                            placeholder={t('email')}
                             err={emailErr}
                             setErr={setEmailErr}
                             setState={setEmail}
@@ -108,6 +112,7 @@ const SignUpForm = () => {
                             id='tel'
                             name='tel'
                             maxLength="13"
+                            placeholder={t('tel')}
                             err={telErr}
                             setErr={setTelErr}
                             setState={setTel}
@@ -116,13 +121,10 @@ const SignUpForm = () => {
                     </div>
 
                     <div className="signInputBox">
-                        <div className="btns_box">
-                            { errorsCheck ?
-                                <button type="submit" className='btns on'>{t('signUp')}</button>
-                            :
-                                <button type='button' className='btns'>{t('signUp')}</button>
-                            }
-                        </div>
+                        <SubmitBtnsBox 
+                            errorsCheck={errorsCheck}
+                            text={t('signUp')}
+                        />
                     </div>
                 </div>
             </form> 

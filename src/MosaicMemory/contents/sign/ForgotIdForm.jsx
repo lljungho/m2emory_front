@@ -1,35 +1,31 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next';
-import GatherSvg from '../../utils/svg/GatherSvg'
-import { setValidEmail, setValidTel } from '../../utils/handler/handlerUtils';
 import { forgotIdPostData } from '../../utils/axios/axiosUtils';
 import { Link } from 'react-router-dom';
 import { useFormatDate, useMaskedString } from '../../utils/hook/customHookUtils';
 
+import SignInputBox from '../../utils/form/SignInputBox';
 import ContTitleBox from '../../include/contents/ContTitleBox';
+import SubmitBtnsBox from '../../utils/form/SubmitBtnsBox';
 
 const ForgotIdForm = () => {
     const { t } = useTranslation();
-    const tel = useRef(null);
-    const email = useRef(null);
-    const [telErr, setTelErr] = useState('');
-    const [emailErr, setEmailErr] = useState('');
-    const [errorsCheck, setErrorsCheck] = useState(false);
-    const [signErrorCheck, setSignErrorCheck] = useState(false);
     const [userRows, setUserRows] = useState('');
     const { maskedLast } = useMaskedString();
     const { yyyymmdd } = useFormatDate();
 
-    const isValidEmail = () => {
-        setEmailErr(!setValidEmail(email.current.value));
-    };
+    // input
+    const [email, setEmail] = useState('');
+    const [tel, setTel] = useState('');
 
-    const isValidTel = () => {
-        setTelErr(!setValidTel(tel));
-    };
+    // error regex state
+    const [telErr, setTelErr] = useState('');
+    const [emailErr, setEmailErr] = useState('');
+    const [errorsCheck, setErrorsCheck] = useState(false);
+    const [signErrorCheck, setSignErrorCheck] = useState(false);
 
+    // 모든 에러 체크
     useEffect(() => {
-        // 모든 에러 체크
         if (telErr !== "" && emailErr !== "") {
             const allErrosCheck = !telErr && !emailErr;
             setErrorsCheck(allErrosCheck);
@@ -44,10 +40,13 @@ const ForgotIdForm = () => {
         e.preventDefault(); // submit으로 기본 이벤트 발생 막기
 
         let formData = new FormData();
-        formData.append('email', email.current.value);
-        formData.append('tel', tel.current.value);
+        formData.append('email', email);
+        formData.append('tel', tel);
 
-        const userData = await forgotIdPostData(formData, handleErrorCallback);
+        const userData = await forgotIdPostData(
+            formData, 
+            handleErrorCallback,
+        );
         if (userData) {
             console.log('userData :', userData );
             setUserRows(userData);
@@ -81,24 +80,31 @@ const ForgotIdForm = () => {
                     :
                     <>
                     <div className="signInputBox">
-                        <label htmlFor="email" className="signInfoInput innerElement">
-                            <div className={`signInputInfoBox ${!emailErr ? '' : 'regexCK_box'}`}>
-                                <GatherSvg name='message' color={!emailErr ? 'var(--baseRGB_b)' : '#ff3f3f'} title={t('email')} />
-                                <input type="text" name="email" id="email" ref={email} className="signInput" onInput={isValidEmail} placeholder={t('email')} />
-                            </div>
-                            {emailErr && <div className='regexCK'>{t('formEmailRegEx')}</div>}
-                        </label>
+                        <SignInputBox 
+                            type='text'
+                            id='email'
+                            name='email'
+                            placeholder={t('email')}
+                            err={emailErr}
+                            setErr={setEmailErr}
+                            setState={setEmail}
+                            value={email}
+                        />
 
-                        <label htmlFor="tel" className="signInfoInput innerElement">
-                            <div className={`signInputInfoBox ${!telErr ? '' : 'regexCK_box'}`}>
-                                <GatherSvg name='phone' color={!telErr ? 'var(--baseRGB_b)' : '#ff3f3f'} title={t('tel')} />
-                                <input type="text" name="tel" id="tel" ref={tel} maxLength="13" autoComplete="off" className="signInput" onInput={isValidTel} placeholder={t('tel')} />
-                            </div>
-                            {telErr && <div className='regexCK'>{t('formTelRegEx')}</div>}
-                        </label>
+                        <SignInputBox 
+                            type='text'
+                            id='tel'
+                            name='tel'
+                            maxLength="13"
+                            placeholder={t('tel')}
+                            err={telErr}
+                            setErr={setTelErr}
+                            setState={setTel}
+                            value={tel}
+                        />
                     </div>
 
-                    {signErrorCheck && <div className='regexCK'>{t('joinError')}</div>}
+                    {signErrorCheck && <div className='regexCK'>{t('findIdErr')}</div>}
                     </>
                     }
 
@@ -106,13 +112,10 @@ const ForgotIdForm = () => {
                         { userRows ? 
                         null
                         :
-                        <div className="btns_box">
-                            { errorsCheck ?
-                                <button type="submit" className='btns on'>{t('findId')}</button>
-                            :
-                                <button type='button' className='btns'>{t('findId')}</button>
-                            }
-                        </div>
+                        <SubmitBtnsBox 
+                            errorsCheck={errorsCheck}
+                            text={t('findId')}
+                        />
                         }
 
                         <div className={`sign_btns_box ${userRows ? 'btnsChange' : ''}`}>

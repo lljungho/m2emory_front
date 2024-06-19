@@ -29,7 +29,7 @@ const DockBar = () => {
 
     // 로그아웃
     const logout = () => {
-        handleLogout(t('logoutConfirm'), dispatch, navigate);
+        handleLogout(dispatch, navigate, t);
     };
 
     // 메뉴버튼 클릭
