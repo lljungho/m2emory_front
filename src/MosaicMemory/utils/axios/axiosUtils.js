@@ -1,4 +1,5 @@
 import axios from "./axiosSet";
+import basicAxios from "axios";
 
 // 더미 계정 생성
 export const setDummy = async () => {
@@ -26,8 +27,8 @@ const handleError = (error, onError) => {
 };
 
 // formData check
-const handleFormDataCheck = (formData) => {
-    console.log('FormData Entries:');
+const handleFormDataCheck = (formData, location) => {
+    console.log(`${location} FormData Entries :`);
     for (const [key, value] of formData.entries()) {
         console.log(`${key}: ${value}`);
     };
@@ -44,12 +45,10 @@ const multipartHeaders = {
 
 // 회원 가입 요청
 export const signUpPostData = async (formData, dispatch, navigate, onError, t) => {
-    console.log('signUpPostData()');
-    handleFormDataCheck(formData);
+    handleFormDataCheck(formData, 'signUpPostData()');
 
     try {
         const response = await axios.post('/member/signUp', formData, { headers: jsonHeaders });
-
         console.log('[Axios] signUpPostData() success :', response.data, response.status);
         dispatch({
             type: 'SET_SIGN_STATE',
@@ -65,12 +64,10 @@ export const signUpPostData = async (formData, dispatch, navigate, onError, t) =
 
 // 로그인 요청
 export const signInPostData = async (formData, dispatch, navigate, onError, t) => {
-    console.log('signInPostData()');
-    handleFormDataCheck(formData);
+    handleFormDataCheck(formData, 'signInPostData()');
 
     try {
         const response = await axios.post('/member/signIn', formData, { headers: jsonHeaders });
-
         console.log('[Axios] signInPostData() success :', response.data, response.status);
         alert('[ ' + response.data.userInfo.user_id + ' ] ' + t('welcome'));
 
@@ -100,7 +97,7 @@ export const handleLogout = (dispatch, navigate, t) => {
         axios.get('/member/signOut')
         .then(response => {
             console.log(response.data);
-            sessionStorage.removeItem('sessionAuth');
+            sessionStorage.clear();
             dispatch({
                 type: 'CLEAR_ALL_STATE',
             });
@@ -114,12 +111,10 @@ export const handleLogout = (dispatch, navigate, t) => {
 
 // 아이디 찾기 요청
 export const forgotIdPostData = async (formData, onError) => {
-    console.log('forgotIdPostData()');
-    handleFormDataCheck(formData);
+    handleFormDataCheck(formData, 'forgotIdPostData()');
 
     try {
         const response = await axios.post('/member/forgotId', formData, { headers: jsonHeaders });
-
         console.log('[Axios] forgotIdPostData() success :', response.data, response.status);
         return response.data.user;
 
@@ -130,12 +125,10 @@ export const forgotIdPostData = async (formData, onError) => {
 
 // 비밀번호 찾기 요청
 export const forgotPwPostData = async (formData, navigate, onError, t) => {
-    console.log('forgotIdPostData()');
-    handleFormDataCheck(formData);
+    handleFormDataCheck(formData, 'forgotIdPostData()');
 
     try {
         const response = await axios.post('/member/forgotPw', formData, { headers: jsonHeaders });
-
         console.log('[Axios] forgotPwPostData() success :', response.data, response.status);
         alert(t('forgotPwEmailSend'));
         navigate('/');
@@ -144,6 +137,53 @@ export const forgotPwPostData = async (formData, navigate, onError, t) => {
         handleError(error, onError);
     }
 };
+
+// 비밀번호로 로그인 회원 확인 요청
+export const passwordCheckPostData = async (formData, dispatch, onError) => {
+    handleFormDataCheck(formData, 'passwordCheckPostData()');
+
+    try {
+        const response = await axios.post('/member/passwordCheck', formData, { headers: jsonHeaders });
+        console.log('[Axios] passwordCheckPostData() success :', response.data, response.status);
+        sessionStorage.setItem('accountCheck', true);
+        dispatch({
+            type: 'ACCOUNT_CHECK',
+            accountCheck: true
+        });
+
+    } catch(error) {
+        sessionStorage.removeItem('accountCheck');
+        dispatch({
+            type: 'ACCOUNT_CHECK',
+            accountCheck: false
+        });
+        handleError(error, onError);
+    }
+};
+
+ // 회원 확인되었는지 accountToken으로 확인 요청
+ export const accountTokenGetData = async (state, dispatch) => {
+    if (state) {
+        console.log('accountTokenGetData()');
+        try {
+            const response = await basicAxios.get(`${process.env.REACT_APP_SERVER_URL}/member/accountCheck`, {withCredentials: true});
+            console.log('[Axios] accountTokenGetData() success :', response.data, response.status);
+            sessionStorage.setItem('accountCheck', true);
+            dispatch({
+                type: 'ACCOUNT_CHECK',
+                accountCheck: true
+            });
+    
+        } catch(error) {
+            sessionStorage.removeItem('accountCheck');
+            dispatch({
+                type: 'ACCOUNT_CHECK',
+                accountCheck: false
+            });
+            handleError(error);
+        }
+    }
+ };
 
 // 유저 정보 요청
 export const userGetData = async (setLoading, dispatch) => {
@@ -175,11 +215,9 @@ export const userGetData = async (setLoading, dispatch) => {
 
 // 프로필 내용 수정 요청
 export const modifyProfilePutData = async (formData, setCompareCheck, dispatch, onError, t) => {
-    console.log('modifyProfilePutData()');
-    handleFormDataCheck(formData);
+    handleFormDataCheck(formData, 'modifyProfilePutData()');
     try {
         const response = await axios.put('/member/modifyProfile', formData, { headers: jsonHeaders });
-
         console.log('[Axios] modifyProfilePutData() success :', response.data, response.status);
         setCompareCheck(false);
         alert(t('profileUpdated'));
@@ -198,12 +236,10 @@ export const modifyProfilePutData = async (formData, setCompareCheck, dispatch, 
 
 // 프로필 이미지 업로드 요청
 export const modifyProfileImgPutData = async (formData, dispatch) => {
-    console.log("modifyProfileImgPutData()");
-    handleFormDataCheck(formData);
+    handleFormDataCheck(formData, 'modifyProfileImgPutData()');
 
     try {
         const response = await axios.put('/upload/modifyProfileImg', formData, { headers: multipartHeaders });
-
         console.log('[Axios] modifyProfileImgPutData() success :', response.data, response.status);
 
         // 팝업 닫기 및 리듀서 프로필 이미지 수정
@@ -231,7 +267,6 @@ export const deleteProfileImg = async (dispatch) => {
 
     try {
         await axios.delete('/upload/deleteProfileImg');
-
         console.log('[Axios] deleteProfileImg() succsess');
 
         // 팝업 닫기 및 리듀서 프로필 이미지 수정

@@ -131,7 +131,7 @@ const SignUpForm = () => {
 
             <div className="signBottomBox">
                 <div className="signBottomInfoBox">
-                    <p className="signBottomInfo">{t('account')}</p>
+                    <p className="signBottomInfo">{t('accountOk')}</p>
                     <Link to='/' className='txtBtns' >{t('login')}</Link>
                 </div>
             </div>
