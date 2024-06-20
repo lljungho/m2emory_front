@@ -55,87 +55,6 @@
                     display: flex;
                     flex-direction: column;
                     gap: var(--size4);
-        
-                    .signInputBox {
-                        display: flex;
-                        flex-direction: column;
-                        gap: var(--size);
-        
-                        .signInfoInput {
-                            padding: var(--ssize) var(--ssize2);
-                            border: 1px solid transparent;
-                            display: flex;
-                            flex-direction: column;
-                            position: relative;
-        
-                            .signInputInfoBox {
-                                display: flex;
-                                align-items: center;
-                                gap: var(--ssize2);
-                                position: relative;
-
-                                &.regexCK_box {
-                                    border-bottom: 1px solid var(--color5);
-                                }
-        
-                                svg {
-                                    max-width: var(--size);
-                                }
-        
-                                input.signInput {
-                                    font-size: var(--fontSize3);
-        
-                                    &::placeholder {
-                                        text-transform: uppercase;
-                                    }
-                                }
-
-                                .funcBtn {
-                                    svg {
-                                        max-width: none;
-                                    }
-                                }
-                            }
-
-                            &:focus-within {
-                                border-color: var(--color7);
-                            }
-                        }
-                    }
-                    
-                    .resultTxt {
-                        font-size: var(--fontSize5);
-                    }
-
-                    .resultBox {
-                        display: flex;
-                        flex-direction: column;
-                        gap: var(--size);
-
-                        .resultInfoBox {
-                            font-size: var(--fontSize);
-                            padding: 0 var(--size);
-                            display: flex;
-                            justify-content: space-between;
-                            align-items: center;
-                            gap: var(--size);
-
-                            .bold {
-                                font-size: var(--fontSize6);
-                            }
-                        }
-                    }
-        
-                    .sign_btns_box {
-                        width: 100%;
-                        display: flex;
-                        justify-content: space-around;
-                        text-transform: capitalize;
-
-                        &.btnsChange {
-                            gap: var(--size);
-                        }
-                    }
                 }
         
                 .signBottomBox {
@@ -155,6 +74,86 @@
                 }
             }
         }
+    }
+}
+.signInputBox {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size);
+
+    .signInfoInput {
+        padding: var(--ssize) var(--ssize2);
+        border: 1px solid transparent;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+
+        .signInputInfoBox {
+            display: flex;
+            align-items: center;
+            gap: var(--ssize2);
+            position: relative;
+
+            &.regexCK_box {
+                border-bottom: 1px solid var(--color5);
+            }
+
+            svg {
+                max-width: var(--size);
+            }
+
+            input.signInput {
+                font-size: var(--fontSize3);
+
+                &::placeholder {
+                    text-transform: uppercase;
+                }
+            }
+
+            .funcBtn {
+                svg {
+                    max-width: none;
+                }
+            }
+        }
+
+        &:focus-within {
+            border-color: var(--color7);
+        }
+    }
+}
+
+.resultTxt {
+    font-size: var(--fontSize5);
+}
+
+.resultBox {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size);
+
+    .resultInfoBox {
+        font-size: var(--fontSize);
+        padding: 0 var(--size);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: var(--size);
+
+        .bold {
+            font-size: var(--fontSize6);
+        }
+    }
+}
+
+.sign_btns_box {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    text-transform: capitalize;
+
+    &.btnsChange {
+        gap: var(--size);
     }
 }
 
@@ -492,6 +491,7 @@
     .contents_container {
         width: 100%;
         padding: 0 var(--side1);
+        position: relative;
         overflow-y: scroll;
 
         .content_info_box {
@@ -528,7 +528,7 @@
                         }
 
                         &[name="introduction"] {
-                            min-height: 80px;
+                            min-height: 120px;
                         }
                     }
         
@@ -754,7 +754,7 @@
     gap: var(--size);
 
     .content_title {
-        font-size: var(--fontSize7);
+        font-size: var(--fontSize6);
         text-transform: uppercase;
         display: flex;
         align-items: center;
@@ -770,15 +770,6 @@
             transform: rotate(90deg);
             cursor: pointer;
         }
-    }
-
-    .title_btn {
-        width: var(--size2);
-        height: var(--size2);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
     }
 }
 .content_sub_title {
@@ -1123,11 +1114,69 @@
         display: flex;
         gap: var(--size1);
 
+        .prifile_id_box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--ssize1);
+
+            .prifile_id {
+                font-size: var(--fontSize6);
+            }
+        }
+
         .profileFollowBox {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+
+            .prifile_id_box {
+                .prifile_id {
+                    font-size: var(--fontSize6);
+                }
+
+                .title_btns_container {
+                    position: relative;
+            
+                    .title_btn_icon {
+                        width: var(--size2);
+                        height: var(--size2);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        cursor: pointer;
+                    }
+
+                    .title_btns_box {
+                        width: max-content;
+                        background-color: var(--baseBg);
+                        border-radius: var(--bdrs);
+                        display: none;
+                        flex-direction: column;
+                        position: absolute;
+                        right: 0;
+                        top: 0;
+
+                        .title_btns_list{
+                            display: flex;
+                            flex-direction: column;
+                            gap: var(--ssize1);
+                        }
+
+                        .title_btns {
+                            display: block;
+                            text-transform: capitalize;
+                        }
+                    }
+
+                    &:hover {
+                        .title_btns_box {
+                            display: flex;
+                        }
+                    }
+                }
+            }
 
             .profileFollow {
                 display: flex;

@@ -10,6 +10,8 @@ const MyPageWrap = () => {
     const { t } = useTranslation();
     const user = useSelector(store => store.userInfo);
 
+    
+
     // 텍스트 토글
     const maxLine = 5; // 줄임 표시 시 최대 줄 수
     const [originalTextCheck, setOriginalTextCheck] = useState(false);
@@ -31,11 +33,23 @@ const MyPageWrap = () => {
                         <ProfileImgBox img={user.user_pf_img} />
 
                         <div className="profileFollowBox">
-                            <div className="title_box">
-                                <h2 className='content_title'>{user.user_id}</h2>
-                                <Link to='/contents/myPage/profileEdit' className="title_btn">
-                                    <GatherSvg name='setting' />
-                                </Link>
+                            <div className="prifile_id_box">
+                                <h2 className='prifile_id'>{user.user_id}</h2>
+                                <div className="title_btns_container">
+                                    
+                                    <div className="title_btn_icon">
+                                        <GatherSvg name='setting' />
+                                    </div>
+
+                                    <div className="title_btns_box">
+                                        <div className="title_btns_list wrapElement">
+                                            <Link to='/contents/setting/profile' className="title_btns">{t('profileEdit')}
+                                            </Link>
+                                            <Link to='/contents/setting/account' className="title_btns">{t('accountSet')}
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div className="profileFollow">

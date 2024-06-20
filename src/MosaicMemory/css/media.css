@@ -86,10 +86,18 @@
 }
 
 @media screen and (max-width: 425px) {
-    /*modal*/
+    /*myPage*/
     .my_profile_wrap {    
         .my_profile_box {    
+            gap: var(--size2);
+
             .profileFollowBox {    
+                .prifile_id_box {
+                    .prifile_id {
+                        font-size: var(--fontSize2);
+                    }
+                }
+
                 .profileFollow {    
                     .profileFollowBtns {
                         flex-direction: column;

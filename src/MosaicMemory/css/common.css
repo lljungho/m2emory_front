@@ -24,7 +24,6 @@
     --fontSize4: 0.75em;
     --fontSize5: 0.85em;
     --fontSize6: 1.25em;
-    --fontSize7: 20px;
     --lineheight: 1;
     --lineheight1: 1.4;
     --lineheight2: 2;
@@ -69,7 +68,7 @@
     --trst: .2s; 
     --bdrs: 0.3em;
     --translateCenter: -50%, -50%;
-    --bxsd: 1px 2px 3px var(--baseBoxShadow);
+    --bxsd: 1px 2px 5px var(--baseBoxShadow);
     --insetBxsd: 1px 1px 3px var(--baseBoxShadow);
 
 }
@@ -263,7 +262,6 @@ input:-moz-placeholder {
 .bdBtns {
     width: max-content;
     font-size: var(--fontSize4);
-    font-weight: bold;
     line-height: var(--lineheight2);
     color: var(--color7);
     padding: 0 var(--ssize2);
