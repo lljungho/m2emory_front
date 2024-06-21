@@ -121,6 +121,12 @@ export const setAdjustHeight = (textarea, btn, minHeight, maxHeight) => {
     }
 };
 
+// 두개의 데이터 비교
+export const setCompareData = (data, targetData) => {
+    const compare = data === targetData;
+    return compare;
+};
+
 // 파일 체크
 const maxImgsize = 1024 * 1024 * 5;
 const maxVideoSize = 1024 * 1024 * 100;

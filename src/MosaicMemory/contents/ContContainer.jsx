@@ -5,7 +5,7 @@ import SettingWrap from './setting/SettingWrap';
 import SearchWrap from './search/SearchWrap';
 import MyPageWrap from './myPage/MyPageWrap';
 import PostingWrap from './posting/PostingWrap';
-import AccountSettings from './myPage/AccountSettings';
+import AccountCheck from './myPage/AccountCheck';
 
 const EtcContainer = () => {
     return (
@@ -15,7 +15,7 @@ const EtcContainer = () => {
                     <Route path='/myPage' element={<MyPageWrap />}></Route>
                     <Route path='/setting' element={<SettingWrap />}></Route>
                     <Route path='/setting/profile' element={<ProfileEditWrap />}></Route>
-                    <Route path='/setting/account' element={<AccountSettings />}></Route>
+                    <Route path='/setting/account' element={<AccountCheck />}></Route>
                     <Route path='/posting/:post' element={<PostingWrap />}></Route>
                     <Route path='/search' element={<SearchWrap />}></Route>
                 </Routes>

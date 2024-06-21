@@ -1,5 +1,4 @@
 import axios from "./axiosSet";
-import basicAxios from "axios";
 
 // 더미 계정 생성
 export const setDummy = async () => {
@@ -152,11 +151,6 @@ export const passwordCheckPostData = async (formData, dispatch, onError) => {
         });
 
     } catch(error) {
-        sessionStorage.removeItem('accountCheck');
-        dispatch({
-            type: 'ACCOUNT_CHECK',
-            accountCheck: false
-        });
         handleError(error, onError);
     }
 };
@@ -166,14 +160,9 @@ export const passwordCheckPostData = async (formData, dispatch, onError) => {
     if (state) {
         console.log('accountTokenGetData()');
         try {
-            const response = await basicAxios.get(`${process.env.REACT_APP_SERVER_URL}/member/accountCheck`, {withCredentials: true});
+            const response = await axios.get('/member/accountCheck');
             console.log('[Axios] accountTokenGetData() success :', response.data, response.status);
-            sessionStorage.setItem('accountCheck', true);
-            dispatch({
-                type: 'ACCOUNT_CHECK',
-                accountCheck: true
-            });
-    
+            
         } catch(error) {
             sessionStorage.removeItem('accountCheck');
             dispatch({
@@ -186,30 +175,37 @@ export const passwordCheckPostData = async (formData, dispatch, onError) => {
  };
 
 // 유저 정보 요청
-export const userGetData = async (setLoading, dispatch) => {
+export const userGetData = async (setState, dispatch, navigate, requireData) => {
     console.log('userGetData()');
-    setLoading(true);
+    if (setState) setState(true);
+    
     try {
         const response = await axios.get('/member/userInfo');
         console.log('[Axios] userGetData() success :', response.data, response.status);
 
-        // 유저 정보 리듀서에 저장
-        dispatch({
-            type: 'SET_USER_INFO',
-            payload: response.data.userInfo,
-        });
+        if (dispatch) {
+            // 유저 정보 리듀서에 저장
+            dispatch({
+                type: 'SET_USER_INFO',
+                payload: response.data.userInfo,
+            });
 
-        // 토큰 저장
-        sessionStorage.setItem('sessionAuth', true);
-        dispatch({
-            type: 'SESSION_CHECK',
-            sessionAuth: true,
-        });
+            // 토큰 저장
+            sessionStorage.setItem('sessionAuth', true);
+            dispatch({
+                type: 'SESSION_CHECK',
+                sessionAuth: true,
+            });
+        }
 
+        if (requireData) return response.data.userInfo;
+           
     } catch(error) {
+        navigate('/');
         handleError(error);
+
     } finally {
-        setLoading(false);
+        if (setState) setState(false);
     };
 };
 
@@ -284,6 +280,20 @@ export const deleteProfileImg = async (dispatch) => {
         });
 
     } catch(error) {
+        handleError(error);
+    }
+};
+
+// 계정 정보 수정 요청
+export const accountPutData = async (formData, navigate, t) => {
+    handleFormDataCheck(formData, 'accountPutData()');
+    try {
+        const response = await axios.put('/member/modifyAccount', formData, { headers: jsonHeaders });
+        console.log('[Axios] accountPutData() success :', response.data, response.status);
+        alert(t('modifySuccess'));
+        navigate(-1);
+
+    } catch( error) {
         handleError(error);
     }
 };

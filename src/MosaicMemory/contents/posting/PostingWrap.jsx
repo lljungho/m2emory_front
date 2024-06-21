@@ -17,7 +17,7 @@ const PostingWrap = () => {
 
     // 댓글 입력 시 textarea 높이 조정
     const adjustHeight = () => {
-        setAdjustHeight(description, null, null, 130);
+        setAdjustHeight(description, null, null, 200);
     };
 
     // 파일 인풋 데이터 체크
@@ -57,13 +57,13 @@ const PostingWrap = () => {
                         className={`tabBtns ${posting === 1 ? 'btns on' : 'innerElement off'}`}
                         onClick={() => setPosting(1)}
                     >
-                        <p className="tab">갤러리</p>
+                        <p className="tab">{t('post')}</p>
                     </div>
                     <div 
                         className={`tabBtns ${posting === 2 ? 'btns on' : 'innerElement off'}`}
                         onClick={() => setPosting(2)}
                     >
-                        <p className="tab">스토리</p>
+                        <p className="tab">{t('story')}</p>
                     </div>
                 </div>
             </div>

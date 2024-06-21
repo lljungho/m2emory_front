@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setDummy, userGetData } from './utils/axios/axiosUtils';
 import { setColor } from './utils/handler/handlerUtils';
 import { useWindowWidth } from './utils/hook/customHookUtils';
+import { useNavigate } from 'react-router-dom';
 
 import './css/common.css';
 import './css/style.css';
@@ -22,14 +23,15 @@ const Wrap = () => {
     const dimmedState = useSelector(store => store.contStatus.dimmedState);
     const modalContents = useSelector(store => store.contStatus.modalContents);
     const dispatch = useDispatch(); 
+    const navigate = useNavigate();
 
     // 로딩 설정
     const [loading, setLoading] = useState(false);
     
     // 유저 정보 요청
     useEffect(() => {
-        userGetData(setLoading, dispatch);
-    }, [dispatch]);   
+        userGetData(setLoading, dispatch, navigate, null);
+    }, [dispatch, navigate]);   
     
     // 컬러 세팅
     useEffect(() => {

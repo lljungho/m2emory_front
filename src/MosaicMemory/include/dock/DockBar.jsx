@@ -64,24 +64,32 @@ const DockBar = () => {
                         { menuOpen && 
                             <div className="moreMenuBox" onClick={(e) => e.stopPropagation()}>
                                 <div className="moreMenuBtns wrapElement">
-                                    <div className="moreMenu">
-                                        <select 
-                                            name="lng" 
-                                            id="lng" 
-                                            className={`${colorMode ? 'dark' : ''}`} 
-                                            onChange={(e) => changeLanguage(e.target.value)}
-                                            value={nowLanguage}
-                                        >
-                                            { languages.map((lng, index) => (
-                                                <option 
-                                                    key={index} 
-                                                    value={lng} 
-                                                >
-                                                    { languageNames[lng] || lng }
-                                                </option>
-                                            ))}
-                                        </select>
-                                    </div>
+                                    <label className="moreMenu">
+                                        <div className="moreMenuSelectBox">
+                                            <img
+                                                src={`/images/icon/lng_${nowLanguage}.png`}
+                                                alt={languageNames[nowLanguage]}
+                                                className='lng_icon'
+                                            />
+                                            
+                                            <select
+                                                name="lng"
+                                                id="lng"
+                                                className={`${colorMode ? 'dark' : ''}`}
+                                                onChange={(e) => changeLanguage(e.target.value)}
+                                                value={nowLanguage}
+                                            >
+                                                { languages.map((lng, index) => (
+                                                    <option
+                                                        key={index}
+                                                        value={lng}
+                                                    >
+                                                        { languageNames[lng] || lng }
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                    </label>
                                     <div className="moreMenu" onClick={colorModeChanger}> 
                                         { colorMode ? t('lightMode') : t('darkMode') }
                                         <div className="icon">

@@ -1,103 +1,126 @@
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import { accountTokenGetData, passwordCheckPostData } from '../../utils/axios/axiosUtils';
+import { accountPutData, userGetData } from '../../utils/axios/axiosUtils';
+import { useNavigate } from 'react-router-dom';
 
-import ContTitleBox from '../../include/contents/ContTitleBox'
 import SignInputBox from '../../utils/form/SignInputBox';
 import SubmitBtnsBox from '../../utils/form/SubmitBtnsBox';
 
 const AccountSettings = () => {
     const { t } = useTranslation();
-    const dispatch = useDispatch();
-    const pwCheck = useSelector(store => store.sessionCheck.accountCheck);
+    const navigate = useNavigate();
 
     // input
-    const [userPassword, setUserPassword] = useState('');
+    const [pw, setPw] = useState('');
+    const [email, setEmail] = useState('');
+    const [tel, setTel] = useState('');
 
     // error regex state
-    const [userPasswordErr, setUserPasswordErr] = useState('');
+    const [pwErr, setPwErr] = useState('');
+    const [emailErr, setEmailErr] = useState(false);
+    const [telErr, setTelErr] = useState(false);
     const [errorsCheck, setErrorsCheck] = useState(false);
-    const [signErrorCheck, setSignErrorCheck] = useState(false);
 
     // 모든 에러 체크
     useEffect(() => {
-        if (userPasswordErr !== "") {
-            const allErrosCheck = !userPasswordErr;
+        if (pwErr !== "" && telErr !== "" && emailErr !== "") {
+            const allErrosCheck = !pwErr && !telErr && !emailErr;
             setErrorsCheck(allErrosCheck);
 
-        } else if (userPasswordErr === "") {
+        } else if (pwErr === "" || telErr === "" || emailErr === "") {
             setErrorsCheck(false);
         }
-    }, [userPasswordErr]);
+    }, [pwErr, telErr, emailErr]);
 
-    // 회원 확인되었는지 accountToken으로 확인 요청
+    // 유저 정보 요청
     useEffect(() => {
-        accountTokenGetData(pwCheck, dispatch);
-    }, [pwCheck, dispatch]);
+        const getData = async () => {
+            try {
+                const user = await userGetData(null, null, navigate, true);
+                if (user) {
+                    setEmail(user.user_email || '');
+                    setTel(user.user_tel || '');
+                }
 
-    // 회원 확인 요청
-    const postData = (e) => {
-        e.preventDefault(); // submit으로 기본 이벤트 발생 막기
+            } catch(error) {
+                console.log(error);
+            }
+        };
+        getData();
+    }, [navigate]);
 
+    // 계정 정보 수정 요청
+    const putData = () => {
         let formData = new FormData();
-        formData.append('userPassword', userPassword);
+        formData.append('pw', pw);
+        formData.append('email', email);
+        formData.append('tel', tel);
 
-        passwordCheckPostData(
-            formData,  
-            dispatch,
-            handleErrorCallback
+        accountPutData(
+            formData,
+            navigate,
+            t,
         );
     };
 
-    const handleErrorCallback = () => {
-        setSignErrorCheck(true);
-    };
-
     return (
-        <div className='content_info_box'>
-            <ContTitleBox
-                title={t('accountSet')}
-                back={true}
-            />
+        <>
+            <div className="contentInfoBox wrapElement">
+                <p className="content_sub_title">{t('modifyInfomation')}</p>
 
-            { pwCheck ?
-            null
-            :
-            <form onSubmit={postData}>
-                <div className="contentInfoBox wrapElement">
-                    <p className="content_sub_title">{t('pw')}</p>
-
-                    <div className='signInfoBox signInBox'>
-                        <div className="signInputWrap">
-                            <div className="signInputBox">
+                <div className='signInfoBox signInBox'>
+                    <div className="signInputWrap">
+                        <div className="signInputBox">
+                            <form>
                                 <input type="text" name="username" autoComplete='username' className='displayNone' disabled />
                                 <SignInputBox
                                     type='password'
-                                    id='userPassword'
-                                    name='userPassword'
+                                    id='pw'
+                                    name='pw'
+                                    maxLength='16'
                                     placeholder={t('pw')}
-                                    setErr={setUserPasswordErr}
-                                    setState={setUserPassword}
-                                    value={userPassword}
+                                    err={pwErr}
+                                    setErr={setPwErr}
+                                    setState={setPw}
+                                    value={pw}
                                 />
-                            </div>
-                            
-                            {signErrorCheck && <div className='regexCK'>{t('memberInputErr')}</div>}
+                            </form>
+
+                            <SignInputBox 
+                                type='text'
+                                id='email'
+                                name='email'
+                                placeholder={t('email')}
+                                err={emailErr}
+                                setErr={setEmailErr}
+                                setState={setEmail}
+                                value={email}
+                            />
+
+                            <SignInputBox 
+                                type='text'
+                                id='tel'
+                                name='tel'
+                                maxLength="13"
+                                placeholder={t('tel')}
+                                err={telErr}
+                                setErr={setTelErr}
+                                setState={setTel}
+                                value={tel}
+                            />
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div className="signInputBox">
-                    <SubmitBtnsBox
-                        errorsCheck={errorsCheck}
-                        text={t('check')}
-                    />
-                </div>
-            </form>
-            }
-
-        </div>
+            <div className="signInputBox">
+                <SubmitBtnsBox 
+                    errorsCheck={errorsCheck}
+                    text={t('modify')}
+                    onClick={putData}
+                />
+            </div>
+        </>
     )
 }
 

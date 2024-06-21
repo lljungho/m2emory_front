@@ -4,9 +4,9 @@ import { signUpPostData } from '../../utils/axios/axiosUtils';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
-import SignInputBox from '../../utils/form/SignInputBox';
 import ContTitleBox from '../../include/contents/ContTitleBox';
 import SubmitBtnsBox from '../../utils/form/SubmitBtnsBox';
+import SignInputBox from '../../utils/form/SignInputBox';
 
 const SignUpForm = () => {
     const { t } = useTranslation();
