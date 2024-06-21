@@ -1,19 +1,23 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { modifyProfilePutData } from '../../utils/axios/axiosUtils';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { setCompareData } from '../../utils/handler/handlerUtils';
 
 import ContTitleBox from '../../include/contents/ContTitleBox';
 import ProfileImgBox from '../../include/contents/ProfileImgBox';
+import SubmitBtnsBox from '../../utils/form/SubmitBtnsBox';
 
 export const ProfileEditWrap = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const dimmedState = useSelector(store => store.contStatus.dimmedState);
     const user = useSelector(store => store.userInfo);
+    const user_pf_name = user.user_pf_name || '';
+    const user_pf_introduction = user.user_pf_introduction || '';
 
-    const name = useRef(null);
-    const introduction = useRef(null);
+    const [name, setName] = useState(user_pf_name);
+    const [introduction, setIntroduction] = useState(user_pf_introduction);
     
     // popup
     const profileEditPop = () => {
@@ -30,8 +34,8 @@ export const ProfileEditWrap = () => {
     // 프로필 내용 수정 요청
     const putData = () => {
         let formData = new FormData();
-        formData.append('name', name.current.value);
-        formData.append('introduction', introduction.current.value);
+        formData.append('name', name);
+        formData.append('introduction', introduction);
 
         modifyProfilePutData(
             formData,
@@ -45,18 +49,18 @@ export const ProfileEditWrap = () => {
     // 에러 처리
     const handleErrorCallback = () => {
         console.log('[Axios] modifyProfilePutData() communication error');
-        name.current.value = user.user_pf_name;
-        introduction.current.value = user.user_pf_introduction;
-        name.current.focus();
+        setName(user_pf_name);
+        setIntroduction(user_pf_introduction);
     };
 
     // 기존 데이터 비교
     const [compareCheck, setCompareCheck] = useState(false);
-    const compareData = () => {
-        const compare = name.current.value !== user.user_pf_name || introduction.current.value !== user.user_pf_introduction;
-        setCompareCheck(compare);
-    };
-
+    useEffect(() => {
+        const nameCompare = setCompareData(user_pf_name, name);
+        const introductionCompare = setCompareData(user_pf_introduction, introduction);
+        setCompareCheck(!(nameCompare && introductionCompare));
+    }, [name, introduction, user_pf_name, user_pf_introduction]);
+        
     // 글자 수 제한
     const maxLengthConfig = {
         name: 30,
@@ -64,16 +68,8 @@ export const ProfileEditWrap = () => {
     };
 
     // 글자 수 초기 값 설정
-    const [nameLength, setNameLength] = useState(0);
-    const [introductionLength, setIntroductionLength] = useState(0);
-    useEffect(() => {
-        if (name.current.value) {
-            setNameLength(name.current.value.length);
-        }
-        if (introduction.current.value) {
-            setIntroductionLength(introduction.current.value.length);
-        }
-    }, []);
+    const [nameLength, setNameLength] = useState(name.length);
+    const [introductionLength, setIntroductionLength] = useState(introduction.length);
 
     // 입력 값 제한
     const handleInputValue = (e) => {
@@ -85,14 +81,14 @@ export const ProfileEditWrap = () => {
         }
 
         if (e.target.name === 'name') {
+            setName(value);
             setNameLength(value.length);                    
         } 
 
         if (e.target.name === 'introduction') {
+            setIntroduction(value);
             setIntroductionLength(value.length); 
         }
-
-        compareData();
     };
 
     // textarea 줄바꿈 제한
@@ -130,11 +126,10 @@ export const ProfileEditWrap = () => {
                     <input 
                         type="text" 
                         name="name" 
-                        ref={name} 
                         maxLength={maxLengthConfig.name} 
                         className='editInput innerElement' 
                         placeholder={t('name')} 
-                        defaultValue={user.user_pf_name} 
+                        defaultValue={user_pf_name} 
                         onChange={handleInputValue}
                     />
                     <span className="limit_byte">{nameLength} / {maxLengthConfig.name}</span>
@@ -146,11 +141,10 @@ export const ProfileEditWrap = () => {
                 <div className="editInputBox">
                     <textarea 
                         name="introduction" 
-                        ref={introduction} 
                         maxLength={maxLengthConfig.introduction} 
                         className='editInput innerElement' 
                         placeholder={t('introduction')} 
-                        defaultValue={user.user_pf_introduction} 
+                        defaultValue={user_pf_introduction} 
                         onChange={handleInputValue}
                         onKeyDown={handleKeyDown}
                     >
@@ -159,13 +153,11 @@ export const ProfileEditWrap = () => {
                 </div>
             </div>
 
-            <div className="btns_box">
-                { compareCheck ?
-                    <button type="button" className='btns' onClick={putData}>{t('submit')}</button>
-                :
-                    <button type='button' className='btns off'>{t('submit')}</button>
-                }
-            </div>
+            <SubmitBtnsBox 
+                errorsCheck={compareCheck}
+                text={t('submit')} 
+                onClick={putData}
+            />
         </div>
     )
 }

@@ -579,6 +579,12 @@
                         }
                     }
                 }
+
+                .descriptionInputBox {
+                    .editInput {
+                        min-height: 100px;
+                    }
+                }
             }
 
             .contMediaBox {
@@ -1338,11 +1344,24 @@
                             display: flex;
                             justify-content: space-between;
                             align-items: center;
-                            gap: var(--size);
+                            gap: var(--size2);
 
                             .icon {
                                 width: var(--size);
                                 height: var(--size);
+                            }
+
+                            .moreMenuSelectBox {
+                                width: 100%;
+                                display: flex;
+                                align-items: center;
+                                gap: var(--ssize);
+
+                                .lng_icon {
+                                    width: var(--size2);
+                                    min-width: var(--size2);
+                                    height: var(--size2);
+                                }
                             }
                         }
                     }

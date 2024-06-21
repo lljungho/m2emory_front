@@ -4,7 +4,7 @@ import { setValidEmail, setValidId, setValidPw, setValidTel } from '../handler/h
 
 import GatherSvg from '../svg/GatherSvg'
 
-const IdInputBox = ({ type, id, name, maxLength, placeholder, err, setErr, setState, value }) => {
+const SignInputBox = ({ type, id, name, maxLength, placeholder, err, setErr, setState, value }) => {
     const { t } = useTranslation();
 
     // password view
@@ -113,4 +113,4 @@ const IdInputBox = ({ type, id, name, maxLength, placeholder, err, setErr, setSt
     )
 }
 
-export default IdInputBox
+export default SignInputBox;
