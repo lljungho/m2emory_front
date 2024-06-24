@@ -10,8 +10,6 @@ const MyPageWrap = () => {
     const { t } = useTranslation();
     const user = useSelector(store => store.userInfo);
 
-    
-
     // 텍스트 토글
     const maxLine = 5; // 줄임 표시 시 최대 줄 수
     const [originalTextCheck, setOriginalTextCheck] = useState(false);

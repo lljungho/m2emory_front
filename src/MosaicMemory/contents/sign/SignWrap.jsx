@@ -13,6 +13,7 @@ const SignWrap = () => {
         <div className="signWrap">
             <div className="signInnerBox">
                 <Logo />
+                
                 <div className="signBox wrapElement">
                     <Routes>
                         <Route path='/' element={<SignInForm />}></Route>

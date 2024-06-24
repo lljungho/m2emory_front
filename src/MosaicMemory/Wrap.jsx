@@ -30,8 +30,11 @@ const Wrap = () => {
     
     // 유저 정보 요청
     useEffect(() => {
-        userGetData(setLoading, dispatch, navigate, null);
-    }, [dispatch, navigate]);   
+        if (isLogIned) {
+            userGetData(setLoading, dispatch, navigate, null);
+        }
+        // eslint-disable-next-line
+    }, [isLogIned]);
     
     // 컬러 세팅
     useEffect(() => {
