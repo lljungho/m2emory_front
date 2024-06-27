@@ -31,6 +31,7 @@ const Wrap = () => {
     // 유저 정보 요청
     useEffect(() => {
         if (isLogIned) {
+            console.log('Wrap component useEffect()');
             userGetData(setLoading, dispatch, navigate, null);
         }
         // eslint-disable-next-line

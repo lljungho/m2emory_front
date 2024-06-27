@@ -34,6 +34,7 @@ const AccountSettings = () => {
 
     // 유저 정보 요청
     useEffect(() => {
+        console.log('accountCheck userInfo');
         const getData = async () => {
             try {
                 const user = await userGetData(null, null, navigate, true);
